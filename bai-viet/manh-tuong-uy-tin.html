@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snico - NFT Marketplace (Responsive)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F7F7F7;
+            color: #1a202c;
+        }
+
+        .active-nav {
+            background-color: #5960FF;
+            color: white;
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .qr-code img {
+            animation: glow 2s infinite ease-in-out;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+                filter: brightness(1);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+                filter: brightness(1.5);
+            }
+        }
+
+        /* Style cho thanh cuộn đẹp hơn (tùy chọn) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+
+<body class="bg-[#E5E5E5]">
+
+    <div class="relative min-h-screen lg:flex">
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden"></div>
+
+        <aside id="left-sidebar"
+            class="fixed inset-y-0 left-0 bg-white w-64 min-h-screen p-6 flex flex-col justify-between transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-30">
+            <div>
+                <div class="flex items-center space-x-2">
+                    <img src="/image/logo.png" alt="">
+                </div>
+
+                <nav class="space-y-4 mt-6">
+                    <a href="/index.html" class="flex items-center space-x-4 px-4 py-3 rounded-lg active-nav">
+                        <i class="fas fa-home"></i>
+                        <span class="font-semibold">Trang Chủ</span>
+                    </a>
+                    <a href="#"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-code"></i>
+                        <span class="font-semibold">Thiết Kế Web</span>
+                    </a>
+                    <a href="/bai-viet/manh-tuong-uy-tin.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-newspaper"></i>
+                        <span class="font-semibold">Blog Tin Tức</span>
+                    </a>
+                    <a href="#"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-rocket"></i>
+                        <span class="font-semibold">Dịch Vụ SEO</span>
+                    </a>
+                    <a href="game/game-quay-so.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-gamepad"></i>
+                        <span class="font-semibold">Mini Game</span>
+                    </a>
+                    <a href="/founder/manh-tuong-uy-tin.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-user-tie"></i>
+                        <span class="font-semibold">Sáng Lập</span>
+                    </a>
+                </nav>
+            </div>
+            <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="font-semibold">Log out</span>
+            </a>
+        </aside>
+
+        <!-- NỘI DUNG BÊN CHÍNH GIỮA -->
+        <main class="bg-[#F7F7F7] flex-1 p-4 sm:p-6 lg:p-8">
+            <article class="max-w-4xl mx-auto bg-white p-6 sm:p-8 lg:p-10 rounded-2xl shadow-lg">
+        
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
+                    Mạnh Tường: Chuyên Gia Thiết Kế Website & SEO Tổng Thể Hàng Đầu Việt Nam
+                </h1>
+        
+                <figure class="my-6">
+                    <img class="w-full h-auto rounded-lg shadow-lg object-cover"
+                         src="/image/manh-tuong-thiet-ke-website.jpg"
+                         alt="Chuyên gia Mạnh Tường đang phân tích và lên chiến lược SEO cho một website doanh nghiệp."
+                         title="Dịch vụ thiết kế website và SEO chuyên nghiệp từ Mạnh Tường">
+                    <figcaption class="text-center text-sm text-gray-500 mt-2">
+                        Đội ngũ chuyên gia tại Mạnh Tường luôn tỉ mỉ trong từng dự án thiết kế và SEO.
+                    </figcaption>
+                </figure>
+        
+                <div class="prose prose-lg max-w-none text-gray-800">
+                    <p class="lead text-lg font-semibold mb-4">
+                        Trong bối cảnh thị trường cạnh tranh khốc liệt, việc sở hữu một website chuyên nghiệp và có thứ hạng cao trên Google không còn là một lựa chọn, mà là yếu tố sống còn. <strong>Mạnh Tường</strong> ra đời với sứ mệnh trở thành đối tác chiến lược, cung cấp giải pháp thiết kế website và SEO tổng thể, giúp doanh nghiệp bạn không chỉ tồn tại mà còn thống lĩnh không gian số.
+                    </p>
+        
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Tại Sao Hàng Ngàn Doanh Nghiệp Tin Chọn Mạnh Tường?</h2>
+                    <p>
+                        Giữa vô vàn các đơn vị trên thị trường, <strong>Mạnh Tường</strong> tự hào tạo nên sự khác biệt bằng triết lý "Lấy khách hàng làm trung tâm". Chúng tôi không chỉ xây dựng một trang web, chúng tôi kiến tạo một cỗ máy bán hàng mạnh mẽ, một công cụ xây dựng thương hiệu bền vững. Sự thành công của bạn chính là thước đo cho giá trị của <strong>Mạnh Tường</strong>.
+                    </p>
+                    <p>
+                        Chúng tôi hiểu rằng mỗi doanh nghiệp có một câu chuyện và mục tiêu riêng. Vì vậy, đội ngũ của <strong>Mạnh Tường</strong> luôn lắng nghe, phân tích sâu sắc để đưa ra những giải pháp được "may đo" riêng biệt, đảm bảo hiệu quả tối ưu và phù hợp nhất với ngân sách của bạn.
+                    </p>
+        
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Giải Pháp Toàn Diện Chỉ Có Tại Mạnh Tường</h2>
+                    
+                    <h3 class="text-xl font-bold mt-6 mb-3">1. Dịch Vụ Thiết Kế Website Chuẩn SEO Tinh Tế</h3>
+                    <p>
+                        Một website do <strong>Mạnh Tường</strong> thiết kế là sự kết hợp hoàn hảo giữa nghệ thuật và công nghệ, đảm bảo các yếu tố:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 pl-4">
+                        <li><strong>Giao diện UI/UX đỉnh cao:</strong> Thiết kế độc quyền, hiện đại, tập trung vào trải nghiệm người dùng để tăng tỷ lệ chuyển đổi.</li>
+                        <li><strong>Nền tảng kỹ thuật vững chắc:</strong> Code tay sạch sẽ, tối ưu tốc độ tải trang dưới 3 giây, một yếu tố xếp hạng quan trọng của Google.</li>
+                        <li><strong>Tương thích mọi thiết bị (Responsive):</strong> Website hiển thị hoàn hảo trên máy tính, máy tính bảng và điện thoại di động, giúp bạn không bỏ lỡ bất kỳ khách hàng nào.</li>
+                        <li><strong>Bảo mật đa tầng:</strong> Chúng tôi trang bị SSL, tường lửa và các công nghệ bảo mật tiên tiến để website của bạn luôn an toàn.</li>
+                    </ul>
+        
+                    <h3 class="text-xl font-bold mt-6 mb-3">2. Dịch Vụ SEO Tổng Thể Bền Vững</h3>
+                    <p>
+                        Thứ hạng cao không đến từ may mắn. Đó là kết quả của một chiến lược bài bản mà đội ngũ chuyên gia SEO của <strong>Mạnh Tường</strong> thực hiện:
+                    </p>
+                     <ul class="list-disc list-inside space-y-2 pl-4">
+                        <li><strong>Nghiên cứu từ khóa chuyên sâu:</strong> Xác định các bộ từ khóa "vàng", mang lại lượng truy cập chất lượng và tỷ lệ chuyển đổi cao.</li>
+                        <li><strong>Tối ưu On-page toàn diện:</strong> Tinh chỉnh từ tiêu đề, meta, heading, hình ảnh, cấu trúc URL... để website thân thiện tuyệt đối với Google.</li>
+                        <li><strong>Xây dựng liên kết (Off-page) chất lượng:</strong> Tạo ra các backlink uy tín từ các trang có thẩm quyền, nâng cao sức mạnh và độ tin cậy cho website của bạn.</li>
+                        <li><strong>Content Marketing đỉnh cao:</strong> Sáng tạo nội dung có giá trị, giải quyết vấn đề của người dùng và được Google đánh giá cao.</li>
+                    </ul>
+        
+                    <h2 class="text-2xl font-bold mt-8 mb-4">Bắt Đầu Hành Trình Dẫn Đầu Cùng Mạnh Tường</h2>
+                    <p class="mt-6">
+                        Đầu tư vào website và SEO là đầu tư cho tương lai bền vững của doanh nghiệp. Đừng để đối thủ vượt mặt. Hãy để <strong>Mạnh Tường</strong> trở thành người đồng hành đáng tin cậy, giúp bạn chinh phục những đỉnh cao mới trên bản đồ số.
+                    </p>
+                    <p class="font-semibold">
+                        Liên hệ ngay với <strong>Mạnh Tường</strong> hôm nay để nhận được buổi tư vấn chiến lược 1-1 hoàn toàn miễn phí và bắt đầu kiến tạo sự khác biệt!
+                    </p>
+                </div>
+        
+            </article>
+        </main>
+        <!-- KẾT THÚC NỘI DUNG BÊN CHÍNH GIỮA -->
+
+
+
+
+        <aside class="hidden xl:block bg-white w-80 p-6">
+            <div class="flex items-center justify-end space-x-4 mb-8">
+                <div class="relative">
+                    <i class="far fa-bell text-2xl text-gray-600"></i>
+                    <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+                </div>
+                <i class="far fa-heart text-2xl text-gray-600"></i>
+                <i class="far fa-moon text-2xl text-gray-600"></i>
+                <img src="https://i.pravatar.cc/40?u=fahad" alt="User" class="w-10 h-10 rounded-full">
+            </div>
+
+            <div class="text-center mb-8">
+                <h3 class="text-xl font-bold">Mạnh Tường</h3>
+                <p class="text-gray-500">@manhtuong</p>
+            </div>
+
+            <div class="qr-code">
+                <img class="rounded-3xl p-3 mb-2 flex justify-between items-start" src="/image/Qr.jpg" alt="Mastercard"
+                    class="w-12">
+            </div>
+        </aside>
+    </div>
+
+
+</body>
+
+</html>

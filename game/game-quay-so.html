@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Game Mạnh Tường</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F7F7F7;
+            color: #1a202c;
+        }
+        .active-nav {
+            background-color: #5960FF;
+            color: white;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .qr-code img {
+                animation: glow 2s infinite ease-in-out;
+              }
+            
+              @keyframes glow {
+                0%, 100% {
+                  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+                  filter: brightness(1);
+                }
+                50% {
+                  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+                  filter: brightness(1.5);
+                }
+              }
+        /* Style cho thanh cuộn đẹp hơn (tùy chọn) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+
+
+        /* === CSS CHO TRÒ CHƠI QUAY SỐ ===*/
+        /* === CSS CHO TRÒ CHƠI QUAY SỐ === */
+        .active-nav {
+            background-color: #5960FF;
+            color: white;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .qr-code img {
+            animation: glow 2s infinite ease-in-out;
+        }
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(242, 238, 238, 0.838);
+                filter: brightness(1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+                filter: brightness(1.5);
+            }
+        }
+        /* Style cho thanh cuộn */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c5c5c5; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
+        /* === CSS MỚI & CẬP NHẬT CHO TRÒ CHƠI === */
+        .game-container {
+            background: url('https://i.imgur.com/L13vHkG.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 2rem;
+            box-shadow: 0 20px 25px -5px rgb(255, 255, 255), 0 8px 10px -6px rgb(255, 255, 255);
+            padding: 2rem;
+        }
+        .bet-card.selected {
+            transform: translateY(-10px) scale(1.05);
+            border-color: #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+            filter: brightness(1.2);
+        }
+        #bet-on-Hoa.selected {
+            border-color: #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+        }
+        .quick-bet-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+            border: 1px solid rgb(255, 255, 255);
+        }
+        .quick-bet-btn:hover { background-color: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+        .quick-bet-btn:active { transform: scale(0.95); }
+        .history-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            animation: slide-in 0.5s ease forwards;
+        }
+        .coin {
+            position: absolute;
+            width: 40px; height: 40px;
+            background-image: url('/image/gameImage/coin.jpg');
+            background-size: contain; background-repeat: no-repeat;
+            animation: fall linear infinite; top: -10%;
+        }
+        @keyframes fall { to { top: 110%; transform: rotateY(720deg) rotateZ(60deg); } }
+        @keyframes slide-in { from { transform: translateX(30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .shake-animation { animation: shake 0.5s infinite; }
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0) rotate(0); } 10% { transform: translate(-2px, -3px) rotate(-1deg); } 20% { transform: translate(2px, 3px) rotate(1deg); } 30% { transform: translate(-2px, 3px) rotate(0deg); } 40% { transform: translate(2px, -3px) rotate(1deg); } 50% { transform: translate(-2px, 3px) rotate(-1deg); } 60% { transform: translate(2px, -3px) rotate(0deg); } 70% { transform: translate(-2px, 3px) rotate(-1deg); } 80% { transform: translate(3px, -2px) rotate(1deg); } 90% { transform: translate(-2px, 3px) rotate(0deg); }
+        }
+        #result-modal {
+            background: url('https://i.imgur.com/s659mIq.png') no-repeat center center;
+            background-size: cover;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        #result-image-container { animation: resultPop 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+        .glow-effect {
+            background: radial-gradient(circle, rgba(255,223,0,0.6) 0%, rgba(255,223,0,0) 70%);
+            animation: glow-pulse 2s infinite ease-in-out;
+        }
+        .coin {
+            position: absolute;
+            width: 40px; height: 40px;
+            background-image: url('/image/gameImage/coin.jpg'); /* Ảnh đồng xu */
+            background-size: contain; background-repeat: no-repeat;
+            animation: fall linear infinite; top: -10%;
+        }
+        @keyframes fall { to { top: 110%; transform: rotateY(720deg) rotateZ(60deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes resultPop {
+            0% { transform: scale(0.3) rotate(-360deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        @keyframes glow-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Dán đoạn CSS này vào trong thẻ <style> */
+.highlight-qr {
+    transition: all 0.5s ease-in-out;
+    transform: scale(1.1);
+    box-shadow: 0 0 40px 10px rgba(255, 215, 0, 0.7);
+    z-index: 9999;
+    border-radius: 2rem; /* Làm tròn góc cho đẹp */
+}
+
+/* THÊM ĐOẠN NÀY VÀO THẺ <STYLE> */
+    #full-history-container .history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+#full-history-container .history-item:last-child {
+    margin-bottom: 0;
+}
+        /* === KẾT THÚC CSS TRÒ CHƠI === */
+/* === KẾT THÚC CSS TRÒ CHƠI === */
+
+/* === CSS CHO HIỆU ỨNG CHỮ CHẠY (MARQUEE) === */
+.marquee-container {
+    white-space: nowrap; /* Ngăn không cho văn bản xuống dòng */
+    animation: marquee 25s linear infinite; /* Áp dụng animation */
+}
+
+.marquee-content {
+    display: inline-block; /* Hiển thị trên một hàng */
+    padding-right: 4rem; /* Tạo khoảng cách giữa 2 đoạn văn bản (16px * 4) */
+}
+
+/* Định nghĩa animation chạy chữ từ phải qua trái */
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%); /* Di chuyển sang trái đúng bằng chiều rộng của 1 đoạn văn bản */
+    }
+}
+    </style>
+</head>
+<body class="bg-[#E5E5E5]">
+
+    <div class="relative min-h-screen lg:flex">
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden"></div>
+
+        <aside id="left-sidebar" class="fixed inset-y-0 left-0 bg-white w-64 min-h-screen p-6 flex flex-col justify-between transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-30">
+            <div>
+                <div class="flex items-center space-x-2">
+                   <img src="/image/logo.png" alt="Logo">
+                </div>
+                <nav class="space-y-4 mt-6">
+                    <a href="/index.html" class="flex items-center space-x-4 px-4 py-3 rounded-lg active-nav">
+                        <i class="fas fa-home"></i>
+                        <span class="font-semibold">Trang Chủ</span>
+                    </a>
+                    <a href="#"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-code"></i>
+                        <span class="font-semibold">Thiết Kế Web</span>
+                    </a>
+                    <a href="/bai-viet/manh-tuong-uy-tin.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-newspaper"></i>
+                        <span class="font-semibold">Blog Tin Tức</span>
+                    </a>
+                    <a href="#"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-rocket"></i>
+                        <span class="font-semibold">Dịch Vụ SEO</span>
+                    </a>
+                    <a href="game/game-quay-so.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-gamepad"></i>
+                        <span class="font-semibold">Mini Game</span>
+                    </a>
+                    <a href="/founder/manh-tuong-uy-tin.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-user-tie"></i>
+                        <span class="font-semibold">Sáng Lập</span>
+                    </a>
+                </nav>
+            </div>
+            <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="font-semibold">Log out</span>
+            </a>
+        </aside>
+
+        <main style="background-image: url('/image/gameImage/backgroundminigame.jpg'); background-size: cover; background-position: center;" class="flex-1 p-4 flex items-center justify-center min-h-screen">
+            <div class="relative w-full flex flex-col items-center">
+                
+                <div class="mb-4 w-full bg-yellow-900/50 backdrop-blur-sm rounded-lg border border-yellow-400/60 shadow-lg overflow-hidden">
+                    <div class="marquee-container flex items-center p-3">
+                        <span class="marquee-content">
+                            <i class="fas fa-exclamation-triangle text-yellow-300"></i>
+                            <strong class="mx-2 text-yellow-300 uppercase">Lưu Ý:</strong>
+                            <span class="text-white">Game mang tính chất giải trí, không phải là hình thức cờ bạc. Tránh lạm dụng quá đà.</span>
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="relative rounded-3xl w-full">
+                    <div id="game-container" class="relative w-full max-w-4xl text-center flex flex-col items-center justify-between p-6 bg-black/40 backdrop-blur-md rounded-3xl shadow-2xl aspect-[16/10] mx-auto">
+                        <div class="w-full flex justify-between items-start">
+                            <div class="bg-black/50 p-2 rounded-xl shadow-lg text-center">
+                                <h3 class="text-white text-xs font-bold mb-2">LỊCH SỬ</h3>
+                                <button id="open-history-btn" class="bg-white/20 hover:bg-white/30 text-white text-xs font-semibold py-1 px-3 rounded-md transition">
+                                    <i class="fas fa-history mr-1"></i> Xem
+                                </button>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="bg-black/50 backdrop-blur-sm text-white font-bold py-2 px-5 rounded-full flex items-center gap-2 shadow-lg border border-yellow-400/50">
+                                    <img src="/image/gameImage/coin.png" alt="coin" class="w-8 h-8 ">
+                                    <span id="player-coins-display" class="text-xl">0</span>
+                                </div>
+                                <div id="countdown-container" class="hidden text-center mt-2 bg-red-800/60 border border-red-500 rounded-lg py-1 px-3 text-white shadow-lg">
+                                    <p class="text-xs font-semibold">Nhận xu miễn phí sau:</p>
+                                    <span id="countdown-timer" class="font-bold text-base"></span>
+                                </div>
+                            </div>
+                            </div>
+                        
+                        <div id="arena" class="w-full flex items-center justify-center gap-4 sm:gap-10 px-4 transition-opacity duration-500">
+                            <div id="bet-on-Rong" class="bet-card w-1/3 cursor-pointer p-2 bg-black/30 rounded-2xl border-2 border-transparent transition-all duration-300">
+                                <img src="/image/gameImage/duongtien.jpg" alt="Rồng" class="h-80 w-80 object-cover rounded-xl mx-auto drop-shadow-lg">
+                                <p class="text-white font-bold mt-2 text-xl">DƯƠNG TIỄN (x2)</p>
+                            </div>
+                        
+                            <div class="text-5xl font-black text-white/80" style="text-shadow: 0 0 15px rgba(255, 82, 82, 0.8);">VS</div>
+                            
+                            <div id="bet-on-Phuong" class="bet-card w-1/3 cursor-pointer p-2 bg-black/30 rounded-2xl border-2 border-transparent transition-all duration-300">
+                                <img src="/image/gameImage/ngokhong.jpg" alt="Phượng" class="h-80 w-80 object-cover rounded-xl mx-auto drop-shadow-lg">
+                                <p class="text-white font-bold mt-2 text-xl">NGỘ KHÔNG (x2)</p>
+                            </div>
+                        </div>
+                        
+                        <div id="bet-on-Hoa" class="bet-card cursor-pointer mt- mb-2 py-2 px-6 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full border-2 border-transparent transition-all duration-300 hover:shadow-2xl hover:shadow-green-500/50">
+                            <p class="text-white font-bold text-lg">CƯỢC LỚN (x8)</p>
+                        </div>
+        
+                        <div id="controls" class="flex flex-col items-center gap-4 transition-opacity duration-500">
+                            <div class="flex items-center gap-2">
+                                <button class="quick-bet-btn" data-amount="100">100</button>
+                                <button class="quick-bet-btn" data-amount="500">500</button>
+                                <button class="quick-bet-btn" data-amount="1000">1K</button>
+                                <button class="quick-bet-btn" data-amount="all">TẤT CẢ</button>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white/20 backdrop-blur-sm p-2 rounded-full">
+                                <button id="decrease-bet" class="w-10 h-10 bg-white text-[#5960FF] rounded-full font-bold text-2xl active:scale-90 transition-transform">-</button>
+                                <input id="bet-amount-input" type="number" value="10" class="w-24 bg-transparent text-white text-center font-bold text-2xl outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                <button id="increase-bet" class="w-10 h-10 bg-white text-[#5960FF] rounded-full font-bold text-2xl active:scale-90 transition-transform">+</button>
+                            </div>
+                            <button id="spin-button" class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-bold py-3 px-12 rounded-xl text-lg hover:from-purple-700 hover:to-indigo-800 active:scale-95 transition-all duration-200 shadow-lg disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed disabled:active:scale-100">
+                                CHỌN CỬA CƯỢC
+                            </button>
+                        </div>
+                    </div>
+                </div>
+        
+                <div id="result-modal" class="fixed inset-0 flex-col items-center justify-center text-white hidden z-50 bg-black/70 backdrop-blur-xl">
+                    <div id="coin-fall-container" class="absolute inset-0 overflow-hidden"></div>
+                    <h2 id="result-text" class="text-4xl sm:text-6xl font-bold mb-10 text-yellow-300 animate-pulse" style="text-shadow: 2px 2px 15px #000;"></h2>
+                    <div id="result-image-container" class="relative flex items-center justify-center">
+                        <div class="glow-effect absolute w-64 h-64 sm:w-96 sm:h-96"></div>
+                        <img id="result-image" src="" alt="Kết quả" class="relative z-10 w-48 h-48 sm:w-72 sm:h-72 object-contain drop-shadow-2xl">
+                    </div>
+                    <button id="play-again-button" class="relative z-10 mt-12 bg-white text-[#5960FF] font-semibold py-3 px-10 rounded-xl text-lg hover:bg-gray-200 transition-all duration-200 active:scale-95 shadow-lg">
+                        Chơi Lại
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <div id="recharge-popup" class="fixed inset-0 flex-col items-center justify-center text-white hidden z-50 bg-black/80 backdrop-blur-sm p-4">
+            <div class="relative text-center p-6 sm:p-8 bg-gray-800/60 border border-yellow-500 rounded-2xl shadow-lg max-w-sm w-full">
+                 <button id="close-recharge-popup" class="absolute top-2 right-4 text-white text-3xl font-bold hover:text-yellow-400 transition">&times;</button>
+                <h2 class="text-3xl font-bold mb-3 text-yellow-400">NẠP XU</h2>
+                <p class="mb-5 text-lg text-gray-200">Quét mã QR để nạp xu và tiếp tục.</p>
+                
+                <img src="/image/Qr.jpg" alt="Mã QR Nạp tiền" class="w-full max-w-[250px] mx-auto rounded-lg border-2 border-white shadow-md">
+                
+                <p class="mt-4 font-semibold text-yellow-300 text-lg">Nội dung chuyển khoản: <span class="text-white">NAPXU [Tên tài khoản]</span></p>
+                <p class="mt-1 mb-6 text-base text-white">Tỷ giá: 1.000 VND = 1.000 Xu</p>
+
+                <p class="text-sm text-gray-400">Sau khi chuyển khoản, vui lòng chờ 1-2 phút để hệ thống cập nhật.</p>
+            </div>
+        </div>
+
+        <div id="history-modal" class="fixed inset-0 flex-col items-center justify-center text-white hidden z-50 bg-black/80 backdrop-blur-sm p-4">
+            <div class="bg-gray-800/60 border border-gray-600 rounded-2xl shadow-lg w-full max-w-md text-center p-6">
+                <h2 class="text-2xl font-bold mb-4 text-yellow-300">Lịch Sử Các Ván Đấu</h2>
+                <div id="full-history-container" class="max-h-[60vh] overflow-y-auto bg-black/30 p-4 rounded-lg">
+                    </div>
+                <button id="close-history-modal" class="mt-6 bg-white text-gray-800 font-semibold py-2 px-8 rounded-lg hover:bg-gray-200 transition active:scale-95">
+                    Đóng
+                </button>
+            </div>
+        </div>
+
+        <audio id="click-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2772086a93.mp3" preload="auto"></audio>
+        <audio id="win-sound" src="https://cdn.pixabay.com/download/audio/2022/11/22/audio_a63473b183.mp3" preload="auto"></audio>
+        <audio id="lose-sound" src="https://cdn.pixabay.com/download/audio/2021/08/09/audio_34f0f4a860.mp3" preload="auto"></audio>
+
+        <aside class="hidden xl:block bg-white w-80 p-6">
+            <div class="flex items-center justify-end space-x-4 mb-8">
+                <div class="relative">
+                    <i class="far fa-bell text-2xl text-gray-600"></i>
+                    <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+                </div>
+                <img src="https://i.pravatar.cc/40?u=fahad" alt="User" class="w-10 h-10 rounded-full">
+            </div>
+
+            <div class="text-center mb-8">
+                <h3 class="text-xl font-bold">Mạnh Tường</h3>
+                <p class="text-gray-500">@manhtuong</p>
+            </div>
+
+            <div class="qr-code text-center">
+                 <img class="rounded-3xl p-3 mb-2 mx-auto w-full" src="/image/Qr.jpg" alt="QR Code">
+                <button id="recharge-button" class="mt-2 w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-blue-700 active:scale-95 transition-all duration-200 shadow-lg">
+                    <i class="fas fa-wallet mr-2"></i> NẠP XU
+                </button>
+            </div>  
+        </aside>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- BIẾN TRẠNG THÁI GAME ---
+            let playerCoins;
+            let betAmount = 10;
+            let betOn = null;
+            let isSpinning = false;
+            let gameHistory = [];
+            let hasInteracted = false;
+            let countdownInterval = null; // Biến lưu interval của bộ đếm ngược
+            const COIN_REFILL_AMOUNT = 1000;
+            const WAIT_TIME_MS = 3 * 60 * 60 * 1000; // 3 tiếng
+    
+            // --- THÀNH PHẦN DOM CHÍNH ---
+            const playerCoinsDisplay = document.getElementById('player-coins-display');
+            const betCards = document.querySelectorAll('.bet-card');
+            const betAmountInput = document.getElementById('bet-amount-input');
+            const increaseBetBtn = document.getElementById('increase-bet');
+            const decreaseBetBtn = document.getElementById('decrease-bet');
+            const quickBetBtns = document.querySelectorAll('.quick-bet-btn');
+            const spinButton = document.getElementById('spin-button');
+            const arena = document.getElementById('arena');
+            const controls = document.getElementById('controls');
+    
+            // --- THÀNH PHẦN DOM CHO CÁC MODAL & POPUP ---
+            const resultModal = document.getElementById('result-modal');
+            const resultImage = document.getElementById('result-image');
+            const resultText = document.getElementById('result-text');
+            const resultImageContainer = document.getElementById('result-image-container');
+            const coinContainer = document.getElementById('coin-fall-container');
+            const playAgainButton = document.getElementById('play-again-button');
+    
+            const rechargePopup = document.getElementById('recharge-popup');
+            const openRechargeBtn = document.getElementById('recharge-button');
+            const closeRechargePopupBtn = document.getElementById('close-recharge-popup');
+    
+            const historyModal = document.getElementById('history-modal');
+            const openHistoryBtn = document.getElementById('open-history-btn');
+            const closeHistoryModal = document.getElementById('close-history-modal');
+            const fullHistoryContainer = document.getElementById('full-history-container');
+    
+            // --- THÀNH PHẦN DOM MỚI CHO BỘ ĐẾM NGƯỢC ---
+            const countdownContainer = document.getElementById('countdown-container');
+            const countdownTimer = document.getElementById('countdown-timer');
+    
+            // --- ÂM THANH ---
+            const clickSound = document.getElementById('click-sound');
+            const winSound = document.getElementById('win-sound');
+            const loseSound = document.getElementById('lose-sound');
+    
+            // --- DỮ LIỆU CÁC CỬA CƯỢC ---
+            const items = {
+                Rong: { name: 'Dương Tiễn', src: '/image/gameImage/duongtien.jpg', ratio: 2, color: '#ef4444' }, // red
+                Phuong: { name: 'Ngộ Không', src: '/image/gameImage/ngokhong.jpg', ratio: 2, color: '#3b82f6' }, // blue
+                Hoa: { name: 'Cược Lớn', src: 'https://i.imgur.com/kY43Z5O.png', ratio: 8, color: '#22c55e' } // green
+            };
+    
+            // --- CÁC HÀM XỬ LÝ ÂM THANH ---
+            function playSound(sound) {
+                if (hasInteracted) { sound.currentTime = 0; sound.play().catch(() => {}); }
+            }
+    
+            function unlockAudio() {
+                if (!hasInteracted) {
+                    hasInteracted = true;
+                    clickSound.volume = 0;
+                    clickSound.play().catch(() => {});
+                    clickSound.volume = 1; winSound.volume = 1; loseSound.volume = 1;
+                    document.body.removeEventListener('click', unlockAudio);
+                }
+            }
+    
+            // --- CÁC HÀM CẬP NHẬT GIAO DIỆN VÀ TRẠNG THÁI ---
+            function updateUI() {
+                playerCoinsDisplay.textContent = Math.floor(playerCoins);
+                betAmountInput.value = betAmount;
+    
+                const isWaitingForRefill = !!localStorage.getItem('zeroCoinTimestamp');
+    
+                if (isSpinning || isWaitingForRefill) {
+                    spinButton.disabled = true;
+                    decreaseBetBtn.disabled = true;
+                    increaseBetBtn.disabled = true;
+                    betAmountInput.disabled = true;
+                } else {
+                    spinButton.disabled = false;
+                    decreaseBetBtn.disabled = false;
+                    increaseBetBtn.disabled = false;
+                    betAmountInput.disabled = false;
+                }
+                
+                if (isSpinning) return;
+                
+                const canBet = betOn && betAmount > 0 && betAmount <= playerCoins;
+                spinButton.disabled = !canBet || isWaitingForRefill;
+                
+                if (isWaitingForRefill) {
+                    spinButton.textContent = 'HẾT XU';
+                } else if (!betOn) {
+                    spinButton.textContent = 'CHỌN CỬA CƯỢC';
+                } else if (betAmount > playerCoins) {
+                    spinButton.textContent = 'KHÔNG ĐỦ XU';
+                } else if (betAmount <= 0) {
+                    spinButton.textContent = 'NHẬP TIỀN CƯỢC';
+                } else {
+                    spinButton.textContent = `CƯỢC ${betAmount} XU`;
+                }
+            }
+    
+            // --- CÁC HÀM XỬ LÝ LOGIC GAME ---
+            function handleBetSelection(selection) {
+                if (isSpinning) return;
+                playSound(clickSound);
+                betOn = selection;
+                betCards.forEach(card => card.classList.toggle('selected', card.id === `bet-on-${selection}`));
+                updateUI();
+            }
+    
+            function adjustBet(amount) {
+                playSound(clickSound);
+                let newBet = parseInt(betAmountInput.value) + amount;
+                if (newBet < 0) newBet = 0;
+                betAmount = newBet;
+                updateUI();
+            }
+    
+            function handleQuickBet(e) {
+                playSound(clickSound);
+                const amountType = e.target.dataset.amount;
+                if (amountType === 'all') {
+                    betAmount = playerCoins;
+                } else {
+                    betAmount = parseInt(amountType);
+                }
+                updateUI();
+            }
+    
+            function startSpin() {
+                if (isSpinning || !betOn || betAmount <= 0) return;
+                
+                if (betAmount > playerCoins) {
+                    alert('Bạn không đủ xu để thực hiện ván cược này!');
+                    rechargePopup.classList.remove('hidden');
+                    rechargePopup.classList.add('flex');
+                    return;
+                }
+        
+                isSpinning = true;
+                playerCoins -= betAmount;
+                localStorage.setItem('playerCoins', playerCoins);
+                spinButton.disabled = true;
+                spinButton.innerHTML = `<i class="fas fa-spinner animate-spin mr-2"></i> ĐANG QUAY...`;
+                arena.classList.add('shake-animation');
+                controls.style.opacity = '0';
+                updateUI();
+                setTimeout(showResult, 3000);
+            }
+            
+            function showResult() {
+                arena.classList.remove('shake-animation');
+                const rand = Math.random();
+                const winnerKey = (rand < 0.06) ? 'Hoa' : (rand < 0.53) ? 'Rong' : 'Phuong';
+                const winner = items[winnerKey];
+                let winnings = 0;
+        
+                if (winnerKey === betOn) {
+                    winnings = betAmount * winner.ratio;
+                    playerCoins += winnings;
+                    resultText.textContent = `THẮNG LỚN! +${winnings}`;
+                    resultText.className = 'text-4xl sm:text-6xl font-bold mb-10 text-yellow-300 animate-pulse';
+                    createCoinFall();
+                    playSound(winSound);
+                } else {
+                    resultText.textContent = `TIẾC QUÁ! -${betAmount}`;
+                    resultText.className = 'text-4xl sm:text-6xl font-bold mb-10 text-red-500';
+                    playSound(loseSound);
+                }
+                
+                // *** LOGIC MỚI: KIỂM TRA HẾT XU VÀ BẮT ĐẦU ĐẾM NGƯỢC ***
+                if (playerCoins <= 0) {
+                    playerCoins = 0;
+                    if (!localStorage.getItem('zeroCoinTimestamp')) {
+                        const now = new Date().getTime();
+                        localStorage.setItem('zeroCoinTimestamp', now);
+                        startCountdown(); // Bắt đầu đếm ngược ngay lập tức
+                    }
+                }
+    
+                localStorage.setItem('playerCoins', playerCoins);
+                updateHistory(winnerKey);
+                
+                resultImage.src = winner.src;
+                resultImageContainer.style.animation = 'none';
+                void resultImageContainer.offsetWidth; // Trigger reflow
+                resultImageContainer.style.animation = null;
+                resultModal.classList.remove('hidden');
+                resultModal.classList.add('flex');
+            }
+            
+            function resetGame() {
+                resultModal.classList.add('hidden');
+                resultModal.classList.remove('flex');
+                coinContainer.innerHTML = '';
+                isSpinning = false;
+                betOn = null;
+                betCards.forEach(card => card.classList.remove('selected'));
+                controls.style.opacity = '1';
+                
+                if (playerCoins <= 0) {
+                    betAmount = 0;
+                }
+                
+                updateUI();
+            }
+        
+            function createCoinFall() {
+                coinContainer.innerHTML = '';
+                for (let i = 0; i < 40; i++) {
+                    const coin = document.createElement('div');
+                    coin.classList.add('coin');
+                    coin.style.left = Math.random() * 100 + 'vw';
+                    coin.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+                    coin.style.animationDelay = Math.random() * 2 + 's';
+                    coinContainer.appendChild(coin);
+                }
+            }
+        
+            // --- CÁC HÀM XỬ LÝ LỊCH SỬ ---
+            function updateHistory(winnerKey) {
+                if (!winnerKey) return;
+                gameHistory.unshift(winnerKey);
+                if (gameHistory.length > 50) gameHistory.pop();
+                localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+            }
+        
+            function renderFullHistory() {
+                fullHistoryContainer.innerHTML = '';
+                if (gameHistory.length === 0) {
+                    fullHistoryContainer.innerHTML = '<p class="text-gray-400">Chưa có lịch sử ván đấu nào.</p>';
+                    return;
+                }
+                gameHistory.forEach((key, index) => {
+                    const item = items[key];
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'history-item';
+                    itemDiv.innerHTML = `<span>Ván #${gameHistory.length - index}</span> <span class="font-bold" style="color: ${item.color}">${item.name} thắng</span>`;
+                    fullHistoryContainer.appendChild(itemDiv);
+                });
+            }
+            
+            // --- *** HÀM MỚI: QUẢN LÝ BỘ ĐẾM NGƯỢC *** ---
+            function startCountdown() {
+                const zeroCoinTimestamp = parseInt(localStorage.getItem('zeroCoinTimestamp'));
+                if (!zeroCoinTimestamp) return;
+    
+                if (countdownInterval) clearInterval(countdownInterval); // Xóa interval cũ nếu có
+    
+                countdownContainer.classList.remove('hidden');
+                updateUI(); // Cập nhật lại UI để vô hiệu hóa nút
+    
+                countdownInterval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const timeLeft = (zeroCoinTimestamp + WAIT_TIME_MS) - now;
+    
+                    if (timeLeft <= 0) {
+                        clearInterval(countdownInterval);
+                        countdownContainer.classList.add('hidden');
+                        localStorage.removeItem('zeroCoinTimestamp');
+                        playerCoins = COIN_REFILL_AMOUNT;
+                        localStorage.setItem('playerCoins', playerCoins);
+                        alert(`Chúc mừng! Bạn đã nhận được ${COIN_REFILL_AMOUNT} xu miễn phí!`);
+                        updateUI();
+                        return;
+                    }
+    
+                    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+                    countdownTimer.textContent = 
+                        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                }, 1000);
+            }
+        
+            // --- Chức năng vô hiệu hóa F5 và chuột phải ---
+            function disableBrowserFeatures() {
+                document.addEventListener('contextmenu', event => event.preventDefault());
+                document.addEventListener('keydown', event => {
+                    if (event.key === 'F12' || event.keyCode === 123 ||
+                        (event.ctrlKey && event.shiftKey && event.key === 'I') ||
+                        (event.ctrlKey && event.shiftKey && event.key === 'J') ||
+                        event.key === 'F5' || event.keyCode === 116 ||
+                        (event.ctrlKey && event.key === 'r') ||
+                        (event.ctrlKey && event.key === 's') ||
+                        (event.ctrlKey && event.key === 'u')) {
+                        event.preventDefault();
+                    }
+                });
+            }
+        
+            // --- KHỞI TẠO GAME VÀ GÁN SỰ KIỆN ---
+            function initializeGame() {
+                document.body.addEventListener('click', unlockAudio, { once: true });
+        
+                // *** LOGIC MỚI: KHỞI TẠO XU VÀ KIỂM TRA THỜI GIAN CHỜ ***
+                const savedCoins = localStorage.getItem('playerCoins');
+                const zeroCoinTimestamp = localStorage.getItem('zeroCoinTimestamp');
+    
+                if (savedCoins === null) {
+                    // Người chơi mới hoàn toàn
+                    playerCoins = COIN_REFILL_AMOUNT;
+                    localStorage.setItem('playerCoins', playerCoins);
+                } else {
+                    // Người chơi cũ
+                    playerCoins = parseInt(savedCoins, 10);
+                    if (playerCoins <= 0 && zeroCoinTimestamp) {
+                        // Hết xu và đang trong thời gian chờ
+                        startCountdown();
+                    }
+                }
+                
+                if (playerCoins <= 0) {
+                    betAmount = 0;
+                }
+        
+                const savedHistory = localStorage.getItem('gameHistory');
+                if (savedHistory) {
+                    try {
+                        gameHistory = JSON.parse(savedHistory);
+                    } catch(e) {
+                        gameHistory = [];
+                    }
+                }
+        
+                // Gán sự kiện cho các nút
+                betCards.forEach(card => card.addEventListener('click', () => handleBetSelection(card.id.split('-')[2])));
+                quickBetBtns.forEach(btn => btn.addEventListener('click', handleQuickBet));
+                increaseBetBtn.addEventListener('click', () => adjustBet(10));
+                decreaseBetBtn.addEventListener('click', () => adjustBet(-10));
+                betAmountInput.addEventListener('change', (e) => {
+                    let val = parseInt(e.target.value);
+                    if (isNaN(val) || val < 0) val = 0;
+                    betAmount = val;
+                    updateUI();
+                });
+                spinButton.addEventListener('click', startSpin);
+                playAgainButton.addEventListener('click', resetGame);
+                
+                // Gán sự kiện cho popup nạp xu
+                openRechargeBtn.addEventListener('click', () => {
+                    rechargePopup.classList.remove('hidden');
+                    rechargePopup.classList.add('flex');
+                });
+                closeRechargePopupBtn.addEventListener('click', () => {
+                    rechargePopup.classList.add('hidden');
+                    rechargePopup.classList.remove('flex');
+                });
+        
+                openHistoryBtn.addEventListener('click', () => {
+                    renderFullHistory();
+                    historyModal.classList.remove('hidden');
+                    historyModal.classList.add('flex');
+                });
+                closeHistoryModal.addEventListener('click', () => {
+                    historyModal.classList.add('hidden');
+                    historyModal.classList.remove('flex');
+                });
+                
+                // Gọi hàm vô hiệu hóa các tính năng trình duyệt
+                disableBrowserFeatures();
+        
+                updateUI();
+            }
+        
+            // Bắt đầu game
+            initializeGame();
+        });
+    </script>
+</body>
+</html>  
+     

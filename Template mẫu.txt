@@ -113,27 +113,22 @@
 
 
 
+ <a href="https://www.facebook.com/ha.tuong.35728" target="_blank" rel="noopener noreferrer"
+                class="flex flex-col items-center text-center group cursor-pointer">
 
-        <aside class="hidden xl:block bg-white w-80 p-6">
-            <div class="flex items-center justify-end space-x-4 mb-8">
-                <div class="relative">
-                    <i class="far fa-bell text-2xl text-gray-600"></i>
-                    <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+                <div
+                    class="p-1 rounded-full ring-2 ring-blue-500 group-hover:ring-blue-700 transition-all duration-300 mb-4">
+                    <img src="/image/manh-tuong.jpg" alt="User" class="w-24 h-24 rounded-full shadow-md object-cover">
                 </div>
-                <i class="far fa-heart text-2xl text-gray-600"></i>
-                <i class="far fa-moon text-2xl text-gray-600"></i>
-                <img src="https://i.pravatar.cc/40?u=fahad" alt="User" class="w-10 h-10 rounded-full">
-            </div>
 
-            <div class="text-center mb-8">
-                <h3 class="text-xl font-bold">Mạnh Tường</h3>
-                <p class="text-gray-500">@manhtuong</p>
-            </div>
+                <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-700 transition-colors">Mạnh Tường</h3>
+                <p class="text-sm text-gray-500">@manhtuong</p>
+            </a>
 
-            <div class="qr-code">
-                <img class="rounded-3xl p-3 mb-2 flex justify-between items-start" src="/image/Qr.jpg" alt="Mastercard" class="w-12">
-              </div>   
-        </aside>
+            <div class="bg-gray-50 rounded-2xl p-4">
+                <img class="w-full rounded-xl" src="/image/Qr.jpg" alt="QR Code">
+            </div>
+            <hr class="my-6">
     </div>
 
 

@@ -49,10 +49,7 @@
             color: white;
         }
 
-        .active-nav {
-            background-color: #5960FF;
-            color: white;
-        }
+     
 
         /* Style cho mục cha khi menu con đang mở */
         .dropdown-toggle.active-parent {
@@ -135,17 +132,17 @@
                     <img src="/image/logo.png" alt="">
                 </div>
                 <nav class="space-y-4 mt-6">
-                    <a href="/index.html" class="flex items-center space-x-4 px-4 py-3 rounded-lg active-nav">
+                    <a href="/" class="flex items-center space-x-4 px-4 py-3 rounded-lg active-nav">
                         <i class="fas fa-home"></i>
                         <span class="font-semibold">Trang Chủ</span>
                     </a>
-                    <a href="#"
+                    <a href="eror404/notfound.html"
                         class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
                         <i class="fas fa-code"></i>
                         <span class="font-semibold">Thiết Kế Web</span>
                     </a>
                     <div>
-                        <a href="#"
+                        <a href="eror404/notfound.html"
                             class="dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-lg text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200 cursor-pointer">
                             <div class="flex items-center space-x-4">
                                 <i class="fas fa-newspaper w-5 text-center"></i>
@@ -159,19 +156,19 @@
                                 <a href="/bai-viet/manh-tuong-uy-tin.html"
                                     class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Mạnh
                                     Tường</a>
-                                <a href="#"
+                                <a href="eror404/notfound.html"
                                     class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Vui
                                     Vẻ</a>
-                                <a href="#"
+                                <a href="eror404/notfound.html"
                                     class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Joke
                                     Tiktok</a>
-                                <a href="#"
+                                <a href="eror404/notfound.html"
                                     class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Blog
                                     Facebook</a>
                             </nav>
                         </div>
                     </div>
-                    <a href="#"
+                    <a href="eror404/notfound.html"
                         class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
                         <i class="fas fa-rocket"></i>
                         <span class="font-semibold">Dịch Vụ SEO</span>
@@ -291,29 +288,22 @@
             </div>
         </main>
         <aside class="hidden xl:block bg-white w-80 p-6 flex flex-col space-y-8">
-            <div class="flex items-center justify-end space-x-5">
-                <div class="relative">
-                    <i
-                        class="far fa-bell text-2xl text-gray-500 hover:text-indigo-600 cursor-pointer transition-colors"></i>
-                    <span
-                        class="absolute -top-1 -right-1 h-2.5 w-2.5 bg-red-500 rounded-full border-2 border-white"></span>
-                </div>
-                <i
-                    class="far fa-heart text-2xl text-gray-500 hover:text-indigo-600 cursor-pointer transition-colors"></i>
-                <i
-                    class="far fa-moon text-2xl text-gray-500 hover:text-indigo-600 cursor-pointer transition-colors"></i>
-            </div>
+            <a href="https://www.facebook.com/ha.tuong.35728" target="_blank" rel="noopener noreferrer"
+                class="flex flex-col items-center text-center group cursor-pointer">
 
-            <div class="flex flex-col items-center text-center">
-                <img src="/image/manh-tuong.jpg" alt="User" class="w-24 h-24 rounded-full mb-4 shadow-md object-cover">
-                <h3 class="text-xl font-bold text-gray-800">Mạnh Tường</h3>
+                <div
+                    class="p-1 rounded-full ring-2 ring-blue-500 group-hover:ring-blue-700 transition-all duration-300 mb-4">
+                    <img src="/image/manh-tuong.jpg" alt="User" class="w-24 h-24 rounded-full shadow-md object-cover">
+                </div>
+
+                <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-700 transition-colors">Mạnh Tường</h3>
                 <p class="text-sm text-gray-500">@manhtuong</p>
-            </div>
+            </a>
 
             <div class="bg-gray-50 rounded-2xl p-4">
                 <img class="w-full rounded-xl" src="/image/Qr.jpg" alt="QR Code">
             </div>
-
+            <hr class="my-6">
             <div>
                 <h4 class="text-lg font-semibold text-gray-800 mb-4">Khách Hàng</h4>
                 <div id="artist-list" class="space-y-4">

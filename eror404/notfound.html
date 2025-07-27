@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snico - NFT Marketplace (Responsive)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F7F7F7;
+            color: #1a202c;
+        }
+
+        .active-nav {
+            background-color: #5960FF;
+            color: white;
+        }
+
+
+
+        /* Style cho mục cha khi menu con đang mở */
+        .dropdown-toggle.active-parent {
+            background-color: #eff0ff;
+            /* Màu nền nhạt hơn */
+            color: #5960FF;
+            /* Màu chữ tím */
+        }
+
+        /* Style cho menu con */
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+            background-color: #fafbff;
+            /* Nền hơi khác biệt cho menu con */
+        }
+
+        /* Lớp active để hiển thị menu con */
+        .submenu.active {
+            max-height: 250px;
+            /* Chiều cao đủ lớn để chứa các mục */
+            opacity: 1;
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .qr-code img {
+            animation: glow 2s infinite ease-in-out;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+                filter: brightness(1);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+                filter: brightness(1.5);
+            }
+        }
+
+        /* Style cho thanh cuộn đẹp hơn (tùy chọn) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        
+    </style>
+</head>
+
+<body class="bg-[#E5E5E5]">
+
+    <div class="relative min-h-screen lg:flex">
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden"></div>
+
+        <aside id="left-sidebar"
+            class="fixed inset-y-0 left-0 bg-white w-64 min-h-screen p-6 flex flex-col justify-between transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-30">
+            <div>
+                <div class="flex items-center space-x-2">
+                    <img src="/image/logo.png" alt="">
+                </div>
+
+                <nav class="space-y-4 mt-6">
+                    <a href="/" class="flex items-center space-x-4 px-4 py-3 rounded-lg active-nav">
+                        <i class="fas fa-home"></i>
+                        <span class="font-semibold">Trang Chủ</span>
+                    </a>
+                    <a href="/eror404/notfound.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-code"></i>
+                        <span class="font-semibold">Thiết Kế Web</span>
+                    </a>
+                    <div>
+                        <a href="eror404/notfound.html"
+                            class="dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-lg text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-newspaper w-5 text-center"></i>
+                                <span class="font-semibold">Blog Tin Tức</span>
+                            </div>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </a>
+
+                        <div class="submenu">
+                            <nav class="flex flex-col pt-2 pb-1 mx-4 border-l-2 border-indigo-100">
+                                <a href="/bai-viet/manh-tuong-uy-tin.html"
+                                    class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Mạnh
+                                    Tường</a>
+                                <a href="eror404/notfound.html"
+                                    class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Vui
+                                    Vẻ</a>
+                                <a href="eror404/notfound.html"
+                                    class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Joke
+                                    Tiktok</a>
+                                <a href="eror404/notfound.html"
+                                    class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Blog
+                                    Facebook</a>
+                            </nav>
+                        </div>
+                    </div>
+                    <a href="/eror404/notfound.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-rocket"></i>
+                        <span class="font-semibold">Dịch Vụ SEO</span>
+                    </a>
+                    <a href="/game/game-quay-so.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-gamepad"></i>
+                        <span class="font-semibold">Mini Game</span>
+                    </a>
+                    <a href="/founder/manh-tuong-uy-tin.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-user-tie"></i>
+                        <span class="font-semibold">Sáng Lập</span>
+                    </a>
+                </nav>
+
+                <!-- SCript danh mục cấp 1 -->
+                <script>
+                    // --- Dropdown Menu Logic ---
+                    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+                    dropdownToggles.forEach(clickedToggle => {
+                        clickedToggle.addEventListener('click', (event) => {
+                            event.preventDefault(); // Ngăn trang chuyển hướng
+
+                            const submenu = clickedToggle.nextElementSibling;
+
+                            // Kiểm tra nếu menu đang được click đã mở hay chưa
+                            const isAlreadyOpen = clickedToggle.classList.contains('active-parent');
+
+                            // Đóng tất cả các menu khác trước
+                            dropdownToggles.forEach(toggle => {
+                                toggle.classList.remove('active-parent');
+                                toggle.nextElementSibling.classList.remove('active');
+                                toggle.querySelector('.fa-chevron-down').classList.remove('rotate-180');
+                            });
+
+                            // Nếu menu chưa mở, thì mở nó ra
+                            if (!isAlreadyOpen) {
+                                clickedToggle.classList.add('active-parent');
+                                submenu.classList.add('active');
+                                clickedToggle.querySelector('.fa-chevron-down').classList.add('rotate-180');
+                            }
+                        });
+                    });
+                </script>
+            </div>
+            <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="font-semibold">Log out</span>
+            </a>
+        </aside>
+
+        <!-- NỘI DUNG BÊN CHÍNH GIỮA -->
+        <main class="bg-gray-800 flex-1 flex flex-col items-center justify-center relative overflow-hidden cursor-crosshair">
+
+            <div id="loading-screen" class="w-full max-w-lg text-center z-20">
+                <h1 class="text-3xl font-bold text-white mb-4 animate-pulse">WEBSITE ĐANG CẬP NHẬT PHIÊN BẢN MỚI...</h1>
+                <div class="w-full bg-gray-700 rounded-full h-6 border-2 border-indigo-400 shadow-lg">
+                    <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-full rounded-full text-center text-white text-sm leading-6 transition-all duration-500" style="width: 0%;">
+                    </div>
+                </div>
+                <p id="progress-text" class="text-white mt-2 font-semibold text-lg">0%</p>
+                <button id="start-game-button" class="mt-8 px-8 py-3 bg-green-500 text-white font-bold rounded-lg shadow-lg hover:bg-green-600 transition-transform transform hover:scale-105 hidden">BẮT ĐẦU TRẬN CHIẾN!</button>
+            </div>
+        
+        
+        
+            <script>
+            document.addEventListener('DOMContentLoaded', () => {
+        
+                // --- PHẦN 1: KHỞI TẠO VÀ CÀI ĐẶT BAN ĐẦU ---
+                const loadingScreen = document.getElementById('loading-screen');
+                const progressBar = document.getElementById('progress-bar');
+                const progressText = document.getElementById('progress-text');
+                const startGameButton = document.getElementById('start-game-button');
+                const canvas = document.getElementById('gameCanvas');
+                const ctx = canvas.getContext('2d');
+                const gameUI = document.getElementById('game-ui');
+        
+                // UI Elements
+                const scoreEl = document.getElementById('score');
+                const playerHealthBarEl = document.getElementById('player-health-bar');
+                const bossHealthContainer = document.getElementById('boss-health-container');
+                const bossHealthBarEl = document.getElementById('boss-health-bar');
+                const levelTitleEl = document.getElementById('level-title');
+                const levelSubtitleEl = document.getElementById('level-subtitle');
+                const messageContainer = document.getElementById('message-container');
+        
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+    
+            });
+            </script>
+        </main>
+        <!-- KẾT THÚC NỘI DUNG BÊN CHÍNH GIỮA -->
+
+
+
+
+        <aside class="hidden xl:block bg-white w-80 p-6">
+            <a href="https://www.facebook.com/ha.tuong.35728" target="_blank" rel="noopener noreferrer"
+                class="flex flex-col items-center text-center group cursor-pointer">
+
+                <div
+                    class="p-1 rounded-full ring-2 ring-blue-500 group-hover:ring-blue-700 transition-all duration-300 mb-4">
+                    <img src="/image/manh-tuong.jpg" alt="User" class="w-24 h-24 rounded-full shadow-md object-cover">
+                </div>
+
+                <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-700 transition-colors">Mạnh Tường</h3>
+                <p class="text-sm text-gray-500">@manhtuong</p>
+            </a>
+
+            <div class="bg-gray-50 rounded-2xl p-4">
+                <img class="w-full rounded-xl" src="/image/Qr.jpg" alt="QR Code">
+            </div>
+        </aside>
+    </div>
+
+
+</body>
+
+</html>

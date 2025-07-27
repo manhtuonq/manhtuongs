@@ -7,25 +7,31 @@
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
+    <url>
+        <loc>https://tuong.name.vn/design.html</loc>
+        <lastmod>2025-07-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
 
     <url>
         <loc>https://tuong.name.vn/bai-viet/manh-tuong-uy-tin.html</loc>
         <lastmod>2025-07-26</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://tuong.name.vn/founder/manh-tuong-uy-tin.html</loc>
         <lastmod>2025-07-26</lastmod>
-        <changefreq>yearly</changefreq>
+        <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <url>
         <loc>https://tuong.name.vn/game/game-quay-so.html</loc>
         <lastmod>2025-07-26</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
 

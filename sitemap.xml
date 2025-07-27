@@ -20,6 +20,12 @@
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://manhtuongs.vercel.app/bai-viet/bai-viet/thiet-ke-website-uy-tin-manh-tuong.html</loc>
+        <lastmod>2025-07-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
     
     <url>
         <loc>https://manhtuongs.vercel.app/founder/manh-tuong-uy-tin.html</loc>

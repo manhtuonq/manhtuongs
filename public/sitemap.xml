@@ -2,34 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>https://tuong.name.vn/</loc>
+        <loc>https://manhtuongs.vercel.app/</loc>
         <lastmod>2025-07-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://tuong.name.vn/design.html</loc>
+        <loc>https://manhtuongs.vercel.app/design.html</loc>
         <lastmod>2025-07-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://tuong.name.vn/bai-viet/manh-tuong-uy-tin.html</loc>
+        <loc>https://manhtuongs.vercel.app/bai-viet/manh-tuong-uy-tin.html</loc>
         <lastmod>2025-07-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://tuong.name.vn/founder/manh-tuong-uy-tin.html</loc>
+        <loc>https://manhtuongs.vercel.app/founder/manh-tuong-uy-tin.html</loc>
         <lastmod>2025-07-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <url>
-        <loc>https://tuong.name.vn/game/game-quay-so.html</loc>
+        <loc>https://manhtuongs.vercel.app/game/game-quay-so.html</loc>
         <lastmod>2025-07-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

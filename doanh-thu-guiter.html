@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mạnh Tường uy tín - Nhà Thiết Kế Có Tâm & Chuyên Nghiệp</title>
+    <meta name="description"
+        content="Mạnh Tường - Nhà thiết kế uy tín, mang đến các giải pháp thiết kế sáng tạo, chuyên nghiệp và tận tâm. Cam kết chất lượng và sự hài lòng của khách hàng.">
+    <link rel="canonical" href="https://manhtuongs.vercel.app/">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords"
+        content="mạnh tường uy tín, nhà thiết kế mạnh tường, thiết kế chuyên nghiệp, dịch vụ thiết kế, thiết kế có tâm, mạnh tường designer">
+        <link rel="icon" sizes="40x40" href="/image/manh-tuong.jpg" type="image/jpeg">
+    <meta property="og:title" content="Mạnh Tường uy tín - Nhà Thiết Kế Có Tâm & Chuyên Nghiệp">
+    <meta property="og:description"
+        content="Mạnh Tường - Nhà thiết kế uy tín, mang đến các giải pháp thiết kế sáng tạo, chuyên nghiệp và tận tâm.">
+    <meta property="og:image" content="https://manhtuongs.vercel.app/image/manh-tuong.jpg">
+    <meta property="og:url" content="https://manhtuongs.vercel.app/">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mạnh Tường uy tín - Nhà Thiết Kế Có Tâm & Chuyên Nghiệp">
+    <meta name="twitter:description"
+        content="Mạnh Tường - Nhà thiết kế uy tín, mang đến các giải pháp thiết kế sáng tạo, chuyên nghiệp và tận tâm.">
+    <meta name="twitter:image" content="https://manhtuongs.vercel.app/image/manh-tuong.jpg">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/image/manh-tuong.jpg">
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #F7F7F7;
+            color: #1a202c;
+        }
+
+        .active-nav {
+            background-color: #5960FF;
+            color: white;
+        }
+
+     
+
+        /* Style cho mục cha khi menu con đang mở */
+        .dropdown-toggle.active-parent {
+            background-color: #eff0ff;
+            /* Màu nền nhạt hơn */
+            color: #5960FF;
+            /* Màu chữ tím */
+        }
+
+        /* Style cho menu con */
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+            background-color: #fafbff;
+            /* Nền hơi khác biệt cho menu con */
+        }
+
+        /* Lớp active để hiển thị menu con */
+        .submenu.active {
+            max-height: 250px;
+            /* Chiều cao đủ lớn để chứa các mục */
+            opacity: 1;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .qr-code img {
+            animation: glow 2s infinite ease-in-out;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+                filter: brightness(1);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+                filter: brightness(1.5);
+            }
+        }
+
+        /* Style cho thanh cuộn đẹp hơn (tùy chọn) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+
+<body class="bg-[#E5E5E5]">
+
+    <div class="relative min-h-screen lg:flex">
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden"></div>
+
+        <aside id="left-sidebar"
+            class="fixed inset-y-0 left-0 bg-white w-64 min-h-screen p-6 flex flex-col justify-between transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-30">
+            <div>
+                <div class="flex items-center space-x-2">
+                    <img src="/image/logo.png" alt="">
+                </div>
+
+                <nav class="space-y-4 mt-6">
+                    <a href="/" class="flex items-center space-x-4 px-4 py-3 rounded-lg active-nav">
+                        <i class="fas fa-home"></i>
+                        <span class="font-semibold">Trang Chủ</span>
+                    </a>
+                    <a href="/eror404/notfound.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-code"></i>
+                        <span class="font-semibold">Thiết Kế Web</span>
+                    </a>
+                    <div>
+                        <a href="/eror404/notfound.html"
+                            class="dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-lg text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-newspaper w-5 text-center"></i>
+                                <span class="font-semibold">Blog Tin Tức</span>
+                            </div>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </a>
+
+                        <div class="submenu">
+                            <nav class="flex flex-col pt-2 pb-1 mx-4 border-l-2 border-indigo-100">
+                                <a href="/bai-viet/manh-tuong-uy-tin.html"
+                                    class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Mạnh
+                                    Tường</a>
+                                <a href="/bai-viet/thiet-ke-website-uy-tin-manh-tuong.html"
+                                    class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Vui
+                                    Vẻ</a>
+                                <a href="/eror404/notfound.html"
+                                    class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Joke
+                                    Tiktok</a>
+                                <a href="/eror404/notfound.html"
+                                    class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Blog
+                                    Facebook</a>
+                            </nav>
+                        </div>
+                    </div>
+                    <a href="/eror404/notfound.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-rocket"></i>
+                        <span class="font-semibold">Dịch Vụ SEO</span>
+                    </a>
+                    <a href="game/game-quay-so.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-gamepad"></i>
+                        <span class="font-semibold">Mini Game</span>
+                    </a>
+                    <a href="/founder/manh-tuong-uy-tin.html"
+                        class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-user-tie"></i>
+                        <span class="font-semibold">Sáng Lập</span>
+                    </a>
+                </nav>
+   <script>
+                    // --- Dropdown Menu Logic ---
+                    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+                    dropdownToggles.forEach(clickedToggle => {
+                        clickedToggle.addEventListener('click', (event) => {
+                            event.preventDefault(); // Ngăn trang chuyển hướng
+
+                            const submenu = clickedToggle.nextElementSibling;
+
+                            // Kiểm tra nếu menu đang được click đã mở hay chưa
+                            const isAlreadyOpen = clickedToggle.classList.contains('active-parent');
+
+                            // Đóng tất cả các menu khác trước
+                            dropdownToggles.forEach(toggle => {
+                                toggle.classList.remove('active-parent');
+                                toggle.nextElementSibling.classList.remove('active');
+                                toggle.querySelector('.fa-chevron-down').classList.remove('rotate-180');
+                            });
+
+                            // Nếu menu chưa mở, thì mở nó ra
+                            if (!isAlreadyOpen) {
+                                clickedToggle.classList.add('active-parent');
+                                submenu.classList.add('active');
+                                clickedToggle.querySelector('.fa-chevron-down').classList.add('rotate-180');
+                            }
+                        });
+                    });
+                </script>
+            </div>
+            <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="font-semibold">Log out</span>
+            </a>
+        </aside>
+
+        <!-- NỘI DUNG BÊN CHÍNH GIỮA -->
+        <main class="bg-[#F7F7F7] flex-1 p-4 sm:p-6 lg:p-8">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Bảng điều khiển</h1>
+                    <p class="text-gray-500 mt-1">Tổng quan cửa hàng Nhạc cụ Tiến Đạt</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 border border-gray-200 rounded-lg shadow-sm transition duration-300">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        <span>Lọc theo ngày</span>
+                    </button>
+                </div>
+            </div>
+        
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Lượt truy cập</p>
+                            <p class="text-3xl font-bold text-gray-800 mt-1" id="total-visitors">12.875</p>
+                        </div>
+                        <div class="bg-blue-100 text-blue-600 w-12 h-12 flex items-center justify-center rounded-full">
+                            <i class="fas fa-users fa-lg"></i>
+                        </div>
+                    </div>
+                    <p class="text-green-500 text-sm font-semibold mt-4 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i>
+                        12.5% so với tháng trước
+                    </p>
+                </div>
+        
+                <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Doanh thu</p>
+                            <p class="text-3xl font-bold text-gray-800 mt-1" id="total-revenue">256M</p>
+                        </div>
+                        <div class="bg-green-100 text-green-600 w-12 h-12 flex items-center justify-center rounded-full">
+                            <i class="fas fa-dollar-sign fa-lg"></i>
+                        </div>
+                    </div>
+                    <p class="text-green-500 text-sm font-semibold mt-4 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i>
+                        8.2% so với tháng trước
+                    </p>
+                </div>
+        
+                <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Khách hàng mới</p>
+                            <p class="text-3xl font-bold text-gray-800 mt-1" id="new-customers">1.254</p>
+                        </div>
+                        <div class="bg-indigo-100 text-indigo-600 w-12 h-12 flex items-center justify-center rounded-full">
+                            <i class="fas fa-user-plus fa-lg"></i>
+                        </div>
+                    </div>
+                    <p class="text-red-500 text-sm font-semibold mt-4 flex items-center">
+                        <i class="fas fa-arrow-down mr-1"></i>
+                        1.7% so với tháng trước
+                    </p>
+                </div>
+        
+                <div class="bg-white p-6 rounded-2xl shadow-lg card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Tổng đơn hàng</p>
+                            <p class="text-3xl font-bold text-gray-800 mt-1" id="total-orders">859</p>
+                        </div>
+                        <div class="bg-yellow-100 text-yellow-600 w-12 h-12 flex items-center justify-center rounded-full">
+                            <i class="fas fa-shopping-cart fa-lg"></i>
+                        </div>
+                    </div>
+                    <p class="text-green-500 text-sm font-semibold mt-4 flex items-center">
+                        <i class="fas fa-arrow-up mr-1"></i>
+                        5.9% so với tháng trước
+                    </p>
+                </div>
+            </div>
+        
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">Tổng quan Doanh thu & Lượt truy cập</h3>
+                        <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+                            <button class="px-3 py-1 text-sm font-semibold text-gray-500 hover:bg-white hover:text-gray-800 rounded-md transition-colors">Tuần</button>
+                            <button class="px-3 py-1 text-sm font-semibold bg-white text-gray-900 shadow-sm rounded-md transition-colors">Tháng</button>
+                            <button class="px-3 py-1 text-sm font-semibold text-gray-500 hover:bg-white hover:text-gray-800 rounded-md transition-colors">Năm</button>
+                        </div>
+                    </div>
+                    <div class="h-80">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+        
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Báo cáo Thu Chi chi tiết</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-base font-medium text-blue-700">Doanh thu Guitar</span>
+                                    <span class="text-sm font-medium text-blue-700">125.500.000 VNĐ</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-base font-medium text-green-700">Doanh thu Violin</span>
+                                    <span class="text-sm font-medium text-green-700">80.200.000 VNĐ</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                             <hr class="my-3">
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Tổng thu:</span>
+                                    <span class="font-semibold text-gray-800">205.700.000 VNĐ</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Chi phí (Ước tính):</span>
+                                    <span class="font-semibold text-gray-800">- 41.140.000 VNĐ</span>
+                                </div>
+                                <div class="flex justify-between text-base mt-2 pt-2 border-t">
+                                    <span class="font-bold text-gray-900">Lợi nhuận ròng:</span>
+                                    <span class="font-bold text-green-600">164.560.000 VNĐ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="bg-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Sản phẩm Bán chạy nhất</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <img src="https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=80&h=80&fit=crop" alt="Guitar" class="w-14 h-14 rounded-lg object-cover mr-4">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-gray-800">Guitar Acoustic Taylor 214ce</h4>
+                                    <p class="text-sm text-gray-500">Đã bán: 128</p>
+                                </div>
+                                <span class="font-semibold text-gray-700">25.0M</span>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="https://images.unsplash.com/photo-1612225332248-54c3c07bdb4f?w=80&h=80&fit=crop" alt="Violin" class="w-14 h-14 rounded-lg object-cover mr-4">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-gray-800">Violin Kapok V182</h4>
+                                    <p class="text-sm text-gray-500">Đã bán: 97</p>
+                                </div>
+                                <span class="font-semibold text-gray-700">3.5M</span>
+                            </div>
+                             <div class="flex items-center">
+                                <img src="https://images.unsplash.com/photo-1520442372728-9c988a876a47?w=80&h=80&fit=crop" alt="Guitar Classic" class="w-14 h-14 rounded-lg object-cover mr-4">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-gray-800">Guitar Classic Cordoba C5</h4>
+                                    <p class="text-sm text-gray-500">Đã bán: 85</p>
+                                </div>
+                                <span class="font-semibold text-gray-700">7.8M</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- KẾT THÚC NỘI DUNG BÊN CHÍNH GIỮA -->
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+            
+            document.addEventListener('DOMContentLoaded', function () {
+    // --- 0. DỮ LIỆU MẪU CHO CÁC KHOẢNG THỜI GIAN ---
+    // Dữ liệu cho các ngày trong tuần
+    const weeklyData = {
+        labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
+        datasets: [
+            {
+                label: 'Doanh thu (triệu VNĐ)',
+                data: [15, 20, 18, 25, 22, 30, 28],
+            },
+            {
+                label: 'Lượt truy cập (nghìn)',
+                data: [5, 6, 5.5, 7, 6.5, 8, 9],
+            }
+        ]
+    };
+
+    // Dữ liệu cho các tháng trong năm (lấy từ script gốc của bạn)
+    const monthlyData = {
+        labels: ['Thg 1', 'Thg 2', 'Thg 3', 'Thg 4', 'Thg 5', 'Thg 6', 'Thg 7'],
+        datasets: [
+            {
+                label: 'Doanh thu (triệu VNĐ)',
+                data: [65, 59, 80, 81, 56, 55, 90],
+            },
+            {
+                label: 'Lượt truy cập (nghìn)',
+                data: [28, 48, 40, 19, 86, 27, 110],
+            }
+        ]
+    };
+    
+    // Dữ liệu cho các năm
+    const yearlyData = {
+        labels: ['2023', '2024', '2025', '2026'],
+        datasets: [
+            {
+                label: 'Doanh thu (tỷ VNĐ)',
+                data: [1.2, 1.5, 1.4, 1.8],
+            },
+            {
+                label: 'Lượt truy cập (triệu)',
+                data: [0.8, 1.1, 1.0, 1.3],
+            }
+        ]
+    };
+
+    // --- 1. ĐỊNH DẠNG CÁC CON SỐ (Giữ nguyên từ script của bạn) ---
+    const formatNumber = (number) => number.toLocaleString('vi-VN');
+    
+    const totalVisitors = 12875;
+    const newCustomers = 1254;
+    const totalOrders = 859;
+    
+    document.getElementById('total-visitors').innerText = formatNumber(totalVisitors);
+    document.getElementById('new-customers').innerText = formatNumber(newCustomers);
+    document.getElementById('total-orders').innerText = formatNumber(totalOrders);
+    
+    const formatRevenue = (number) => {
+        if (number >= 1000000) {
+            return (number / 1000000).toFixed(0) + 'M';
+        }
+        return formatNumber(number) + ' VNĐ';
+    };
+    const totalRevenue = 256000000;
+    document.getElementById('total-revenue').innerText = formatRevenue(totalRevenue);
+
+    // --- 2. KHỞI TẠO BIỂU ĐỒ (Sử dụng dữ liệu tháng làm mặc định) ---
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    const gradientBgBlue = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientBgBlue.addColorStop(0, 'rgba(59, 130, 246, 0.4)');
+    gradientBgBlue.addColorStop(1, 'rgba(59, 130, 246, 0)');
+
+    const gradientBgGreen = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientBgGreen.addColorStop(0, 'rgba(16, 185, 129, 0.4)');
+    gradientBgGreen.addColorStop(1, 'rgba(16, 185, 129, 0)');
+
+    const revenueChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: monthlyData.labels,
+            datasets: [
+                {
+                    ...monthlyData.datasets[0], // Lấy dữ liệu doanh thu tháng mặc định
+                    borderColor: '#3B82F6',
+                    backgroundColor: gradientBgBlue,
+                    borderWidth: 2, pointBackgroundColor: '#3B82F6', pointBorderColor: '#ffffff',
+                    pointHoverRadius: 6, pointHoverBorderWidth: 3, fill: true, tension: 0.4
+                },
+                {
+                    ...monthlyData.datasets[1], // Lấy dữ liệu truy cập tháng mặc định
+                    borderColor: '#10B981',
+                    backgroundColor: gradientBgGreen,
+                    borderWidth: 2, pointBackgroundColor: '#10B981', pointBorderColor: '#ffffff',
+                    pointHoverRadius: 6, pointHoverBorderWidth: 3, fill: true, tension: 0.4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top', align: 'end',
+                    labels: { usePointStyle: true, boxWidth: 8, font: { family: "'Montserrat', sans-serif" } }
+                },
+                tooltip: {
+                    backgroundColor: '#1a202c', titleFont: { size: 14, weight: 'bold', family: "'Montserrat', sans-serif" },
+                    bodyFont: { size: 12, family: "'Montserrat', sans-serif" },
+                    padding: 12, cornerRadius: 8, displayColors: true, boxPadding: 4,
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) { label += ': '; }
+                            if (context.parsed.y !== null) {
+                                let value = context.parsed.y;
+                                if (label.includes('Doanh thu')) {
+                                    if (label.includes('tỷ')) {
+                                        label += value + ' tỷ VNĐ';
+                                    } else {
+                                        label += value + ' triệu VNĐ';
+                                    }
+                                } else {
+                                    if (label.includes('triệu')) {
+                                        label += value + ' triệu';
+                                    } else {
+                                        label += formatNumber(value * 1000);
+                                    }
+                                }
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true, grid: { drawBorder: false, color: '#E5E7EB' },
+                    ticks: {
+                       font: { family: "'Montserrat', sans-serif" },
+                       callback: function(value) { return value + ' tr'; } // Mặc định là triệu
+                    }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { family: "'Montserrat', sans-serif" } }
+                }
+            }
+        }
+    });
+
+    // --- 3. LOGIC CẬP NHẬT BIỂU ĐỒ THEO BỘ LỌC ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    function updateChart(period) {
+        let data;
+        let yAxisUnitLabel = 'tr'; // Đơn vị mặc định cho trục Y
+
+        switch(period) {
+            case 'week':
+                data = weeklyData;
+                yAxisUnitLabel = ' tr';
+                break;
+            case 'year':
+                data = yearlyData;
+                yAxisUnitLabel = ' tỷ';
+                break;
+            case 'month':
+            default:
+                data = monthlyData;
+                yAxisUnitLabel = ' tr';
+        }
+
+        // Cập nhật dữ liệu cho biểu đồ
+        revenueChart.data.labels = data.labels;
+        revenueChart.data.datasets[0].data = data.datasets[0].data;
+        revenueChart.data.datasets[0].label = data.datasets[0].label;
+        revenueChart.data.datasets[1].data = data.datasets[1].data;
+        revenueChart.data.datasets[1].label = data.datasets[1].label;
+        
+        // Cập nhật đơn vị trên trục Y
+        revenueChart.options.scales.y.ticks.callback = function(value) {
+            return value + yAxisUnitLabel;
+        };
+
+        // Vẽ lại biểu đồ
+        revenueChart.update();
+    }
+
+    // Gắn sự kiện click cho các nút lọc
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Cập nhật giao diện nút active
+            filterButtons.forEach(btn => {
+                btn.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+                btn.classList.add('text-gray-500');
+            });
+            button.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            button.classList.remove('text-gray-500');
+
+            // Cập nhật biểu đồ
+            const period = button.dataset.period;
+            updateChart(period);
+        });
+    });
+});
+        </script>
+
+        <aside class="hidden xl:block bg-white w-80 p-6 shadow-lg">
+           
+            
+            <a href="https://www.facebook.com/ha.tuong.35728" target="_blank" rel="noopener noreferrer"
+               class="flex flex-col items-center text-center group cursor-pointer">
+                
+                <div class="p-1 rounded-full ring-2 ring-blue-500 group-hover:ring-blue-700 transition-all duration-300 mb-4">
+                    <img src="/image/manh-tuong.jpg" alt="User" class="w-24 h-24 rounded-full shadow-md object-cover">
+                </div>
+            
+                <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-700 transition-colors">Mạnh Tường</h3>
+                <p class="text-sm text-gray-500">@manhtuong</p>
+            </a>
+            <div class="bg-gray-50 rounded-2xl p-4 mt-6"> <img class="w-full rounded-xl" src="/image/Qr.jpg" alt="QR Code">
+            </div>
+
+
+            <hr class="my-6">
+        
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <h4 class="text-lg font-bold text-gray-800">Bài viết gần đây</h4>
+                    <div class="relative">
+                        <select id="sort-filter" class="appearance-none bg-gray-100 border border-gray-200 text-gray-700 py-2 pl-3 pr-8 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 focus:bg-white text-sm transition-all">
+                            <option value="newest">Mới nhất</option>
+                            <option value="oldest">Cũ nhất</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+        
+                <div id="post-list" class="space-y-3">
+                    </div>
+        
+                <nav id="pagination" class="flex justify-center items-center pt-4 space-x-2"></nav>
+            </div>
+            </aside>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        
+            // ============================================================
+            // DỮ LIỆU BÀI VIẾT (BẠN CHỈ CẦN CẬP NHẬT Ở ĐÂY)
+            // Sắp xếp theo ngày mới nhất lúc ban đầu
+            // Quan trọng: `date` phải theo định dạng 'YYYY-MM-DD' để sắp xếp đúng
+            // ============================================================
+            const allPosts = [
+                { id: 1, title: 'Hướng dẫn setup môi trường dev', imageUrl: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=80&h=80&fit=crop', date: '2025-07-25' },
+                { id: 2, title: '10 mẹo CSS hữu ích cho người mới', imageUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=80&h=80&fit=crop', date: '2025-07-22' },
+                { id: 3, title: 'Tìm hiểu về React Hooks cơ bản', imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=80&h=80&fit=crop', date: '2025-07-20' },
+                { id: 4, title: 'Tailwind CSS và những điều cần biết', imageUrl: 'https://images.unsplash.com/photo-1617042375876-a13e36732a04?w=80&h=80&fit=crop', date: '2025-06-30' },
+                { id: 5, title: 'Tối ưu hóa hiệu năng website', imageUrl: 'https://images.unsplash.com/photo-1542393545-10f5cde2c810?w=80&h=80&fit=crop', date: '2025-06-15' },
+                { id: 6, title: 'Xây dựng API với Node.js và Express', imageUrl: 'https://images.unsplash.com/photo-1629654291663-b91ad42769a4?w=80&h=80&fit=crop', date: '2025-07-26' }, // Bài mới nhất
+                { id: 7, title: 'Giới thiệu về Vue 3 Composition API', imageUrl: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=80&h=80&fit=crop', date: '2025-05-10' },
+            ];
+        
+            const postListContainer = document.getElementById('post-list');
+            const paginationContainer = document.getElementById('pagination');
+            const sortFilter = document.getElementById('sort-filter');
+        
+            let currentPage = 1;
+            const postsPerPage = 3; // Số bài viết trên mỗi trang
+            let currentPosts = [...allPosts];
+        
+            // Hàm tính toán và hiển thị ngày tương đối (vd: 2 ngày trước)
+            function timeAgo(dateString) {
+                const date = new Date(dateString);
+                const now = new Date();
+                const seconds = Math.floor((now - date) / 1000);
+                let interval = seconds / 31536000;
+                if (interval > 1) return Math.floor(interval) + " năm trước";
+                interval = seconds / 2592000;
+                if (interval > 1) return Math.floor(interval) + " tháng trước";
+                interval = seconds / 86400;
+                if (interval > 1) return Math.floor(interval) + " ngày trước";
+                interval = seconds / 3600;
+                if (interval > 1) return Math.floor(interval) + " giờ trước";
+                interval = seconds / 60;
+                if (interval > 1) return Math.floor(interval) + " phút trước";
+                return "Vừa xong";
+            }
+        
+            // Hàm hiển thị danh sách bài viết cho trang hiện tại
+            function displayPosts() {
+                postListContainer.innerHTML = '';
+                const startIndex = (currentPage - 1) * postsPerPage;
+                const endIndex = startIndex + postsPerPage;
+                const paginatedPosts = currentPosts.slice(startIndex, endIndex);
+        
+                paginatedPosts.forEach(post => {
+                    const postElement = document.createElement('a');
+                    postElement.href = `#post-${post.id}`;
+                    postElement.className = 'flex items-center p-3 rounded-xl hover:bg-gray-100 hover:shadow-sm transition-all duration-200 transform hover:-translate-y-0.5';
+                    postElement.innerHTML = `
+                        <img src="${post.imageUrl}" alt="${post.title}" class="w-16 h-16 rounded-lg object-cover mr-4 flex-shrink-0">
+                        <div class="overflow-hidden">
+                            <h5 class="font-semibold text-gray-800 leading-tight truncate">${post.title}</h5>
+                            <p class="text-sm text-gray-500">${timeAgo(post.date)}</p>
+                        </div>
+                    `;
+                    postListContainer.appendChild(postElement);
+                });
+            }
+        
+            // Hàm thiết lập các nút phân trang
+            function setupPagination() {
+                paginationContainer.innerHTML = '';
+                const pageCount = Math.ceil(currentPosts.length / postsPerPage);
+        
+                for (let i = 1; i <= pageCount; i++) {
+                    const btn = document.createElement('button');
+                    btn.innerText = i;
+                    btn.className = `px-3 py-1 rounded-md text-sm font-medium transition-colors duration-200`;
+                    if (i === currentPage) {
+                        btn.classList.add('bg-blue-600', 'text-white', 'cursor-default');
+                    } else {
+                        btn.classList.add('bg-white', 'text-gray-600', 'hover:bg-gray-200');
+                    }
+                    btn.addEventListener('click', () => {
+                        currentPage = i;
+                        displayPosts();
+                        setupPagination();
+                    });
+                    paginationContainer.appendChild(btn);
+                }
+            }
+        
+            // Hàm sắp xếp bài viết
+            function sortPosts() {
+                const sortValue = sortFilter.value;
+                currentPosts.sort((a, b) => {
+                    const dateA = new Date(a.date);
+                    const dateB = new Date(b.date);
+                    return sortValue === 'newest' ? dateB - dateA : dateA - dateB;
+                });
+                currentPage = 1; // Reset về trang đầu tiên sau khi lọc
+                displayPosts();
+                setupPagination();
+            }
+        
+            // Lắng nghe sự kiện thay đổi trên dropdown
+            sortFilter.addEventListener('change', sortPosts);
+        
+            // Khởi tạo lần đầu khi tải trang
+            sortPosts();
+        });
+        </script>
+    </div>
+
+
+</body>
+
+</html>

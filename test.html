@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueLED - Đèn LED Chất Lượng Cao</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .mirror-effect {
+            position: relative;
+        }
+        .mirror-effect::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+            transform: scaleY(-1);
+            opacity: 0.7;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .flashsale-countdown {
+            background: linear-gradient(90deg, #ff3f3f 0%, #ff6b6b 100%);
+        }
+        
+        .comment-box {
+            transition: all 0.3s ease;
+        }
+        .comment-box:hover {
+            transform: perspective(1000px) rotateX(5deg);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes flashsalePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .flashsale-pulse {
+            animation: flashsalePulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo với hiệu ứng gương -->
+            <div class="flex items-center space-x-2">
+                <div class="mirror-effect">
+                    <a href="#" class="text-2xl font-bold flex items-center">
+                        <i class="fas fa-lightbulb mr-2 text-blue-300"></i>
+                        <span class="text-blue-100">Blue</span><span class="text-white">LED</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="hidden md:flex flex-1 mx-8">
+                <div class="relative w-full max-w-xl">
+                    <input type="text" placeholder="Tìm kiếm đèn LED..." class="w-full py-2 px-4 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button class="absolute right-0 top-0 h-full px-4 bg-blue-600 rounded-r-full hover:bg-blue-700 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- User Actions -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hover:text-blue-200 transition">
+                    <i class="fas fa-user text-xl"></i>
+                </a>
+                <a href="#" class="hover:text-blue-200 transition">
+                    <i class="fas fa-heart text-xl"></i>
+                </a>
+                <a href="#" class="hover:text-blue-200 transition relative">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navbar -->
+    <nav class="bg-blue-800 text-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <!-- Danh mục -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-2 bg-blue-700 px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                        <i class="fas fa-bars"></i>
+                        <span>Danh mục sản phẩm</span>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-64 bg-white text-gray-800 rounded-lg shadow-lg py-2 z-50 hidden group-hover:block">
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600">Đèn LED dân dụng</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600">Đèn LED công nghiệp</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600">Đèn LED trang trí</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600">Đèn LED ngoài trời</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600">Phụ kiện đèn LED</a>
+                    </div>
+                </div>
+                
+                <!-- Menu chính -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="#" class="hover:text-blue-200 transition">Trang chủ</a>
+                    <a href="#products" class="hover:text-blue-200 transition">Sản phẩm</a>
+                    <a href="#flashsale" class="hover:text-blue-200 transition">Flash Sale</a>
+                    <a href="#news" class="hover:text-blue-200 transition">Tin tức</a>
+                    <a href="#about" class="hover:text-blue-200 transition">Giới thiệu</a>
+                    <a href="#contact" class="hover:text-blue-200 transition">Liên hệ</a>
+                </div>
+                
+                <!-- Hotline -->
+                <div class="flex items-center space-x-2 bg-blue-700 px-4 py-2 rounded-lg">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Hotline: 1900 1234</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-blue-800 to-blue-600 text-white overflow-hidden">
+        <div class="container mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 z-10 mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">ĐÈN LED CHẤT LƯỢNG CAO</h1>
+                <p class="text-xl mb-6">Tiết kiệm điện - Độ bền cao - Ánh sáng tự nhiên</p>
+                <div class="flex space-x-4">
+                    <a href="#products" class="bg-white text-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-100 transition">Mua ngay</a>
+                    <a href="#about" class="border-2 border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-800 transition">Tìm hiểu thêm</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 z-10 flex justify-center">
+                <img src="https://via.placeholder.com/600x400/1e3a8a/ffffff?text=LED+Light" alt="Đèn LED" class="rounded-lg shadow-2xl transform rotate-3 hover:rotate-0 transition duration-500">
+            </div>
+            <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-blue-400 rounded-full opacity-20"></div>
+            <div class="absolute -top-20 -left-20 w-80 h-80 bg-blue-300 rounded-full opacity-20"></div>
+        </div>
+    </section>
+    
+    <!-- Flash Sale Section -->
+    <section id="flashsale" class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-blue-900">FLASH SALE</h2>
+                <div class="flashsale-countdown text-white px-4 py-2 rounded-lg flex items-center space-x-2 flashsale-pulse">
+                    <i class="fas fa-bolt"></i>
+                    <span class="font-bold">KẾT THÚC SAU:</span>
+                    <div id="countdown" class="flex space-x-1">
+                        <span class="bg-white text-red-600 px-2 py-1 rounded">12</span>
+                        <span>:</span>
+                        <span class="bg-white text-red-600 px-2 py-1 rounded">45</span>
+                        <span>:</span>
+                        <span class="bg-white text-red-600 px-2 py-1 rounded">32</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- Flash Sale Item 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 relative">
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">-30%</div>
+                    <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+1" alt="Đèn LED 1" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Bulb 9W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(128)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-red-600 font-bold text-lg">89.000đ</span>
+                            <span class="text-gray-500 text-sm line-through ml-2">129.000đ</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+                            <div class="bg-red-600 h-2.5 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">Đã bán 75/100</div>
+                    </div>
+                </div>
+                
+                <!-- Flash Sale Item 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 relative">
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">-50%</div>
+                    <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+2" alt="Đèn LED 2" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Tube 1.2m</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(95)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-red-600 font-bold text-lg">149.000đ</span>
+                            <span class="text-gray-500 text-sm line-through ml-2">299.000đ</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+                            <div class="bg-red-600 h-2.5 rounded-full" style="width: 90%"></div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">Đã bán 90/100</div>
+                    </div>
+                </div>
+                
+                <!-- Flash Sale Item 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 relative">
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">-25%</div>
+                    <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+3" alt="Đèn LED 3" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Panel 24W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(156)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-red-600 font-bold text-lg">299.000đ</span>
+                            <span class="text-gray-500 text-sm line-through ml-2">399.000đ</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+                            <div class="bg-red-600 h-2.5 rounded-full" style="width: 60%"></div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">Đã bán 60/100</div>
+                    </div>
+                </div>
+                
+                <!-- Flash Sale Item 4 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 relative">
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">-40%</div>
+                    <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+4" alt="Đèn LED 4" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Downlight 7W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(72)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-red-600 font-bold text-lg">79.000đ</span>
+                            <span class="text-gray-500 text-sm line-through ml-2">129.000đ</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+                            <div class="bg-red-600 h-2.5 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">Đã bán 85/100</div>
+                    </div>
+                </div>
+                
+                <!-- Flash Sale Item 5 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 relative">
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">-35%</div>
+                    <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+5" alt="Đèn LED 5" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Spotlight 5W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(64)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-red-600 font-bold text-lg">129.000đ</span>
+                            <span class="text-gray-500 text-sm line-through ml-2">199.000đ</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+                            <div class="bg-red-600 h-2.5 rounded-full" style="width: 70%"></div>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">Đã bán 70/100</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <a href="#" class="inline-block bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-800 transition">Xem tất cả sản phẩm Flash Sale</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Banner Section -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="relative rounded-lg overflow-hidden h-48">
+                    <img src="https://via.placeholder.com/600x300/1e3a8a/ffffff?text=Banner+1" alt="Banner 1" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-blue-900 bg-opacity-30 flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold">ĐÈN LED DÂN DỤNG</h3>
+                    </div>
+                </div>
+                <div class="relative rounded-lg overflow-hidden h-48">
+                    <img src="https://via.placeholder.com/600x300/1e40af/ffffff?text=Banner+2" alt="Banner 2" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-blue-800 bg-opacity-30 flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold">ĐÈN LED CÔNG NGHIỆP</h3>
+                    </div>
+                </div>
+                <div class="relative rounded-lg overflow-hidden h-48">
+                    <img src="https://via.placeholder.com/600x300/1e3a8a/ffffff?text=Banner+3" alt="Banner 3" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-blue-900 bg-opacity-30 flex items-center justify-center">
+                        <h3 class="text-white text-xl font-bold">ĐÈN LED TRANG TRÍ</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Products Section -->
+    <section id="products" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">SẢN PHẨM NỔI BẬT</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+Pro+1" alt="Đèn LED Pro 1" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">Mới</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Bulb 12W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(215)</span>
+                        </div>
+                        <div class="text-blue-700 font-bold text-lg mb-3">159.000đ</div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+Pro+2" alt="Đèn LED Pro 2" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded">Bán chạy</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Tube 0.6m</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(187)</span>
+                        </div>
+                        <div class="text-blue-700 font-bold text-lg mb-3">129.000đ</div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+Pro+3" alt="Đèn LED Pro 3" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">-15%</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Panel 36W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(342)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-blue-700 font-bold text-lg">399.000đ</span>
+                            <span class="text-gray-500 text-sm line-through ml-2">469.000đ</span>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition mt-3">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+Pro+4" alt="Đèn LED Pro 4" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Downlight 9W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(128)</span>
+                        </div>
+                        <div class="text-blue-700 font-bold text-lg mb-3">149.000đ</div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+Pro+5" alt="Đèn LED Pro 5" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">Mới</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Spotlight 7W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(95)</span>
+                        </div>
+                        <div class="text-blue-700 font-bold text-lg mb-3">179.000đ</div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+Pro+6" alt="Đèn LED Pro 6" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded">Bán chạy</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Bulb 15W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(276)</span>
+                        </div>
+                        <div class="text-blue-700 font-bold text-lg mb-3">199.000đ</div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+Pro+7" alt="Đèn LED Pro 7" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">-20%</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Tube 1.5m</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(153)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-blue-700 font-bold text-lg">249.000đ</span>
+                            <span class="text-gray-500 text-sm line-through ml-2">309.000đ</span>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition mt-3">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                
+                <!-- Product 8 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=LED+Pro+8" alt="Đèn LED Pro 8" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg mb-2">Đèn LED Panel 48W</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(87)</span>
+                        </div>
+                        <div class="text-blue-700 font-bold text-lg mb-3">499.000đ</div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-800 transition">Xem thêm sản phẩm</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="py-12 bg-blue-900 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">KHÁCH HÀNG NÓI VỀ CHÚNG TÔI</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="comment-box bg-blue-800 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/80/1e3a8a/ffffff?text=KH" alt="Khách hàng 1" class="w-12 h-12 rounded-full object-cover">
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Nguyễn Văn A</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-blue-100">"Tôi rất hài lòng với chất lượng đèn LED mua tại BlueLED. Ánh sáng dịu nhẹ, tiết kiệm điện và độ bền cao. Đặc biệt dịch vụ chăm sóc khách hàng rất tốt!"</p>
+                    <div class="mt-4 text-sm text-blue-300">
+                        <i class="fas fa-clock mr-1"></i> 2 ngày trước
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="comment-box bg-blue-800 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/80/1e3a8a/ffffff?text=KH" alt="Khách hàng 2" class="w-12 h-12 rounded-full object-cover">
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Trần Thị B</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-blue-100">"Sản phẩm đúng như mô tả, giao hàng nhanh chóng. Đèn LED của BlueLED giúp tiết kiệm đáng kể chi phí điện hàng tháng cho gia đình tôi. Sẽ tiếp tục ủng hộ cửa hàng!"</p>
+                    <div class="mt-4 text-sm text-blue-300">
+                        <i class="fas fa-clock mr-1"></i> 1 tuần trước
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="comment-box bg-blue-800 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/80/1e3a8a/ffffff?text=KH" alt="Khách hàng 3" class="w-12 h-12 rounded-full object-cover">
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Lê Văn C</h4>
+                            <div class="text-yellow-400 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-blue-100">"Tôi đã mua đèn LED công nghiệp cho xưởng sản xuất. Sau 6 tháng sử dụng, hoàn toàn không có sự cố nào. Ánh sáng ổn định, nhân viên làm việc thoải mái hơn hẳn."</p>
+                    <div class="mt-4 text-sm text-blue-300">
+                        <i class="fas fa-clock mr-1"></i> 3 tuần trước
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Comment Form -->
+            <div class="mt-12 max-w-2xl mx-auto bg-white text-gray-800 rounded-lg p-6 shadow-lg">
+                <h3 class="text-2xl font-bold text-center text-blue-900 mb-6">GỬI ĐÁNH GIÁ CỦA BẠN</h3>
+                <form>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-2">Họ tên</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="rating" class="block text-gray-700 mb-2">Đánh giá</label>
+                        <div class="flex space-x-1">
+                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="1"></i>
+                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="2"></i>
+                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="3"></i>
+                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="4"></i>
+                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="5"></i>
+                        </div>
+                        <input type="hidden" id="rating-value" value="0">
+                    </div>
+                    <div class="mb-4">
+                        <label for="comment" class="block text-gray-700 mb-2">Bình luận</label>
+                        <textarea id="comment" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-700 text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition">Gửi đánh giá</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- News Section -->
+    <section id="news" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">TIN TỨC & SỰ KIỆN</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://via.placeholder.com/600x400/1e3a8a/ffffff?text=Tin+tức+1" alt="Tin tức 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="text-blue-600 text-sm mb-2">
+                            <i class="far fa-calendar-alt mr-1"></i> 15/06/2023
+                        </div>
+                        <h3 class="font-semibold text-xl mb-3">Xu hướng sử dụng đèn LED trong năm 2023</h3>
+                        <p class="text-gray-600 mb-4">Cùng khám phá những xu hướng mới nhất trong thiết kế và ứng dụng đèn LED cho không gian sống và làm việc...</p>
+                        <a href="#" class="text-blue-700 font-semibold hover:text-blue-900 transition">Đọc tiếp <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- News 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://via.placeholder.com/600x400/1e3a8a/ffffff?text=Tin+tức+2" alt="Tin tức 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="text-blue-600 text-sm mb-2">
+                            <i class="far fa-calendar-alt mr-1"></i> 02/06/2023
+                        </div>
+                        <h3 class="font-semibold text-xl mb-3">Hướng dẫn chọn đèn LED phù hợp cho từng không gian</h3>
+                        <p class="text-gray-600 mb-4">Bài viết sẽ giúp bạn hiểu rõ hơn về cách lựa chọn đèn LED phù hợp với từng không gian sống và làm việc...</p>
+                        <a href="#" class="text-blue-700 font-semibold hover:text-blue-900 transition">Đọc tiếp <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <!-- News 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://via.placeholder.com/600x400/1e3a8a/ffffff?text=Tin+tức+3" alt="Tin tức 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="text-blue-600 text-sm mb-2">
+                            <i class="far fa-calendar-alt mr-1"></i> 20/05/2023
+                        </div>
+                        <h3 class="font-semibold text-xl mb-3">BlueLED ra mắt dòng sản phẩm đèn LED thông minh</h3>
+                        <p class="text-gray-600 mb-4">BlueLED chính thức ra mắt dòng sản phẩm đèn LED thông minh tích hợp công nghệ IoT, mang đến trải nghiệm ánh sáng hoàn toàn mới...</p>
+                        <a href="#" class="text-blue-700 font-semibold hover:text-blue-900 transition">Đọc tiếp <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-800 transition">Xem tất cả tin tức</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <img src="https://via.placeholder.com/600x400/1e3a8a/ffffff?text=About+Us" alt="Về chúng tôi" class="rounded-lg shadow-xl transform rotate-1 hover:rotate-0 transition duration-500">
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <h2 class="text-3xl font-bold text-blue-900 mb-6">VỀ BLUELED</h2>
+                    <p class="text-gray-700 mb-4">BlueLED là thương hiệu hàng đầu trong lĩnh vực cung cấp các giải pháp chiếu sáng bằng đèn LED chất lượng cao tại Việt Nam.</p>
+                    <p class="text-gray-700 mb-4">Với hơn 10 năm kinh nghiệm trong ngành, chúng tôi tự hào mang đến cho khách hàng những sản phẩm đèn LED tiết kiệm điện, độ bền cao và thân thiện với môi trường.</p>
+                    <p class="text-gray-700 mb-6">Đội ngũ kỹ sư và chuyên gia của BlueLED luôn không ngừng nghiên cứu, cải tiến để cho ra đời những sản phẩm chất lượng nhất, đáp ứng mọi nhu cầu chiếu sáng từ dân dụng đến công nghiệp.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-check-circle text-blue-700"></i>
+                            </div>
+                            <span class="font-semibold">Chất lượng</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-check-circle text-blue-700"></i>
+                            </div>
+                            <span class="font-semibold">Tiết kiệm</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-check-circle text-blue-700"></i>
+                            </div>
+                            <span class="font-semibold">Bền bỉ</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-check-circle text-blue-700"></i>
+                            </div>
+                            <span class="font-semibold">Thẩm mỹ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 bg-blue-900 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">LIÊN HỆ VỚI CHÚNG TÔI</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">THÔNG TIN LIÊN HỆ</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-300"></i>
+                            <div>
+                                <h4 class="font-semibold">Địa chỉ</h4>
+                                <p class="text-blue-200">123 Đường ABC, Phường XYZ, Quận 1, TP. Hồ Chí Minh</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-blue-300"></i>
+                            <div>
+                                <h4 class="font-semibold">Điện thoại</h4>
+                                <p class="text-blue-200">1900 1234 - 028 1234 5678</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-blue-300"></i>
+                            <div>
+                                <h4 class="font-semibold">Email</h4>
+                                <p class="text-blue-200">info@blueled.vn</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-clock mt-1 mr-3 text-blue-300"></i>
+                            <div>
+                                <h4 class="font-semibold">Giờ làm việc</h4>
+                                <p class="text-blue-200">Thứ 2 - Thứ 7: 8:00 - 17:30</p>
+                                <p class="text-blue-200">Chủ nhật: 8:00 - 12:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold mt-8 mb-4">THEO DÕI CHÚNG TÔI</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">GỬI TIN NHẮN</h3>
+                    <form>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label for="contact-name" class="block text-blue-200 mb-2">Họ tên</label>
+                                <input type="text" id="contact-name" class="w-full px-4 py-2 bg-blue-800 border border-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            </div>
+                            <div>
+                                <label for="contact-phone" class="block text-blue-200 mb-2">Điện thoại</label>
+                                <input type="tel" id="contact-phone" class="w-full px-4 py-2 bg-blue-800 border border-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="contact-email" class="block text-blue-200 mb-2">Email</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-2 bg-blue-800 border border-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                        </div>
+                        <div class="mb-4">
+                            <label for="contact-message" class="block text-blue-200 mb-2">Nội dung</label>
+                            <textarea id="contact-message" rows="4" class="w-full px-4 py-2 bg-blue-800 border border-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-white text-blue-900 py-3 rounded-lg font-semibold hover:bg-blue-100 transition">Gửi tin nhắn</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-blue-950 text-blue-200 py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">BLUELED</h3>
+                    <p class="mb-4">Thương hiệu đèn LED chất lượng cao hàng đầu Việt Nam</p>
+                    <img src="https://via.placeholder.com/200x100/1e3a8a/ffffff?text=Logo" alt="Logo" class="h-12">
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">DANH MỤC</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Trang chủ</a></li>
+                        <li><a href="#products" class="hover:text-white transition">Sản phẩm</a></li>
+                        <li><a href="#flashsale" class="hover:text-white transition">Flash Sale</a></li>
+                        <li><a href="#news" class="hover:text-white transition">Tin tức</a></li>
+                        <li><a href="#about" class="hover:text-white transition">Giới thiệu</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">CHÍNH SÁCH</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Chính sách bảo hành</a></li>
+                        <li><a href="#" class="hover:text-white transition">Chính sách đổi trả</a></li>
+                        <li><a href="#" class="hover:text-white transition">Chính sách vận chuyển</a></li>
+                        <li><a href="#" class="hover:text-white transition">Chính sách thanh toán</a></li>
+                        <li><a href="#" class="hover:text-white transition">Bảo mật thông tin</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">ĐĂNG KÝ NHẬN TIN</h3>
+                    <p class="mb-4">Đăng ký để nhận thông tin khuyến mãi và sản phẩm mới từ BlueLED</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Email của bạn" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full">
+                        <button type="submit" class="bg-blue-600 px-4 py-2 rounded-r-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="mt-4">
+                        <img src="https://via.placeholder.com/200x100/ffffff/1e3a8a?text=Payment" alt="Payment Methods" class="mt-2">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-800 mt-8 pt-6 text-center">
+                <p>&copy; 2023 BlueLED. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-700 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-blue-800 transition opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+        // Rating stars
+        const stars = document.querySelectorAll('[data-rating]');
+        const ratingValue = document.getElementById('rating-value');
+        
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = star.getAttribute('data-rating');
+                ratingValue.value = rating;
+                
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.remove('far');
+                        s.classList.add('fas', 'text-yellow-400');
+                    } else {
+                        s.classList.remove('fas', 'text-yellow-400');
+                        s.classList.add('far', 'text-gray-400');
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseover', () => {
+                const hoverRating = star.getAttribute('data-rating');
+                
+                stars.forEach((s, index) => {
+                    if (index < hoverRating) {
+                        s.classList.add('text-yellow-400');
+                    } else {
+                        s.classList.remove('text-yellow-400');
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseout', () => {
+                const currentRating = ratingValue.value;
+                
+                stars.forEach((s, index) => {
+                    if (index < currentRating) {
+                        s.classList.add('text-yellow-400');
+                    } else {
+                        s.classList.remove('text-yellow-400');
+                    }
+                });
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Countdown timer for flash sale
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            let hours = 12;
+            let minutes = 45;
+            let seconds = 32;
+            
+            const timer = setInterval(() => {
+                seconds--;
+                
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                }
+                
+                if (minutes < 0) {
+                    minutes = 59;
+                    hours--;
+                }
+                
+                if (hours < 0) {
+                    clearInterval(timer);
+                    countdownElement.innerHTML = '<span class="bg-white text-red-600 px-2 py-1 rounded">KẾT THÚC</span>';
+                    return;
+                }
+                
+                countdownElement.innerHTML = `
+                    <span class="bg-white text-red-600 px-2 py-1 rounded">${hours.toString().padStart(2, '0')}</span>
+                    <span>:</span>
+                    <span class="bg-white text-red-600 px-2 py-1 rounded">${minutes.toString().padStart(2, '0')}</span>
+                    <span>:</span>
+                    <span class="bg-white text-red-600 px-2 py-1 rounded">${seconds.toString().padStart(2, '0')}</span>
+                `;
+            }, 1000);
+        }
+        
+        updateCountdown();
+        
+        // 3D effect for product cards
+        const productCards = document.querySelectorAll('.product-card');
+        
+        productCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateY(-10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-10px) rotateY(0deg) rotateX(0deg)';
+            });
+        });
+    </script>
+</body>
+</html>

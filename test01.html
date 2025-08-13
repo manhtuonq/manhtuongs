@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phật Tử Connect - Mạng xã hội Phật giáo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'buddhist-gold': '#D4AF37',
+            'buddhist-brown': '#8B4513',
+            'buddhist-cream': '#FFF8DC',
+            'buddhist-green': '#2F5233',
+            'buddhist-orange': '#FF8C00'
+          },
+          boxShadow: {
+            glow: '0 0 0 3px rgba(212,175,55,0.15)'
+          },
+          keyframes: {
+            ripple: {
+              '0%': { transform: 'scale(0)', opacity: '0.5' },
+              '100%': { transform: 'scale(4)', opacity: '0' }
+            },
+            fadeInUp: {
+              '0%': { opacity: 0, transform: 'translateY(8px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' }
+            }
+          },
+          animation: {
+            ripple: 'ripple 600ms ease-out',
+            fadeInUp: 'fadeInUp .4s ease-out both'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .focus-gold:focus { box-shadow: 0 0 0 3px rgba(212,175,55,.35); outline: none; }
+    /* Sửa lại pure CSS thay cho @apply để chạy CDN */
+    .carousel-card{position:absolute;top:50%;transform:translateY(-50%);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.06);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 15px 35px rgba(2,6,23,.35);border:1px solid rgba(255,255,255,.15)}
+    .carousel-card img{display:block;width:100%;height:100%;object-fit:cover}
+    #heroCarousel{border-radius:20px}
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-white via-amber-50 to-white text-gray-800">
+  <!-- Nền hoa sen toàn trang -->
+  <div aria-hidden="true" class="fixed inset-0 -z-10 pointer-events-none">
+    <img src="https://i.pinimg.com/1200x/ca/92/73/ca92730634cabe072c65f5d547878f5a.jpg" alt="Lotus background" class="w-full h-full object-cover object-center" referrerpolicy="no-referrer" />
+    <!-- Lớp phủ làm sáng để nội dung dễ đọc -->
+    <div class="absolute inset-0 bg-white/80 supports-[backdrop-filter]:backdrop-blur-[2px]"></div>
+  </div>
+  <!-- Header sáng vàng + trắng -->
+  <header class="fixed inset-x-0 top-0 z-50 h-16 bg-gradient-to-r from-white to-amber-100 border-b border-amber-200/60">
+    <div class="max-w-[1400px] mx-auto h-full px-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="group flex items-center gap-3">
+        <div class="w-10 h-10 bg-buddhist-gold/90 rounded-full grid place-items-center shadow-md">
+          <span class="text-2xl">🪷</span>
+        </div>
+        <h1 class="text-xl font-bold text-buddhist-brown tracking-wide">Phật Tử Connect</h1>
+        <span class="ml-1 text-xs px-2 py-0.5 rounded-full bg-amber-100 text-buddhist-brown/80 group-hover:bg-amber-200 transition">Beta</span>
+      </a>
+
+      <!-- Tìm kiếm -->
+      <div class="hidden md:block md:flex-1 md:max-w-lg mx-4">
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="Tìm chùa, giảng sư, bài viết..."
+            class="w-full px-4 py-2 pl-10 rounded-full bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-buddhist-gold placeholder:text-gray-400 focus:shadow-glow"
+          />
+          <span class="absolute left-3 top-2.5 text-gray-500">🔍</span>
+        </div>
+      </div>
+
+      <!-- Nút hành động -->
+      <div class="flex items-center gap-2">
+        <button class="relative overflow-hidden bg-buddhist-gold text-buddhist-brown px-4 py-2 rounded-lg font-medium hover:bg-yellow-400 transition-colors focus-gold">
+          ✍️ Tạo bài viết
+        </button>
+        <div class="hidden sm:flex gap-2">
+          <button class="relative overflow-hidden w-10 h-10 bg-amber-100 rounded-full grid place-items-center text-buddhist-brown hover:bg-amber-200 transition">
+            🔔
+            <span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-[10px] text-white grid place-items-center">3</span>
+          </button>
+          <button class="relative overflow-hidden w-10 h-10 bg-amber-100 rounded-full grid place-items-center text-buddhist-brown hover:bg-amber-200 transition">
+            💬
+          </button>
+        </div>
+        <div class="w-10 h-10 bg-buddhist-gold rounded-full grid place-items-center cursor-pointer">
+          <span class="text-buddhist-brown font-bold">PT</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main layout -->
+  <main class="pt-20">
+    <div class="max-w-[1400px] mx-auto px-4">
+      <!-- Tăng khoảng cách hai bên -->
+      <div class="grid grid-cols-12 gap-8 xl:gap-12">
+        <!-- Cột trái - Navigation (sáng vàng + trắng) -->
+        <aside class="hidden lg:block col-span-3 xl:col-span-2">
+          <div class="sticky top-24">
+            <nav class="space-y-2 bg-white rounded-2xl p-4 shadow-sm ring-1 ring-amber-100">
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-amber-50 text-buddhist-brown font-medium ring-1 ring-amber-100">
+                <span>🏠</span>
+                <span>Trang chủ</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 transition ring-1 ring-transparent hover:ring-amber-100">
+                <span>📰</span>
+                <span>Tin/Pháp thoại</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 transition ring-1 ring-transparent hover:ring-amber-100">
+                <span>👥</span>
+                <span>Nhóm (Đạo tràng)</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 transition ring-1 ring-transparent hover:ring-amber-100">
+                <span>🏛️</span>
+                <span>Trang Chùa</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 transition ring-1 ring-transparent hover:ring-amber-100">
+                <span>📅</span>
+                <span>Sự kiện</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 transition ring-1 ring-transparent hover:ring-amber-100">
+                <span>📚</span>
+                <span>Thư viện</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 transition ring-1 ring-transparent hover:ring-amber-100">
+                <span>⏰</span>
+                <span>Lịch tụng</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 transition ring-1 ring-transparent hover:ring-amber-100">
+                <span>🔖</span>
+                <span>Bookmark</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-amber-50 transition ring-1 ring-transparent hover:ring-amber-100">
+                <span>⚙️</span>
+                <span>Cài đặt</span>
+              </a>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Cột giữa - Newsfeed (rộng hơn) -->
+        <section class="col-span-12 lg:col-span-9 xl:col-span-7">
+          <!-- Carousel kiểu thẻ như ảnh mẫu -->
+          <div id="heroCarousel" class="relative h-[360px] sm:h-[420px] overflow-hidden select-none ring-1 ring-slate-800/40 shadow-inner" style="background:radial-gradient(120%_120%_at_50%_0%,#111827_0%,#1f2a44_60%,#111827_100%);">
+            <div class="absolute inset-0" id="carouselStage"></div>
+            <!-- Nút điều hướng -->
+            <button id="prevSlide" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-white/10 text-white hover:bg-white/20 border border-white/20 backdrop-blur focus-gold">◀</button>
+            <button id="nextSlide" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-white/10 text-white hover:bg-white/20 border border-white/20 backdrop-blur focus-gold">▶</button>
+          </div>
+
+          <!-- Ô tạo bài (mở rộng khi focus) -->
+          <div class="mt-4 bg-white rounded-2xl shadow-sm ring-1 ring-amber-100 p-6 animate-fadeInUp">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="relative">
+                <div class="w-12 h-12 bg-buddhist-gold rounded-full grid place-items-center">
+                  <span class="text-buddhist-brown font-bold">PT</span>
+                </div>
+                <span class="absolute -right-0 -bottom-0 w-3.5 h-3.5 bg-green-500 rounded-full ring-2 ring-white"></span>
+              </div>
+              <input id="composer" type="text" placeholder="Chia sẻ pháp thoại, kinh nghiệm tu tập..." class="flex-1 px-4 py-3 bg-amber-50 rounded-full focus:outline-none focus:ring-2 focus:ring-buddhist-gold transition-all" />
+            </div>
+            <div id="composerExtra" class="flex items-center justify-between opacity-0 pointer-events-none transition-all duration-200">
+              <div class="flex flex-wrap gap-2">
+                <button class="relative overflow-hidden flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-amber-50 rounded-lg"><span>📷</span><span>Ảnh/Video</span></button>
+                <button class="relative overflow-hidden flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-amber-50 rounded-lg"><span>📅</span><span>Sự kiện</span></button>
+                <button class="relative overflow-hidden flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-amber-50 rounded-lg"><span>📊</span><span>Khảo sát</span></button>
+              </div>
+              <select class="px-3 py-2 border border-amber-200 rounded-lg text-sm bg-white">
+                <option>Công khai</option>
+                <option>Bạn đạo</option>
+                <option>Nhóm</option>
+                <option>Riêng tư</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Bài đăng 1 -->
+          <article class="mt-4 bg-white rounded-2xl shadow-sm ring-1 ring-amber-100 p-6 animate-fadeInUp">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-buddhist-gold to-amber-400 rounded-full grid place-items-center">
+                <span class="text-white font-bold">TT</span>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Thầy Thích Minh An</h3>
+                <p class="text-sm text-gray-500">2 giờ trước • Chùa Vĩnh Nghiêm</p>
+              </div>
+              <span class="ml-auto bg-amber-100 text-buddhist-brown px-2 py-1 rounded-full text-xs">Pháp thoại</span>
+            </div>
+
+            <div class="mb-4">
+              <p class="text-gray-800 mb-3">Hôm nay chúng ta cùng tìm hiểu về ý nghĩa của lòng từ bi trong đời sống hàng ngày. Từ bi không chỉ là thương yêu, mà còn là sự hiểu biết sâu sắc về khổ đau của chúng sinh.</p>
+
+              <!-- Ảnh chèn giữa đoạn văn và blockquote -->
+              <img alt="Lotus" class="w-full rounded-xl ring-1 ring-amber-100 mb-4 transition hover:brightness-110 hover:shadow-[0_0_0_3px_rgba(212,175,55,0.25)]" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23fff7db'/%3E%3Cstop offset='1' stop-color='%23ffe8a3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g)'/%3E%3Ccircle cx='200' cy='260' r='12' fill='%23D4AF37'/%3E%3Ccircle cx='250' cy='240' r='8' fill='%23D4AF37'/%3E%3Ccircle cx='300' cy='260' r='12' fill='%23D4AF37'/%3E%3Ctext x='600' y='320' text-anchor='middle' font-size='36' fill='%238B4513' font-family='sans-serif'%3EThanh tịnh như sen nở%3C/text%3E%3C/svg%3E" />
+
+              <blockquote class="bg-amber-50 border-l-4 border-buddhist-gold pl-4 py-3 my-4 italic rounded-r">
+                "Như mẹ yêu con một, dù phải hy sinh mạng sống để bảo vệ, hãy tu tập lòng từ bi vô lượng đối với tất cả chúng sinh."
+                <footer class="text-sm text-gray-600 mt-2">- Kinh Từ Bi</footer>
+              </blockquote>
+
+              <div class="flex flex-wrap gap-2 mt-3">
+                <span class="px-2.5 py-1 rounded-full bg-amber-50 text-buddhist-brown text-sm">#Từbi</span>
+                <span class="px-2.5 py-1 rounded-full bg-amber-50 text-buddhist-brown text-sm">#Phapthoai</span>
+                <span class="px-2.5 py-1 rounded-full bg-amber-50 text-buddhist-brown text-sm">#ChuaVinhNghiem</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-4 border-t border-amber-100">
+              <div class="flex gap-3 sm:gap-6">
+                <button class="reaction relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition" data-label="Hoan hỷ" data-count="24">
+                  <span>🙏</span>
+                  <span class="label">Hoan hỷ</span>
+                  <span class="count">(24)</span>
+                </button>
+                <button class="reaction relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition" data-label="Tán thán" data-count="8">
+                  <span>🌟</span>
+                  <span class="label">Tán thán</span>
+                  <span class="count">(8)</span>
+                </button>
+                <button class="relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition">
+                  <span>💬</span>
+                  <span>Bình luận (12)</span>
+                </button>
+                <button class="relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition">
+                  <span>📤</span>
+                  <span>Chia sẻ</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Bài đăng 2 -->
+          <article class="mt-4 bg-white rounded-2xl shadow-sm ring-1 ring-amber-100 p-6 animate-fadeInUp">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-full grid place-items-center">
+                <span class="text-white font-bold">LH</span>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Lê Hoàng Minh</h3>
+                <p class="text-sm text-gray-500">4 giờ trước • Nhóm Thiền Tịnh</p>
+              </div>
+              <span class="ml-auto bg-emerald-50 text-emerald-700 px-2 py-1 rounded-full text-xs">Chia sẻ</span>
+            </div>
+
+            <div class="mb-4">
+              <p class="text-gray-800 mb-3">Sáng nay ngồi thiền trong vườn, nghe tiếng chim hót, lòng bỗng thấy an nhiên. Cảm ơn Phật pháp đã giúp con tìm được sự bình an trong tâm hồn.</p>
+
+              <div class="bg-amber-50 rounded-lg p-4 my-4 ring-1 ring-amber-100">
+                <div class="flex items-center gap-2 mb-2">
+                  <span>📍</span>
+                  <span class="text-sm text-gray-600">Chùa Thiền Quang, Đà Lạt</span>
+                </div>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23fff7db'/%3E%3Cpath d='M0 150 Q100 120 200 150 T400 150 V200 H0 Z' fill='%23ffe8a3'/%3E%3Ccircle cx='80' cy='60' r='25' fill='%23D4AF37'/%3E%3Cpath d='M150 100 Q170 80 190 100 Q210 80 230 100 Q250 80 270 100' stroke='%23b0891f' stroke-width='3' fill='none'/%3E%3Ctext x='200' y='180' text-anchor='middle' fill='%23666' font-size='14'%3EVườn thiền bình minh%3C/text%3E%3C/svg%3E" alt="Vườn thiền" class="w-full rounded-lg ring-1 ring-amber-100" />
+              </div>
+
+              <div class="flex flex-wrap gap-2 mt-3">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm">#Thiền</span>
+                <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm">#Bình an</span>
+                <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm">#Dalat</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-4 border-t border-amber-100">
+              <div class="flex gap-3 sm:gap-6">
+                <button class="reaction relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition" data-label="Hoan hỷ" data-count="15">
+                  <span>🙏</span>
+                  <span class="label">Hoan hỷ</span>
+                  <span class="count">(15)</span>
+                </button>
+                <button class="reaction relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition" data-label="Tinh tấn" data-count="6">
+                  <span>🌱</span>
+                  <span class="label">Tinh tấn</span>
+                  <span class="count">(6)</span>
+                </button>
+                <button class="relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition">
+                  <span>💬</span>
+                  <span>Bình luận (5)</span>
+                </button>
+                <button class="relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition">
+                  <span>📤</span>
+                  <span>Chia sẻ</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Sự kiện -->
+          <article class="mt-4 bg-white rounded-2xl shadow-sm ring-1 ring-amber-100 p-6 animate-fadeInUp">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full grid place-items-center">
+                <span class="text-white">🏛️</span>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Chùa Bái Đính</h3>
+                <p class="text-sm text-gray-500">6 giờ trước</p>
+              </div>
+              <span class="ml-auto bg-purple-50 text-purple-700 px-2 py-1 rounded-full text-xs">Sự kiện</span>
+            </div>
+
+            <div class="bg-gradient-to-r from-amber-50 to-white rounded-lg p-4 mb-4 ring-1 ring-amber-100">
+              <h4 class="font-semibold text-lg mb-2">🎋 Khóa tu mùa hè 2024</h4>
+              <p class="text-gray-700 mb-3">Khóa tu 7 ngày dành cho thanh niên từ 18-35 tuổi. Học thiền, kinh hành, và các pháp môn tu tập cơ bản.</p>
+              <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                <span>📅 15-22/7/2024</span>
+                <span>📍 Chùa Bái Đính, Ninh Bình</span>
+                <span>👥 50/100 người</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-4 border-t border-amber-100">
+              <div class="flex gap-3">
+                <button class="relative overflow-hidden bg-buddhist-gold text-buddhist-brown px-4 py-2 rounded-lg font-medium hover:bg-yellow-400 transition">
+                  ✋ Quan tâm
+                </button>
+                <button class="relative overflow-hidden bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-emerald-700 transition">
+                  ✅ Tham gia
+                </button>
+              </div>
+              <div class="flex gap-3">
+                <button class="relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition">
+                  <span>💬</span>
+                  <span>Bình luận (3)</span>
+                </button>
+                <button class="relative overflow-hidden flex items-center gap-2 text-gray-600 hover:text-buddhist-gold transition">
+                  <span>📤</span>
+                  <span>Chia sẻ</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Nút tạo nhanh cho mobile -->
+          <button aria-label="Tạo bài viết" class="lg:hidden fixed bottom-6 right-6 w-14 h-14 rounded-full bg-buddhist-gold text-buddhist-brown text-2xl shadow-lg grid place-items-center">
+            ✍️
+          </button>
+        </section>
+
+        <!-- Cột phải - Thông tin (sáng vàng + trắng) -->
+        <aside class="hidden xl:block col-span-3">
+          <div class="sticky top-24 space-y-6">
+            <!-- Card người tạo web -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm ring-1 ring-amber-100 text-gray-700">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-buddhist-gold rounded-full mx-auto mb-3 grid place-items-center shadow">
+                  <span class="text-2xl">🧘‍♂️</span>
+                </div>
+                <h3 class="font-semibold text-buddhist-brown">Phật Tử Connect</h3>
+                <p class="text-sm text-gray-500">Kết nối cộng đồng Phật tử</p>
+              </div>
+              <p class="text-sm text-gray-700 text-center mb-4">
+                "Mong muốn tạo ra một không gian an lành để mọi người chia sẻ pháp thoại và tu tập cùng nhau."
+              </p>
+              <button class="relative overflow-hidden w-full bg-buddhist-gold text-buddhist-brown py-2 rounded-lg font-medium hover:bg-yellow-400 transition">
+                📧 Liên hệ
+              </button>
+            </div>
+
+            <!-- Thành viên tích cực -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm ring-1 ring-amber-100 text-gray-700">
+              <h3 class="font-semibold text-buddhist-brown mb-4">🏆 Thành viên tích cực tuần</h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 bg-yellow-400 rounded-full grid place-items-center text-buddhist-brown ring-1 ring-amber-200">
+                    <span class="text-xs font-bold">1</span>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-gray-800 font-medium text-sm">Thầy Minh An</p>
+                    <p class="text-gray-500 text-xs">1,250 điểm công đức</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 bg-gray-200 rounded-full grid place-items-center text-gray-700 ring-1 ring-amber-100">
+                    <span class="text-xs font-bold">2</span>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-gray-800 font-medium text-sm">Lê Hoàng Minh</p>
+                    <p class="text-gray-500 text-xs">980 điểm công đức</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 bg-amber-300 rounded-full grid place-items-center text-buddhist-brown ring-1 ring-amber-200">
+                    <span class="text-xs font-bold">3</span>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-gray-800 font-medium text-sm">Nguyễn Thị Lan</p>
+                    <p class="text-gray-500 text-xs">750 điểm công đức</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top bài đáng đọc -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm ring-1 ring-amber-100 text-gray-700">
+              <h3 class="font-semibold text-buddhist-brown mb-4">📖 Bài đáng đọc</h3>
+              <div class="space-y-3">
+                <div class="cursor-pointer hover:bg-amber-50 p-2 rounded ring-1 ring-transparent hover:ring-amber-100">
+                  <p class="text-gray-800 text-sm font-medium">Thiền và cuộc sống hiện đại</p>
+                  <p class="text-gray-500 text-xs">156 lượt tán thán</p>
+                </div>
+                <div class="cursor-pointer hover:bg-amber-50 p-2 rounded ring-1 ring-transparent hover:ring-amber-100">
+                  <p class="text-gray-800 text-sm font-medium">Ý nghĩa của lễ Phật Đản</p>
+                  <p class="text-gray-500 text-xs">142 lượt tán thán</p>
+                </div>
+                <div class="cursor-pointer hover:bg-amber-50 p-2 rounded ring-1 ring-transparent hover:ring-amber-100">
+                  <p class="text-gray-800 text-sm font-medium">Tu tập trong gia đình</p>
+                  <p class="text-gray-500 text-xs">128 lượt tán thán</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sự kiện sắp tới -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm ring-1 ring-amber-100 text-gray-700">
+              <h3 class="font-semibold text-buddhist-brown mb-4">📅 Sự kiện sắp tới</h3>
+              <div class="space-y-3">
+                <div class="bg-amber-50 p-3 rounded-lg ring-1 ring-amber-100">
+                  <p class="text-gray-800 font-medium text-sm">Khóa tu mùa hè</p>
+                  <p class="text-gray-500 text-xs">15/7 - Chùa Bái Đính</p>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-lg ring-1 ring-amber-100">
+                  <p class="text-gray-800 font-medium text-sm">Lễ Vu Lan báo hiếu</p>
+                  <p class="text-gray-500 text-xs">22/8 - Nhiều chùa</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trích dẫn kinh -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm ring-1 ring-amber-100 text-gray-700">
+              <h3 class="font-semibold text-buddhist-brown mb-4">💎 Pháp ngữ hôm nay</h3>
+              <blockquote class="text-gray-700 italic text-sm text-center">
+                "Hạnh phúc không phải là đích đến, mà là cách đi."
+              </blockquote>
+              <p class="text-gray-500 text-xs text-center mt-2">- Đức Phật</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Nút cuộn lên đầu -->
+  <button id="toTop" class="hidden fixed bottom-6 right-6 md:right-8 w-12 h-12 rounded-full bg-white shadow-lg border border-amber-200 grid place-items-center" aria-label="Cuộn lên đầu">
+    ⬆️
+  </button>
+
+  <script>
+    // Hiệu ứng ripple cho mọi button có overflow-hidden
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('button.relative');
+      if (!btn) return;
+      const circle = document.createElement('span');
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      circle.style.width = circle.style.height = size + 'px';
+      circle.className = 'pointer-events-none absolute rounded-full bg-buddhist-gold/30 animate-ripple';
+      circle.style.left = (e.clientX - rect.left - size/2) + 'px';
+      circle.style.top  = (e.clientY - rect.top  - size/2) + 'px';
+      btn.appendChild(circle);
+      setTimeout(() => circle.remove(), 600);
+    });
+
+    // Tương tác reactions: toggle + đếm số
+    document.querySelectorAll('.reaction').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const countEl = btn.querySelector('.count');
+        const labelEl = btn.querySelector('.label');
+        const active = btn.classList.toggle('text-buddhist-gold');
+        const current = parseInt(btn.dataset.count, 10) || 0;
+        const next = active ? current + 1 : Math.max(0, current - 1);
+        btn.dataset.count = String(next);
+        if (countEl) countEl.textContent = `(${next})`;
+        if (labelEl) btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        btn.style.transform = 'scale(1.05)';
+        setTimeout(() => (btn.style.transform = 'scale(1)'), 150);
+      });
+    });
+
+    // Hover slide cho navigation (nhẹ nhàng)
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('mouseenter', function () {
+        this.style.transform = 'translateX(4px)';
+      });
+      link.addEventListener('mouseleave', function () {
+        this.style.transform = 'translateX(0)';
+      });
+    });
+
+    // Composer mở rộng khi focus
+    const composer = document.getElementById('composer');
+    const composerExtra = document.getElementById('composerExtra');
+    if (composer) {
+      composer.addEventListener('focus', () => {
+        composer.classList.add('bg-white');
+        composerExtra.classList.remove('pointer-events-none', 'opacity-0');
+      });
+      composer.addEventListener('blur', () => {
+        if (!composer.value.trim()) {
+          composer.classList.remove('bg-white');
+          composerExtra.classList.add('pointer-events-none', 'opacity-0');
+        }
+      });
+    }
+
+    // Random quote rotation (30s)
+    const quotes = [
+      { text: 'Hạnh phúc không phải là đích đến, mà là cách đi.', author: 'Đức Phật' },
+      { text: 'Tâm thanh tịnh thì cõi thanh tịnh.', author: 'Kinh Duy Ma Cật' },
+      { text: 'Một ngày sống có ý nghĩa hơn trăm năm sống vô ích.', author: 'Pháp Cú' },
+      { text: 'Lòng từ bi là thuốc chữa lành mọi vết thương.', author: 'Đức Phật' }
+    ];
+    function updateQuote() {
+      const cards = document.querySelectorAll('aside .rounded-2xl');
+      const quoteCard = cards[cards.length - 1];
+      if (!quoteCard) return;
+      const blockquote = quoteCard.querySelector('blockquote');
+      const authorEl = quoteCard.querySelector('p.text-gray-500');
+      if (!blockquote || !authorEl) return;
+      const random = quotes[Math.floor(Math.random() * quotes.length)];
+      blockquote.style.opacity = '0';
+      setTimeout(() => {
+        blockquote.textContent = `"${random.text}"`;
+        authorEl.textContent = `- ${random.author}`;
+        blockquote.style.opacity = '1';
+      }, 300);
+    }
+    setInterval(updateQuote, 30000);
+
+    // Nút cuộn lên đầu
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) toTop.classList.remove('hidden');
+      else toTop.classList.add('hidden');
+    });
+    toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ===== Carousel logic (giống layout mẫu: 5 thẻ, giữa lớn hơn) =====
+    const stage = document.getElementById('carouselStage');
+
+    // 5 ảnh placeholder theo tông tím/hồng/xanh giống ảnh mẫu; thay src bằng URL của bạn
+    const carouselData = [
+      // 👉 Cách đúng: dùng URL ảnh trực tiếp (không chèn vào fill của SVG)
+      { src: 'https://i.pinimg.com/736x/a4/34/82/a434825f2e4e962467364fe53adb5811.jpg', title: 'Digital Decade', sub:'by Anthony', stat: '50k' },
+      { src: 'https://images.unsplash.com/photo-1526948531399-320e7e40f0ca?q=80&w=1200&auto=format&fit=crop', title: 'Versace', sub:'by Anton', stat: '48k' },
+      { src: 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1200&auto=format&fit=crop', title: 'Digital Decade', sub:'by Anthony gorgasz', stat: '50k' },
+      { src: 'https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1200&auto=format&fit=crop', title: 'Winter Jamz', sub:'by Anton', stat: '47k' },
+      { src: 'https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?q=80&w=1200&auto=format&fit=crop', title: 'Pastel Wifey', sub:'by Blake', stat: '44k' },
+    ];
+
+    let current = 2; // để ảnh ở giữa là index 2 (giống mẫu)
+
+    const slideEls = carouselData.map((d, i) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'carousel-card will-change-transform';
+      wrap.style.width = '36%';
+      wrap.style.height = '86%';
+      wrap.style.left = '32%';
+      wrap.style.transition = 'transform 450ms cubic-bezier(.2,.8,.2,1), opacity 450ms ease, left 450ms ease, width 450ms ease, height 450ms ease, filter 450ms ease';
+
+      const img = document.createElement('img');
+      img.src = d.src; img.alt = d.title;
+      img.loading = 'lazy'; img.decoding = 'async';
+      img.referrerPolicy = 'no-referrer'; // giúp hiển thị nếu host chặn hotlink theo Referer
+      img.onerror = () => { // fallback nếu ảnh bị chặn/404
+        img.src = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 1600'><defs><linearGradient id='g' x1='0' x2='1'><stop stop-color='#3b82f6'/><stop offset='1' stop-color='#a78bfa'/></linearGradient></defs><rect width='1200' height='1600' fill='url(#g)'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='42' fill='white' opacity='.85'>Image fallback</text></svg>`)}`;
+      };
+      wrap.appendChild(img);
+
+      // Overlay info bar
+      const info = document.createElement('div');
+      info.className = 'absolute left-0 right-0 bottom-0 p-3 sm:p-4';
+      info.innerHTML = `
+        <div class="rounded-xl bg-black/35 border border-white/10 backdrop-blur-md px-3 py-2 flex items-center justify-between gap-3">
+          <div class="min-w-0">
+            <p class="text-white text-sm sm:text-base font-semibold truncate">${d.title}</p>
+            <p class="text-white/70 text-[11px] sm:text-xs truncate">${d.sub}</p>
+          </div>
+          <div class="text-right shrink-0">
+            <div class="text-white text-xs sm:text-sm font-semibold">${d.stat}</div>
+          </div>
+        </div>`;
+      wrap.appendChild(info);
+
+      stage.appendChild(wrap);
+      return wrap;
+    });
+
+    function layout(){
+      const n = carouselData.length;
+      for(let i=0;i<n;i++){
+        let d = (i - current + n) % n; if (d > n/2) d -= n; // -2..2
+        // default: outer cards
+        let scale=.72, left='4%', width='26%', height='72%', opacity=.35, z=3, blur='0px', filt='saturate(.9)';
+        if(d===-1){ scale=.88; left='14%'; width='30%'; height='78%'; opacity=.75; z=6; }
+        if(d===0){  scale=1.0; left='32%'; width='36%'; height='86%'; opacity=1; z=10; blur='0px'; filt='saturate(1)'; }
+        if(d===1){  scale=.88; left='56%'; width='30%'; height='78%'; opacity=.75; z=6; }
+        if(d===2){  left='70%'; }
+        const el = slideEls[i];
+        el.style.transform = `translateY(-50%) scale(${scale})`;
+        el.style.left=left; el.style.width=width; el.style.height=height; el.style.opacity=opacity; el.style.zIndex=z; el.style.filter = (d===0? 'drop-shadow(0 25px 50px rgba(0,0,0,.45)) ' : 'drop-shadow(0 15px 30px rgba(0,0,0,.25)) ')+filt;
+      }
+    }
+    layout();
+
+    function next(){ current = (current + 1) % carouselData.length; layout(); }
+    function prev(){ current = (current - 1 + carouselData.length) % carouselData.length; layout(); }
+
+    document.getElementById('nextSlide').addEventListener('click', next);
+    document.getElementById('prevSlide').addEventListener('click', prev);
+
+    // Kéo để lướt
+    let startX=null, dragging=false;
+    stage.addEventListener('pointerdown', (e)=>{ startX=e.clientX; dragging=true; stage.setPointerCapture(e.pointerId); });
+    stage.addEventListener('pointermove', (e)=>{
+      if(!dragging||startX===null) return; const dx=e.clientX-startX;
+      if(Math.abs(dx)>60){ dx<0?next():prev(); startX=e.clientX; }
+    });
+    window.addEventListener('pointerup', ()=>{ dragging=false; startX=null; });
+
+    // Điều khiển bằng phím
+    const hero = document.getElementById('heroCarousel');
+    hero.tabIndex = 0;
+    hero.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') next(); if(e.key==='ArrowLeft') prev(); });
+  </script>
+</body>
+</html>

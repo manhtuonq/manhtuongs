@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TikTok Studio – Template</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        container: { center: true },
+        extend: {
+          colors: {
+            ttdark: "#0f0f0f",
+            ttgray: "#efefef",
+            border: "#e5e7eb",
+            textDim: "#6b7280",
+            brand: "#fe2c55" /* màu nhấn TikTok */
+          },
+          boxShadow: {
+            card: "0 1px 2px rgba(0,0,0,.04), 0 1px 8px rgba(0,0,0,.03)"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* cuộn mượt và ẩn thanh cuộn thô */
+    ::-webkit-scrollbar{width:10px;height:10px}
+    ::-webkit-scrollbar-thumb{background:#ddd;border-radius:8px}
+    ::-webkit-scrollbar-track{background:transparent}
+  </style>
+</head>
+<body class="bg-white text-[#161823]">
+  <!-- WRAPPER -->
+  <div class="min-h-screen">
+
+    <!-- TOP BAR (giản lược) -->
+    <div class="border-b border-border">
+      <div class="mx-auto max-w-[1400px] px-6 h-14 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="flex items-center text-[#161823] font-semibold text-xl">
+            <span class="inline-block w-6 h-6 rounded-full bg-[#25f4ee] mr-1"></span>
+            <span class="inline-block w-6 h-6 rounded-full bg-brand -ml-3 mr-2"></span>
+            TikTok <span class="ml-1 font-normal text-[#888]">Studio</span>
+          </div>
+        </div>
+        <div class="w-9 h-9 rounded-full bg-[url('https://i.pravatar.cc/80')] bg-cover bg-center"></div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="mx-auto max-w-[1400px] px-6 flex">
+
+      <!-- SIDEBAR -->
+      <aside class="w-[260px] shrink-0 pt-6 pr-4 border-r border-border">
+        <button class="w-full h-11 rounded-md bg-brand/90 text-white font-semibold hover:bg-brand transition">
+          + Tải lên
+        </button>
+
+        <div class="mt-6 text-sm text-textDim">QUẢN LÝ</div>
+        <nav class="mt-2 space-y-1">
+          <a class="flex items-center gap-3 px-3 h-10 rounded-md hover:bg-ttgray" href="#">
+            <span class="w-5 h-5 rounded bg-[#ddd]"></span> Trang chủ
+          </a>
+          <a class="flex items-center gap-3 px-3 h-10 rounded-md bg-ttgray font-medium" href="#">
+            <span class="w-5 h-5 rounded bg-[#ddd]"></span> Bài đăng
+          </a>
+          <a class="flex items-center gap-3 px-3 h-10 rounded-md hover:bg-ttgray" href="#">
+            <span class="w-5 h-5 rounded bg-[#ddd]"></span> Phân tích
+          </a>
+          <a class="flex items-center gap-3 px-3 h-10 rounded-md hover:bg-ttgray" href="#">
+            <span class="w-5 h-5 rounded bg-[#ddd]"></span> Bình luận
+          </a>
+        </nav>
+
+        <div class="mt-6 text-sm text-textDim">CÔNG CỤ</div>
+        <nav class="mt-2 space-y-1">
+          <a class="flex items-center gap-3 px-3 h-10 rounded-md hover:bg-ttgray" href="#">
+            <span class="w-5 h-5 rounded bg-[#ddd]"></span> Cảm hứng
+          </a>
+          <a class="flex items-center gap-3 px-3 h-10 rounded-md hover:bg-ttgray" href="#">
+            <span class="w-5 h-5 rounded bg-[#ddd]"></span> Học viện nhà sáng tạo
+          </a>
+          <a class="flex items-center gap-3 px-3 h-10 rounded-md hover:bg-ttgray" href="#">
+            <span class="w-5 h-5 rounded bg-[#ddd]"></span> Âm thanh không giới hạn
+          </a>
+        </nav>
+
+        <div class="mt-6 text-sm text-textDim">KHÁC</div>
+        <a class="mt-2 flex items-center gap-3 px-3 h-10 rounded-md hover:bg-ttgray" href="#">
+          <span class="w-5 h-5 rounded bg-[#ddd]"></span> Phản hồi
+        </a>
+
+        <a href="#" class="mt-8 inline-block text-sm text-textDim hover:underline">Quay lại TikTok</a>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="flex-1 pt-6 pl-6">
+
+        <!-- Tabs -->
+        <div class="flex items-center gap-6">
+          <button class="text-[#161823] font-semibold border-b-2 border-[#161823] pb-2">Bài đăng 5</button>
+          <button class="text-textDim pb-2">Bản nháp 0</button>
+        </div>
+
+        <!-- Filters -->
+        <div class="mt-4 flex flex-wrap items-center gap-3">
+          <button class="px-3 h-9 rounded-md border border-border bg-white hover:bg-ttgray flex items-center gap-2">
+            <span>☰</span> Lượt xem
+          </button>
+          <button class="px-3 h-9 rounded-md border border-border bg-white hover:bg-ttgray flex items-center gap-2">
+            <span>❤</span> Lượt thích
+          </button>
+          <button class="px-3 h-9 rounded-md border border-border bg-white hover:bg-ttgray flex items-center gap-2">
+            <span>💬</span> Bình luận
+          </button>
+          <button class="px-3 h-9 rounded-md border border-border bg-white hover:bg-ttgray flex items-center gap-2">
+            <span>🔒</span> Quyền riêng tư
+          </button>
+
+          <div class="ml-auto w-[420px]">
+            <div class="h-10 border border-border rounded-md flex items-center px-3 bg-white">
+              <span class="mr-2">🔍</span>
+              <input placeholder="Tìm kiếm mô tả bài đăng"
+                     class="w-full outline-none placeholder:text-textDim text-[15px]"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Header row -->
+        <div class="mt-4 grid grid-cols-[minmax(360px,1fr)_140px_120px_120px_160px] items-center text-sm text-textDim px-3">
+          <div class="">Nội dung (Đã tạo vào)</div>
+          <div class="justify-self-center">Quyền riêng tư</div>
+          <div class="justify-self-center">Lượt xem</div>
+          <div class="justify-self-center">Lượt thích</div>
+          <div class="justify-self-center">Bình luận</div>
+          <div class="justify-self-end pr-3">Hành động</div>
+        </div>
+
+        <div class="mt-2 rounded-lg border border-border divide-y">
+
+          <!-- ROW COMPONENT -->
+          <!-- 1 -->
+          <div class="bg-white hover:bg-ttgray/40 transition">
+            <div class="grid grid-cols-[minmax(360px,1fr)_140px_120px_120px_160px] gap-2 p-3">
+              <div class="flex gap-3">
+                <div class="relative w-28 aspect-square rounded-md bg-[#ddd] overflow-hidden">
+                  <img src="https://picsum.photos/seed/tt1/240/240" class="w-full h-full object-cover" alt="">
+                  <span class="absolute left-1 bottom-1 text-[11px] px-1.5 py-[2px] rounded bg-[rgba(22,24,35,.75)] text-white">01:42</span>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-[15px] line-clamp-2">
+                    Xin mời các vị Bà Tôk hãy để lại tấu chương ở bên dưới #xuhuong…
+                  </div>
+                  <div class="text-xs text-textDim mt-1">17 tháng 8, 10:19 CH</div>
+                </div>
+              </div>
+
+              <div class="justify-self-center self-center">
+                <span class="inline-flex items-center gap-1 px-2 h-8 text-sm rounded border border-border">
+                  🌐 Mọi người
+                </span>
+              </div>
+
+              <!-- x3 số liệu -->
+              <div class="justify-self-center self-center font-medium">3,402</div>
+              <div class="justify-self-center self-center font-medium">492</div>
+              <div class="justify-self-center self-center font-medium">6</div>
+
+              <div class="justify-self-end self-center flex items-center gap-3 pr-1 text-[#6e6e73]">
+                <button title="Sửa" class="p-2 rounded hover:bg-ttgray">✏️</button>
+                <button title="Ảnh bìa" class="p-2 rounded hover:bg-ttgray">🖼️</button>
+                <button title="Bình luận" class="p-2 rounded hover:bg-ttgray">💬</button>
+                <button title="Thêm" class="p-2 rounded hover:bg-ttgray">⋯</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="bg-white hover:bg-ttgray/40 transition">
+            <div class="grid grid-cols-[minmax(360px,1fr)_140px_120px_120px_160px] gap-2 p-3">
+              <div class="flex gap-3">
+                <div class="relative w-28 aspect-square rounded-md bg-[#ddd] overflow-hidden">
+                  <img src="https://picsum.photos/seed/tt2/240/240" class="w-full h-full object-cover" alt="">
+                  <span class="absolute left-1 bottom-1 text-[11px] px-1.5 py-[2px] rounded bg-[rgba(22,24,35,.75)] text-white">00:16</span>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-[15px] line-clamp-2">
+                    con heo #xuhuong #tiktok #giaitri #xuhuongtiktok2025
+                  </div>
+                  <div class="text-xs text-textDim mt-1">26 tháng 7, 3:37 CH</div>
+                </div>
+              </div>
+
+              <div class="justify-self-center self-center">
+                <span class="inline-flex items-center gap-1 px-2 h-8 text-sm rounded border border-border">
+                  🌐 Mọi người
+                </span>
+              </div>
+
+              <div class="justify-self-center self-center font-medium">105</div>
+              <div class="justify-self-center self-center font-medium">0</div>
+              <div class="justify-self-center self-center font-medium">0</div>
+
+              <div class="justify-self-end self-center flex items-center gap-3 pr-1 text-[#6e6e73]">
+                <button class="p-2 rounded hover:bg-ttgray">✏️</button>
+                <button class="p-2 rounded hover:bg-ttgray">🖼️</button>
+                <button class="p-2 rounded hover:bg-ttgray">💬</button>
+                <button class="p-2 rounded hover:bg-ttgray">⋯</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="bg-white hover:bg-ttgray/40 transition">
+            <div class="grid grid-cols-[minmax(360px,1fr)_140px_120px_120px_160px] gap-2 p-3">
+              <div class="flex gap-3">
+                <div class="relative w-28 aspect-square rounded-md bg-[#ddd] overflow-hidden">
+                  <img src="https://picsum.photos/seed/tt3/240/240" class="w-full h-full object-cover" alt="">
+                  <span class="absolute left-1 bottom-1 text-[11px] px-1.5 py-[2px] rounded bg-[rgba(22,24,35,.75)] text-white">00:13</span>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-[15px] line-clamp-2">
+                    aaaaaa lock nôôôô #xuhuong #chiphiên #miale
+                  </div>
+                  <div class="text-xs text-textDim mt-1">13 tháng 7, 6:23 CH</div>
+                </div>
+              </div>
+
+              <div class="justify-self-center self-center">
+                <span class="inline-flex items-center gap-1 px-2 h-8 text-sm rounded border border-border">
+                  🌐 Mọi người
+                </span>
+              </div>
+
+              <div class="justify-self-center self-center font-medium">93</div>
+              <div class="justify-self-center self-center font-medium">0</div>
+              <div class="justify-self-center self-center font-medium">0</div>
+
+              <div class="justify-self-end self-center flex items-center gap-3 pr-1 text-[#6e6e73]">
+                <button class="p-2 rounded hover:bg-ttgray">✏️</button>
+                <button class="p-2 rounded hover:bg-ttgray">🖼️</button>
+                <button class="p-2 rounded hover:bg-ttgray">💬</button>
+                <button class="p-2 rounded hover:bg-ttgray">⋯</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="bg-white hover:bg-ttgray/40 transition">
+            <div class="grid grid-cols-[minmax(360px,1fr)_140px_120px_120px_160px] gap-2 p-3">
+              <div class="flex gap-3">
+                <div class="relative w-28 aspect-square rounded-md bg-[#ddd] overflow-hidden">
+                  <img src="https://picsum.photos/seed/tt4/240/240" class="w-full h-full object-cover" alt="">
+                  <span class="absolute left-1 bottom-1 text-[11px] px-1.5 py-[2px] rounded bg-[rgba(22,24,35,.75)] text-white">00:17</span>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-[15px] line-clamp-2">
+                    Kể cho anh cặp careeeee #xuhuong #trending #vinahouse…
+                  </div>
+                  <div class="text-xs text-textDim mt-1">13 tháng 7, 5:48 CH</div>
+                </div>
+              </div>
+
+              <div class="justify-self-center self-center">
+                <span class="inline-flex items-center gap-1 px-2 h-8 text-sm rounded border border-border">
+                  🌐 Mọi người
+                </span>
+              </div>
+
+              <div class="justify-self-center self-center font-medium">156</div>
+              <div class="justify-self-center self-center font-medium">0</div>
+              <div class="justify-self-center self-center font-medium">6</div>
+
+              <div class="justify-self-end self-center flex items-center gap-3 pr-1 text-[#6e6e73]">
+                <button class="p-2 rounded hover:bg-ttgray">✏️</button>
+                <button class="p-2 rounded hover:bg-ttgray">🖼️</button>
+                <button class="p-2 rounded hover:bg-ttgray">💬</button>
+                <button class="p-2 rounded hover:bg-ttgray">⋯</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="bg-white hover:bg-ttgray/40 transition">
+            <div class="grid grid-cols-[minmax(360px,1fr)_140px_120px_120px_160px] gap-2 p-3">
+              <div class="flex gap-3">
+                <div class="relative w-28 aspect-square rounded-md bg-[#ddd] overflow-hidden">
+                  <img src="https://picsum.photos/seed/tt5/240/240" class="w-full h-full object-cover" alt="">
+                  <span class="absolute left-1 bottom-1 text-[11px] px-1.5 py-[2px] rounded bg-[rgba(22,24,35,.75)] text-white">02:29</span>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-[15px] line-clamp-2">
+                    Được trả nợ nhưng lại bật khóc vì quá thương con nợ #xuhuong…
+                  </div>
+                  <div class="text-xs text-textDim mt-1">9 tháng 7, 10:53 CH</div>
+                </div>
+              </div>
+
+              <div class="justify-self-center self-center">
+                <span class="inline-flex items-center gap-1 px-2 h-8 text-sm rounded border border-border">
+                  🌐 Mọi người
+                </span>
+              </div>
+
+              <div class="justify-self-center self-center font-medium">471</div>
+              <div class="justify-self-center self-center font-medium">0</div>
+              <div class="justify-self-center self-center font-medium">0</div>
+
+              <div class="justify-self-end self-center flex items-center gap-3 pr-1 text-[#6e6e73]">
+                <button class="p-2 rounded hover:bg-ttgray">✏️</button>
+                <button class="p-2 rounded hover:bg-ttgray">🖼️</button>
+                <button class="p-2 rounded hover:bg-ttgray">💬</button>
+                <button class="p-2 rounded hover:bg-ttgray">⋯</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

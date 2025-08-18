@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LED Lighting & Camera - Chuyên gia ánh sáng và hình ảnh</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome (TikTok, Messenger có sẵn; Shopee/Zalo dùng SVG custom) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        container: { center: true, padding: '1rem' },
+        extend: {
+          maxWidth: { 'site': '1440px' }, /* rộng hơn 1280px */
+          colors: {
+            primary:   '#1545FF',  /* xanh biển tươi 2025 */
+            secondary: '#FFC145',  /* vàng ấm */
+            dark:      '#0F172A',  /* slate-900 */
+            ink:       '#0B1220',
+            frosted:   'rgba(255,255,255,.65)'
+          },
+          boxShadow: {
+            lift: '0 10px 30px rgba(21,69,255,.15)',
+            card: '0 8px 22px rgba(2,8,23,.08)'
+          },
+          backdropBlur: { xs: '2px' },
+          keyframes: {
+            slide: {
+              '0%,20%': { transform: 'translateX(0)' },
+              '25%,45%': { transform: 'translateX(-100%)' },
+              '50%,70%': { transform: 'translateX(-200%)' },
+              '75%,95%': { transform: 'translateX(-300%)' },
+              '100%': { transform: 'translateX(0)' }
+            }
+          },
+          animation: {
+            hero: 'slide 16s infinite cubic-bezier(.4,0,.2,1)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .product-hover{ transition:transform .25s ease, box-shadow .25s ease }
+    .product-hover:hover{ transform:translateY(-6px); box-shadow:0 14px 32px rgba(21,69,255,.18) }
+    .countdown-box{ background:rgba(255,255,255,.25); backdrop-filter:blur(6px) }
+    .glass{ background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.72)); backdrop-filter:blur(10px) }
+    .hero-mask{ background:linear-gradient(180deg, rgba(2,8,23,.50), rgba(2,8,23,.35) 40%, rgba(2,8,23,.55)) }
+  </style>
+</head>
+
+<body class="bg-blue-50 text-slate-800">
+  <!-- Top Notice (mới) -->
+  <div class="w-full bg-gradient-to-r from-primary to-blue-600 text-white">
+    <div class="container max-w-site py-2 flex items-center justify-between text-sm">
+      <span class="opacity-95">✨ Sale 48h | Freeship đơn từ 499k</span>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:underline">Theo dõi đơn hàng</a>
+        <a href="#" class="hover:underline">Hệ thống cửa hàng</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header 2025 -->
+  <header class="sticky top-0 z-40 border-b border-slate-200/60 bg-white/90 backdrop-blur">
+    <div class="container max-w-site px-4 py-3 flex items-center gap-4">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 group">
+        <div class="bg-primary text-white p-2 rounded-xl shadow-lift">
+          <i class="fa-solid fa-lightbulb text-xl"></i>
+        </div>
+        <div class="leading-tight">
+          <div class="text-xl font-extrabold tracking-tight text-ink">
+            LED<span class="text-primary">PRO</span>
+          </div>
+          <div class="text-[11px] uppercase tracking-wider text-slate-500">Lighting & Camera</div>
+        </div>
+      </a>
+
+      <!-- Search -->
+      <div class="flex-1 mx-2">
+        <div class="relative">
+          <input
+            class="w-full h-11 rounded-xl pl-4 pr-12 border border-slate-200 focus:outline-none focus:ring-4 focus:ring-primary/15 shadow-card"
+            placeholder="Tìm camera, đèn LED, phụ kiện..."
+            type="text"/>
+          <button class="absolute right-1 top-1 h-9 px-4 rounded-lg bg-primary text-white hover:brightness-95">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="hidden md:flex items-center gap-2">
+        <button class="h-11 px-3 rounded-xl border border-slate-200 hover:bg-slate-50">
+          <i class="fa-regular fa-user text-lg"></i>
+        </button>
+        <button class="h-11 px-3 rounded-xl border border-slate-200 hover:bg-slate-50 relative">
+          <i class="fa-regular fa-heart text-lg"></i>
+          <span class="absolute -top-1 -right-1 text-[10px] bg-secondary text-ink font-bold rounded-full px-1.5">3</span>
+        </button>
+        <button class="h-11 px-3 rounded-xl border border-slate-200 hover:bg-slate-50 relative">
+          <i class="fa-solid fa-cart-shopping text-lg"></i>
+          <span class="absolute -top-1 -right-1 text-[10px] bg-primary text-white font-bold rounded-full px-1.5">2</span>
+        </button>
+        <!-- Social mini (TikTok, Messenger, Shopee, Zalo) -->
+        <div class="hidden lg:flex items-center gap-2 pl-2 ml-1 border-l border-slate-200">
+          <a class="h-11 w-11 grid place-items-center rounded-xl border border-slate-200 hover:bg-slate-50" href="#" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok text-base"></i>
+          </a>
+          <a class="h-11 w-11 grid place-items-center rounded-xl border border-slate-200 hover:bg-slate-50" href="#" aria-label="Messenger">
+            <i class="fa-brands fa-facebook-messenger text-base"></i>
+          </a>
+          <!-- Shopee SVG -->
+          <a class="h-11 w-11 grid place-items-center rounded-xl border border-slate-200 hover:bg-slate-50" href="#" aria-label="Shopee">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor" aria-hidden="true">
+              <path d="M8 6.5C8 4.57 9.57 3 11.5 3S15 4.57 15 6.5h2C17 3.91 14.59 2 11.5 2S6 3.91 6 6.5h2Z"/>
+              <path d="M4 7.5A1.5 1.5 0 0 1 5.5 6h13A1.5 1.5 0 0 1 20 7.5v10.75A2.75 2.75 0 0 1 17.25 21H6.75A2.75 2.75 0 0 1 4 18.25V7.5Zm7.48 8.57c1.88 0 2.99-.93 2.99-2.32 0-1.07-.74-1.79-2.1-2.12l-1.02-.25c-.66-.17-.9-.38-.9-.73 0-.44.46-.74 1.13-.74.66 0 1.09.27 1.23.78l1.58-.34c-.23-1.17-1.26-1.87-2.78-1.87-1.63 0-2.82.85-2.82 2.19 0 1.05.69 1.73 2.01 2.06l1.06.27c.78.2 1.02.4 1.02.77 0 .46-.48.77-1.2.77-.78 0-1.31-.33-1.46-.9l-1.65.34c.26 1.26 1.33 2.09 3.11 2.09Z"/>
+            </svg>
+          </a>
+          <!-- Zalo SVG -->
+          <a class="h-11 w-11 grid place-items-center rounded-xl border border-slate-200 hover:bg-slate-50" href="#" aria-label="Zalo">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor" aria-hidden="true">
+              <path d="M6.5 3h11A3.5 3.5 0 0 1 21 6.5v11A3.5 3.5 0 0 1 17.5 21h-7.9L6 22l.65-2.6A3.5 3.5 0 0 1 3 16V6.5A3.5 3.5 0 0 1 6.5 3Z"/>
+              <path d="M7 8h4v1.4L8.7 13H11v1H7v-1.4L9.3 9H7V8Zm6 .1h1.3V14H13V8.1Zm3.6 0H19V14h-1.3V8.1Z" fill="#fff"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile menu toggle -->
+      <button id="mobile-menu-button" class="md:hidden h-11 w-11 rounded-xl border border-slate-200">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="border-t border-slate-200/70">
+      <div class="container max-w-site px-4">
+        <div class="hidden md:flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="relative group">
+              <button class="h-11 px-4 rounded-xl hover:bg-slate-50 flex items-center gap-2">
+                <i class="fa-solid fa-grid-2"></i><span>Danh mục</span>
+                <i class="fa-solid fa-chevron-down text-xs opacity-60"></i>
+              </button>
+              <div class="absolute z-30 hidden group-hover:block bg-white shadow-card rounded-xl p-2 w-56">
+                <a class="block px-3 py-2 rounded-lg hover:bg-slate-50" href="#">Camera</a>
+                <a class="block px-3 py-2 rounded-lg hover:bg-slate-50" href="#">Đèn hậu trường</a>
+                <a class="block px-3 py-2 rounded-lg hover:bg-slate-50" href="#">Lighting LED</a>
+                <a class="block px-3 py-2 rounded-lg hover:bg-slate-50" href="#">Phụ kiện</a>
+                <a class="block px-3 py-2 rounded-lg hover:bg-slate-50" href="#">Thiết bị ánh sáng</a>
+              </div>
+            </div>
+            <a class="h-11 px-4 rounded-xl hover:bg-slate-50" href="#">Trang chủ</a>
+            <a class="h-11 px-4 rounded-xl hover:bg-slate-50" href="#">Giới thiệu</a>
+            <a class="h-11 px-4 rounded-xl hover:bg-slate-50" href="#">About us</a>
+            <a class="h-11 px-4 rounded-xl hover:bg-slate-50" href="#">Liên hệ</a>
+          </div>
+          <div class="hidden md:flex items-center gap-3 py-2">
+            <div class="flex items-center gap-2 bg-amber-100 text-ink rounded-xl px-3 h-10">
+              <i class="fa-solid fa-phone text-amber-600"></i>
+              <div class="text-sm font-semibold">Hotline: 1900 6868</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile dropdown -->
+        <div id="mobile-menu" class="md:hidden hidden py-2">
+          <div class="grid gap-2 pb-3">
+            <a class="px-3 py-2 rounded-lg bg-slate-50" href="#">Trang chủ</a>
+            <a class="px-3 py-2 rounded-lg hover:bg-slate-50" href="#">Giới thiệu</a>
+            <a class="px-3 py-2 rounded-lg hover:bg-slate-50" href="#">About us</a>
+            <a class="px-3 py-2 rounded-lg hover:bg-slate-50" href="#">Liên hệ</a>
+          </div>
+          <div class="border-t pt-3">
+            <div class="text-sm font-semibold mb-2">Danh mục</div>
+            <div class="grid grid-cols-2 gap-2">
+              <a class="px-3 py-2 rounded-lg bg-slate-50" href="#">Camera</a>
+              <a class="px-3 py-2 rounded-lg bg-slate-50" href="#">Đèn hậu trường</a>
+              <a class="px-3 py-2 rounded-lg bg-slate-50" href="#">Lighting LED</a>
+              <a class="px-3 py-2 rounded-lg bg-slate-50" href="#">Phụ kiện</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Slider -->
+  <section class="container max-w-site mt-4">
+    <div class="relative overflow-hidden h-[420px] sm:h-[520px] rounded-2xl shadow-card">
+      <div class="flex w-[400%] h-full animate-hero">
+        <div class="w-full h-full bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80')"></div>
+        <div class="w-full h-full bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1400&q=80')"></div>
+        <div class="w-full h-full bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80')"></div>
+        <div class="w-full h-full bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80')"></div>
+      </div>
+      <div class="absolute inset-0 hero-mask"></div>
+      <div class="absolute inset-x-0 bottom-0 px-6 sm:px-10 pb-8">
+        <div class="glass rounded-2xl p-5 sm:p-6 shadow-lift text-ink">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">CÔNG NGHỆ ÁNH SÁNG ĐỈNH CAO 2025</h2>
+          <p class="mt-1 sm:mt-2 text-slate-700">Giải pháp chiếu sáng & camera chuyên nghiệp cho mọi không gian.</p>
+          <div class="mt-4 flex items-center gap-3">
+            <a href="#" class="inline-flex items-center gap-2 bg-primary text-white px-5 h-11 rounded-xl hover:brightness-95 shadow-lift">
+              Xem sản phẩm <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="#" class="inline-flex items-center gap-2 h-11 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50">
+              Báo giá nhanh
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Thương hiệu / Features -->
+  <section class="container max-w-site py-12">
+    <h3 class="text-3xl font-extrabold text-ink text-center mb-10">THƯƠNG HIỆU HÀNG ĐẦU</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Card -->
+      <div class="bg-white rounded-2xl p-6 shadow-card product-hover">
+        <div class="w-12 h-12 rounded-xl grid place-items-center bg-blue-100 text-primary mb-4">
+          <i class="fa-solid fa-camera text-xl"></i>
+        </div>
+        <h4 class="font-bold text-lg">Camera Sony</h4>
+        <p class="text-slate-600 mt-1">Chất lượng 4K sắc nét, góc rộng.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-card product-hover">
+        <div class="w-12 h-12 rounded-xl grid place-items-center bg-blue-100 text-primary mb-4">
+          <i class="fa-solid fa-lightbulb text-xl"></i>
+        </div>
+        <h4 class="font-bold text-lg">LED Philips</h4>
+        <p class="text-slate-600 mt-1">Ánh sáng tự nhiên, siêu tiết kiệm.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-card product-hover">
+        <div class="w-12 h-12 rounded-xl grid place-items-center bg-blue-100 text-primary mb-4">
+          <i class="fa-solid fa-video text-xl"></i>
+        </div>
+        <h4 class="font-bold text-lg">Hikvision</h4>
+        <p class="text-slate-600 mt-1">Giám sát thông minh, bảo mật cao.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-card product-hover">
+        <div class="w-12 h-12 rounded-xl grid place-items-center bg-blue-100 text-primary mb-4">
+          <i class="fa-solid fa-solar-panel text-xl"></i>
+        </div>
+        <h4 class="font-bold text-lg">Đèn Solar</h4>
+        <p class="text-slate-600 mt-1">Thân thiện môi trường, bền bỉ.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sản phẩm bán chạy (nền phủ màu, countdown) -->
+  <section class="relative py-12">
+    <div class="absolute inset-0 -z-10">
+      <div class="container max-w-site h-full">
+        <div class="rounded-2xl h-full bg-primary/95 shadow-lift"></div>
+      </div>
+    </div>
+
+    <div class="container max-w-site text-white">
+      <div class="text-center mb-8">
+        <h3 class="text-3xl font-extrabold">SẢN PHẨM BÁN CHẠY</h3>
+        <p class="opacity-90">Những lựa chọn được yêu thích nhất hiện nay</p>
+      </div>
+
+      <!-- Countdown -->
+      <div class="flex justify-center mb-8">
+        <div class="countdown-box rounded-2xl p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
+          <div class="text-center">
+            <div class="text-2xl font-extrabold bg-white/10 px-3 py-1 rounded">00</div>
+            <div class="text-[10px] mt-1 tracking-wide">NGÀY</div>
+          </div>
+          <div class="text-xl">:</div>
+          <div class="text-center">
+            <div class="text-2xl font-extrabold bg-white/10 px-3 py-1 rounded">12</div>
+            <div class="text-[10px] mt-1 tracking-wide">GIỜ</div>
+          </div>
+          <div class="text-xl">:</div>
+          <div class="text-center">
+            <div class="text-2xl font-extrabold bg-white/10 px-3 py-1 rounded">45</div>
+            <div class="text-[10px] mt-1 tracking-wide">PHÚT</div>
+          </div>
+          <div class="text-xl">:</div>
+          <div class="text-center">
+            <div class="text-2xl font-extrabold bg-white/10 px-3 py-1 rounded">30</div>
+            <div class="text-[10px] mt-1 tracking-wide">GIÂY</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Item -->
+        <div class="bg-white text-ink rounded-2xl overflow-hidden shadow-card product-hover">
+          <div class="relative h-48 overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                 src="https://images.unsplash.com/photo-1564466809058-bf4114d55352?auto=format&fit=crop&w=1200&q=80" alt="Sony A7 III">
+            <div class="absolute top-2 left-2 bg-secondary text-ink text-xs font-bold px-2 py-1 rounded">-20%</div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold">Camera Sony A7 III</h4>
+            <p class="text-slate-600 text-sm mt-0.5">Full-frame 24.2MP, 4K HDR</p>
+            <div class="mt-2 flex items-center gap-2">
+              <span class="text-primary font-extrabold">32.990.000đ</span>
+              <span class="text-slate-400 line-through text-sm">36.990.000đ</span>
+            </div>
+            <button class="mt-3 w-full h-10 rounded-xl bg-primary text-white hover:brightness-95">Chi tiết</button>
+          </div>
+        </div>
+
+        <div class="bg-white text-ink rounded-2xl overflow-hidden shadow-card product-hover">
+          <div class="relative h-48 overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                 src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=1200&q=80" alt="Đèn LED"/>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold">Đèn LED Philips 10W</h4>
+            <p class="text-slate-600 text-sm mt-0.5">6500K, tiết kiệm điện</p>
+            <div class="mt-2"><span class="text-primary font-extrabold">89.000đ</span></div>
+            <button class="mt-3 w-full h-10 rounded-xl bg-primary text-white hover:brightness-95">Chi tiết</button>
+          </div>
+        </div>
+
+        <div class="bg-white text-ink rounded-2xl overflow-hidden shadow-card product-hover">
+          <div class="relative h-48 overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                 src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=1200&q=80" alt="Hikvision">
+            <div class="absolute top-2 left-2 bg-secondary text-ink text-xs font-bold px-2 py-1 rounded">-15%</div>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold">Hikvision DS-2CD2</h4>
+            <p class="text-slate-600 text-sm mt-0.5">2MP, IR 30m, IP66</p>
+            <div class="mt-2 flex items-center gap-2">
+              <span class="text-primary font-extrabold">1.450.000đ</span>
+              <span class="text-slate-400 line-through text-sm">1.690.000đ</span>
+            </div>
+            <button class="mt-3 w-full h-10 rounded-xl bg-primary text-white hover:brightness-95">Chi tiết</button>
+          </div>
+        </div>
+
+        <div class="bg-white text-ink rounded-2xl overflow-hidden shadow-card product-hover">
+          <div class="relative h-48 overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                 src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=1200&q=80" alt="Solar">
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold">Đèn Solar Năng Lượng</h4>
+            <p class="text-slate-600 text-sm mt-0.5">Auto bật/tắt, pin 5000mAh</p>
+            <div class="mt-2"><span class="text-primary font-extrabold">320.000đ</span></div>
+            <button class="mt-3 w-full h-10 rounded-xl bg-primary text-white hover:brightness-95">Chi tiết</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="#" class="inline-flex items-center gap-2 bg-secondary text-ink font-bold h-11 px-6 rounded-xl hover:brightness-95">
+          Xem thêm sản phẩm <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sản phẩm mới -->
+  <section class="container max-w-site py-12">
+    <div class="text-center mb-8">
+      <h3 class="text-3xl font-extrabold text-ink">SẢN PHẨM MỚI</h3>
+      <p class="text-slate-600">Cập nhật từ các thương hiệu hàng đầu</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- 4 cards -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-card border border-slate-100 product-hover">
+        <div class="relative h-48">
+          <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               src="https://images.unsplash.com/photo-1607462109225-6b64ae2dd3cb?auto=format&fit=crop&w=1200&q=80" alt="">
+          <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">MỚI</div>
+        </div>
+        <div class="p-4">
+          <h4 class="font-bold">Đèn LED Panel 60x60</h4>
+          <p class="text-slate-600 text-sm">36W, ánh sáng tự nhiên</p>
+          <div class="mt-2 text-primary font-extrabold">420.000đ</div>
+          <button class="mt-3 w-full h-10 rounded-xl bg-primary text-white hover:brightness-95">Chi tiết</button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl overflow-hidden shadow-card border border-slate-100 product-hover">
+        <div class="relative h-48">
+          <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               src="https://images.unsplash.com/photo-1600055882386-5d18b02a0d51?auto=format&fit=crop&w=1200&q=80" alt="">
+          <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">MỚI</div>
+        </div>
+        <div class="p-4">
+          <h4 class="font-bold">Camera IP Wifi 360°</h4>
+          <p class="text-slate-600 text-sm">Độ phân giải 2K, xoay đa trục</p>
+          <div class="mt-2 text-primary font-extrabold">1.890.000đ</div>
+          <button class="mt-3 w-full h-10 rounded-xl bg-primary text-white hover:brightness-95">Chi tiết</button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl overflow-hidden shadow-card border border-slate-100 product-hover">
+        <div class="relative h-48">
+          <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1200&q=80" alt="">
+          <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">MỚI</div>
+        </div>
+        <div class="p-4">
+          <h4 class="font-bold">Đèn Pha LED 100W</h4>
+          <p class="text-slate-600 text-sm">Sân vườn, nhà xưởng</p>
+          <div class="mt-2 text-primary font-extrabold">650.000đ</div>
+          <button class="mt-3 w-full h-10 rounded-xl bg-primary text-white hover:brightness-95">Chi tiết</button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl overflow-hidden shadow-card border border-slate-100 product-hover">
+        <div class="relative h-48">
+          <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+               src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=1200&q=80" alt="">
+          <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">MỚI</div>
+        </div>
+        <div class="p-4">
+          <h4 class="font-bold">Bộ Đèn LED Âm Trần</h4>
+          <p class="text-slate-600 text-sm">3 màu, dimming</p>
+          <div class="mt-2 text-primary font-extrabold">1.250.000đ</div>
+          <button class="mt-3 w-full h-10 rounded-xl bg-primary text-white hover:brightness-95">Chi tiết</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner CTA -->
+  <section class="container max-w-site py-8">
+    <div class="relative h-56 md:h-72 rounded-2xl overflow-hidden shadow-card">
+      <img class="absolute inset-0 w-full h-full object-cover"
+           src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=80" alt="">
+      <div class="absolute inset-0 bg-black/45"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center text-white px-4">
+          <h3 class="text-2xl md:text-3xl font-extrabold">KHUYẾN MÃI LỚN CUỐI NĂM</h3>
+          <p class="opacity-90 mt-1">Giảm đến 40% toàn bộ danh mục</p>
+          <a href="#" class="mt-4 inline-flex items-center gap-2 bg-secondary text-ink font-bold h-11 px-6 rounded-xl hover:brightness-95">
+            Mua ngay <i class="fa-solid fa-cart-arrow-down"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="bg-slate-50 py-12">
+    <div class="container max-w-site">
+      <div class="text-center mb-8">
+        <h3 class="text-3xl font-extrabold text-ink">KHÁCH HÀNG NÓI VỀ CHÚNG TÔI</h3>
+        <p class="text-slate-600">Đánh giá chân thực từ khách hàng</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-card">
+          <div class="flex items-center gap-3 mb-3">
+            <img class="w-12 h-12 rounded-full" src="https://randomuser.me/api/portraits/women/32.jpg" alt="">
+            <div>
+              <div class="font-bold">Chị Ngọc Anh</div>
+              <div class="text-amber-400"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+          <p class="text-slate-600">“Ánh sáng tự nhiên, không mỏi mắt và tiết kiệm điện đáng kể.”</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-card">
+          <div class="flex items-center gap-3 mb-3">
+            <img class="w-12 h-12 rounded-full" src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
+            <div>
+              <div class="font-bold">Anh Minh Đức</div>
+              <div class="text-amber-400"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+          <p class="text-slate-600">“Hình ảnh sắc nét cả ban đêm. Tư vấn & lắp đặt rất chuyên nghiệp.”</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-card">
+          <div class="flex items-center gap-3 mb-3">
+            <img class="w-12 h-12 rounded-full" src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+            <div>
+              <div class="font-bold">Chị Thu Hà</div>
+              <div class="text-amber-400"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></div>
+            </div>
+          </div>
+          <p class="text-slate-600">“Đèn solar ổn định, auto bật tắt, tiết kiệm mà vẫn rất đẹp.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tin tức + TikTok (gộp hai cột 2025) -->
+  <section class="container max-w-site py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- News -->
+      <div>
+        <h3 class="text-2xl font-extrabold text-ink mb-4">TIN TỨC VỀ CAMERA & ĐÈN LED</h3>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <a class="bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-lg transition" href="#">
+            <div class="h-40 overflow-hidden">
+              <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                   src="https://images.unsplash.com/photo-1561736778-92e52a7769ef?auto=format&fit=crop&w=1200&q=80" alt="">
+            </div>
+            <div class="p-4">
+              <div class="text-secondary text-xs mb-1">10/06/2023</div>
+              <div class="font-bold">Xu hướng camera AI năm 2023</div>
+              <p class="text-slate-600 text-sm mt-1">AI làm thay đổi ngành giám sát với nhiều tính năng thông minh...</p>
+            </div>
+          </a>
+
+          <a class="bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-lg transition" href="#">
+            <div class="h-40 overflow-hidden">
+              <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                   src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1200&q=80" alt="">
+            </div>
+            <div class="p-4">
+              <div class="text-secondary text-xs mb-1">25/05/2023</div>
+              <div class="font-bold">Công nghệ LED thế hệ mới</div>
+              <p class="text-slate-600 text-sm mt-1">Tuổi thọ tới 100.000 giờ, hiệu suất vượt trội...</p>
+            </div>
+          </a>
+
+          <a class="bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-lg transition sm:col-span-2" href="#">
+            <div class="h-52 overflow-hidden">
+              <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="">
+            </div>
+            <div class="p-4">
+              <div class="text-secondary text-xs mb-1">15/05/2023</div>
+              <div class="font-bold">Chiếu sáng thông minh cho nhà ở</div>
+              <p class="text-slate-600 text-sm mt-1">Tích hợp hệ thống nhà thông minh đang thành xu hướng...</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- TikTok style cards -->
+      <div>
+        <h3 class="text-2xl font-extrabold text-ink mb-4">VIDEO TRÊN TIKTOK</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Video card -->
+          <div class="bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-lg transition">
+            <div class="relative pb-[125%] bg-black">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center p-4">
+                  <div class="text-white text-4xl mb-2"><i class="fa-brands fa-tiktok"></i></div>
+                  <p class="text-white/95">Đánh giá Sony A7 III</p>
+                </div>
+              </div>
+              <div class="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                <i class="fa-solid fa-play mr-1"></i> 15.2K views
+              </div>
+            </div>
+            <div class="p-4 flex items-center gap-2">
+              <img class="w-8 h-8 rounded-full" src="https://randomuser.me/api/portraits/women/22.jpg" alt="">
+              <span class="text-sm font-medium">@tech_review</span>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-lg transition">
+            <div class="relative pb-[125%] bg-black">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center p-4">
+                  <div class="text-white text-4xl mb-2"><i class="fa-brands fa-tiktok"></i></div>
+                  <p class="text-white/95">Lắp đèn LED âm trần</p>
+                </div>
+              </div>
+              <div class="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                <i class="fa-solid fa-play mr-1"></i> 8.7K views
+              </div>
+            </div>
+            <div class="p-4 flex items-center gap-2">
+              <img class="w-8 h-8 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
+              <span class="text-sm font-medium">@diy_lighting</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white pt-12 pb-6">
+    <div class="container max-w-site">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h4 class="text-xl font-bold mb-4">VỀ CHÚNG TÔI</h4>
+          <p class="text-slate-300 mb-4">LEDPRO - Giải pháp chiếu sáng & camera chất lượng cao.</p>
+          <div class="flex gap-3">
+            <a class="w-10 h-10 grid place-items-center rounded-xl bg-white/10 hover:bg-white/15" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a class="w-10 h-10 grid place-items-center rounded-xl bg-white/10 hover:bg-white/15" href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a class="w-10 h-10 grid place-items-center rounded-xl bg-white/10 hover:bg-white/15" href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a class="w-10 h-10 grid place-items-center rounded-xl bg-white/10 hover:bg-white/15" href="#"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-bold mb-4">LIÊN KẾT NHANH</h4>
+          <ul class="space-y-2 text-slate-300">
+            <li><a class="hover:underline" href="#">Trang chủ</a></li>
+            <li><a class="hover:underline" href="#">Giới thiệu</a></li>
+            <li><a class="hover:underline" href="#">Sản phẩm</a></li>
+            <li><a class="hover:underline" href="#">Tin tức</a></li>
+            <li><a class="hover:underline" href="#">Liên hệ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-bold mb-4">CHÍNH SÁCH</h4>
+          <ul class="space-y-2 text-slate-300">
+            <li><a class="hover:underline" href="#">Bảo mật</a></li>
+            <li><a class="hover:underline" href="#">Vận chuyển</a></li>
+            <li><a class="hover:underline" href="#">Đổi trả</a></li>
+            <li><a class="hover:underline" href="#">Điều khoản</a></li>
+            <li><a class="hover:underline" href="#">Hướng dẫn mua hàng</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-bold mb-4">LIÊN HỆ</h4>
+          <ul class="space-y-3 text-slate-300">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-location-dot text-secondary mt-1"></i>
+              <span>123 Đường ABC, Quận 1, TP.HCM</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-phone text-secondary"></i>
+              <span>1900 6868</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-envelope text-secondary"></i>
+              <span>info@ledpro.vn</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-clock text-secondary"></i>
+              <span>8:00 - 17:30 (T2 - T7)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="rounded-2xl overflow-hidden shadow-card mb-8">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.126365068485!2d106.7122763153346!3d10.801826261721253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528a459cb43ab%3A0x6c3d29d370b52a7e!2sHo%20Chi%20Minh%20City%20University%20of%20Technology%20(HUTECH)!5e0!3m2!1sen!2s!4v1625047719456!5m2!1sen!2s"
+          width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 text-center text-slate-400">
+        <p>© 2025 LEDPRO. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Nút mạng xã hội nổi (TikTok, Messenger, Shopee, Zalo) -->
+  <div class="fixed right-3 bottom-3 z-40 flex flex-col gap-2">
+    <a href="#" class="w-12 h-12 grid place-items-center rounded-full bg-black text-white shadow-lift hover:scale-105 transition" aria-label="TikTok">
+      <i class="fa-brands fa-tiktok"></i>
+    </a>
+    <a href="#" class="w-12 h-12 grid place-items-center rounded-full bg-[#0099FF] text-white shadow-lift hover:scale-105 transition" aria-label="Messenger">
+      <i class="fa-brands fa-facebook-messenger"></i>
+    </a>
+    <a href="#" class="w-12 h-12 grid place-items-center rounded-full bg-[#FF5722] text-white shadow-lift hover:scale-105 transition" aria-label="Shopee">
+      <!-- Shopee bag -->
+      <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor" aria-hidden="true">
+        <path d="M8 6.5C8 4.57 9.57 3 11.5 3S15 4.57 15 6.5h2C17 3.91 14.59 2 11.5 2S6 3.91 6 6.5h2Z"/>
+        <path d="M4 7.5A1.5 1.5 0 0 1 5.5 6h13A1.5 1.5 0 0 1 20 7.5v10.75A2.75 2.75 0 0 1 17.25 21H6.75A2.75 2.75 0 0 1 4 18.25V7.5Zm7.48 8.57c1.88 0 2.99-.93 2.99-2.32 0-1.07-.74-1.79-2.1-2.12l-1.02-.25c-.66-.17-.9-.38-.9-.73 0-.44.46-.74 1.13-.74.66 0 1.09.27 1.23.78l1.58-.34c-.23-1.17-1.26-1.87-2.78-1.87-1.63 0-2.82.85-2.82 2.19 0 1.05.69 1.73 2.01 2.06l1.06.27c.78.2 1.02.4 1.02.77 0 .46-.48.77-1.2.77-.78 0-1.31-.33-1.46-.9l-1.65.34c.26 1.26 1.33 2.09 3.11 2.09Z"/>
+      </svg>
+    </a>
+    <a href="#" class="w-12 h-12 grid place-items-center rounded-full bg-[#0068FF] text-white shadow-lift hover:scale-105 transition" aria-label="Zalo">
+      <!-- Zalo bubble -->
+      <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor" aria-hidden="true">
+        <path d="M6.5 3h11A3.5 3.5 0 0 1 21 6.5v11A3.5 3.5 0 0 1 17.5 21h-7.9L6 22l.65-2.6A3.5 3.5 0 0 1 3 16V6.5A3.5 3.5 0 0 1 6.5 3Z"/>
+        <path d="M7 8h4v1.4L8.7 13H11v1H7v-1.4L9.3 9H7V8Zm6 .1h1.3V14H13V8.1Zm3.6 0H19V14h-1.3V8.1Z" fill="#fff"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    // Countdown timer (3 ngày từ khi tải trang)
+    function startCountdown(daysAhead = 3){
+      const box = document.querySelector('.countdown-box');
+      if(!box) return;
+      const target = new Date();
+      target.setDate(target.getDate() + daysAhead);
+
+      const pad = (n)=> String(n).padStart(2,'0');
+
+      const tick = () => {
+        const now = Date.now();
+        const distance = target - now;
+        if (distance <= 0){
+          box.innerHTML = '<span class="font-bold">KHUYẾN MÃI ĐÃ KẾT THÚC</span>';
+          clearInterval(timer); return;
+        }
+        const d = Math.floor(distance / (1000*60*60*24));
+        const h = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+        const m = Math.floor((distance % (1000*60*60)) / (1000*60));
+        const s = Math.floor((distance % (1000*60)) / 1000);
+
+        const cells = box.querySelectorAll('.text-2xl.font-extrabold');
+        if (cells.length >= 4){
+          cells[0].textContent = pad(d);
+          cells[1].textContent = pad(h);
+          cells[2].textContent = pad(m);
+          cells[3].textContent = pad(s);
+        } else {
+          // fallback cho markup khác
+          const nums = box.querySelectorAll('div > .text-2xl');
+          if(nums[0]) nums[0].textContent = pad(d);
+          if(nums[1]) nums[1].textContent = pad(h);
+          if(nums[2]) nums[2].textContent = pad(m);
+          if(nums[3]) nums[3].textContent = pad(s);
+        }
+      };
+
+      tick();
+      const timer = setInterval(tick, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => startCountdown(3));
+  </script>
+</body>
+</html>

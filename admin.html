@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Mạnh Tường uy tín - Nhà Thiết Kế Có Tâm & Chuyên Nghiệp - Quản lý</title>
+        <meta name="description"
+            content="Mạnh Tường - Nhà thiết kế uy tín, mang đến các giải pháp thiết kế sáng tạo, chuyên nghiệp và tận tâm. Cam kết chất lượng và sự hài lòng của khách hàng.">
+        <link rel="canonical" href="https://manhtuongs.vercel.app/">
+        <meta name="robots" content="index, follow">
+        <meta name="keywords"
+            content="mạnh tường uy tín, nhà thiết kế mạnh tường, thiết kế chuyên nghiệp, dịch vụ thiết kế, thiết kế có tâm, mạnh tường designer">
+        <link rel="icon" sizes="40x40" href="/image/manh-tuong.jpg" type="image/jpeg">
+        <meta property="og:title" content="Mạnh Tường uy tín - Nhà Thiết Kế Có Tâm & Chuyên Nghiệp">
+        <meta property="og:description"
+            content="Mạnh Tường - Nhà thiết kế uy tín, mang đến các giải pháp thiết kế sáng tạo, chuyên nghiệp và tận tâm.">
+        <meta property="og:image" content="https://manhtuongs.vercel.app/image/manh-tuong.jpg">
+        <meta property="og:url" content="https://manhtuongs.vercel.app/">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Mạnh Tường">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Mạnh Tường uy tín - Nhà Thiết Kế Có Tâm & Chuyên Nghiệp">
+        <meta name="twitter:description"
+            content="Mạnh Tường - Nhà thiết kế uy tín, mang đến các giải pháp thiết kế sáng tạo, chuyên nghiệp và tận tâm.">
+        <meta name="twitter:image" content="https://manhtuongs.vercel.app/image/manh-tuong.jpg">
+        <meta name="google-site-verification" content="CoX3fQy3PL7fI-nwFqMgh8Wj6Zuk-jdlHbQ5Ez0gOzQ" />
+        <link rel="icon" href="/favicon.ico" sizes="any">
+        <link rel="apple-touch-icon" href="/image/manh-tuong.jpg">
+        <script type="application/ld+json">
+            {
+              "@context" : "https://schema.org",
+              "@type" : "WebSite",
+              "name" : "Mạnh Tường",
+              "url" : "https://manhtuongs.vercel.app/"
+            }
+            </script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    </head>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F7F7F7;
+            color: #1a202c;
+        }
+
+        .active-nav {
+            background-color: #5960FF;
+            color: white;
+        }
+
+     
+
+        /* Style cho mục cha khi menu con đang mở */
+        .dropdown-toggle.active-parent {
+            background-color: #eff0ff;
+            /* Màu nền nhạt hơn */
+            color: #5960FF;
+            /* Màu chữ tím */
+        }
+
+        /* Style cho menu con */
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+            background-color: #fafbff;
+            /* Nền hơi khác biệt cho menu con */
+        }
+
+        /* Lớp active để hiển thị menu con */
+        .submenu.active {
+            max-height: 250px;
+            /* Chiều cao đủ lớn để chứa các mục */
+            opacity: 1;
+        }
+
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .qr-code img {
+            animation: glow 2s infinite ease-in-out;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+                filter: brightness(1);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+                filter: brightness(1.5);
+            }
+        }
+
+        /* Style cho thanh cuộn đẹp hơn (tùy chọn) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3"></script>
+
+<script>
+    /* ================== DEMO DATA (có thể thay bằng API) ================== */
+    const products = [
+      { id: 1, name: "Sneaker AirFlex Pro", price: 1599000, clicks: 812, views: 402, revenue: 48990000, hotAreas: ["Gò Vấp","Tân Bình"] },
+      { id: 2, name: "Runner Light 2.0",   price: 1299000, clicks: 650, views: 310, revenue: 36570000, hotAreas: ["Cà Mau","Gò Vấp"] },
+      { id: 3, name: "StreetBall X",       price: 1799000, clicks: 540, views: 295, revenue: 39878000, hotAreas: ["Hóc Môn"] },
+      { id: 4, name: "RoadMax Breeze",     price:  999000, clicks: 480, views: 260, revenue: 18981000, hotAreas: ["Tân Bình"] },
+      { id: 5, name: "Ultra Grip Trail",   price: 1899000, clicks: 430, views: 220, revenue: 37980000, hotAreas: ["Gò Vấp","Hóc Môn"] },
+      { id: 6, name: "City Run Neo",       price: 1499000, clicks: 402, views: 210, revenue: 22980000, hotAreas: ["Cà Mau"] },
+      { id: 7, name: "Court Ace Plus",     price: 1699000, clicks: 720, views: 331, revenue: 32980000, hotAreas: ["Gò Vấp","Tân Bình"] },
+    ];
+    
+    const areaMetrics = {
+      "Gò Vấp":  { revenue: 68200000, clicks: 1280, trend: 6.2 },
+      "Tân Bình":{ revenue: 57400000, clicks: 1103, trend: 4.8 },
+      "Hóc Môn": { revenue: 32800000, clicks: 742,  trend: 3.1 },
+      "Cà Mau":  { revenue: 41200000, clicks: 860,  trend: 5.4 },
+    };
+    
+    /* ================== Helpers ================== */
+    const VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 });
+    const fmt = n => n.toLocaleString('vi-VN');
+    const areaSlugToName = { 'go-vap':'Gò Vấp', 'tan-binh':'Tân Bình', 'hoc-mon':'Hóc Môn', 'ca-mau':'Cà Mau' };
+    
+    function badge(area){
+      return `<span class="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-indigo-50 text-indigo-700">${area}</span>`;
+    }
+    
+    /* ================== State for table/filter/sort ================== */
+    let state = {
+      q: '',
+      area: 'all',
+      dateFrom: '',
+      dateTo: '',
+      sortField: 'revenue',
+      sortDir: 'desc',
+      page: 1,
+      pageSize: 5,
+    };
+    
+    function applyStateFromInputs(){
+      state.q = document.getElementById('searchInput').value.trim().toLowerCase();
+      state.area = document.getElementById('areaFilter').value;
+      state.dateFrom = document.getElementById('dateFrom').value;
+      state.dateTo   = document.getElementById('dateTo').value;
+      state.page = 1;
+    }
+    
+    /* ================== KPIs & Area Cards ================== */
+    function renderKPIs(){
+      const totalProducts = products.length;
+      const totalClicks = products.reduce((s,p)=>s+p.clicks,0);
+      const totalViews  = products.reduce((s,p)=>s+p.views,0);
+      const totalRevenue= products.reduce((s,p)=>s+p.revenue,0);
+      document.getElementById('kpiProducts').textContent = fmt(totalProducts);
+      document.getElementById('kpiClicks').textContent   = fmt(totalClicks);
+      document.getElementById('kpiViews').textContent    = fmt(totalViews);
+      document.getElementById('kpiRevenue').textContent  = VND.format(totalRevenue);
+      document.getElementById('kpiProductsDelta').textContent = "+1 hôm nay";
+      document.getElementById('kpiClicksDelta').textContent   = "+5% vs hôm qua";
+      document.getElementById('kpiViewsDelta').textContent    = "+12% tuần này";
+      document.getElementById('kpiRevenueDelta').textContent  = "+8.4%";
+    }
+    
+    function renderAreaCards(){
+      const gv=areaMetrics["Gò Vấp"], tb=areaMetrics["Tân Bình"], hm=areaMetrics["Hóc Môn"], cm=areaMetrics["Cà Mau"];
+      document.getElementById('gvRevenue').textContent = VND.format(gv.revenue);
+      document.getElementById('gvClicks').textContent  = fmt(gv.clicks);
+      document.getElementById('gvTrend').textContent   = `${gv.trend.toFixed(1)}%`;
+      document.getElementById('tbRevenue').textContent = VND.format(tb.revenue);
+      document.getElementById('tbClicks').textContent  = fmt(tb.clicks);
+      document.getElementById('tbTrend').textContent   = `${tb.trend.toFixed(1)}%`;
+      document.getElementById('hmRevenue').textContent = VND.format(hm.revenue);
+      document.getElementById('hmClicks').textContent  = fmt(hm.clicks);
+      document.getElementById('hmTrend').textContent   = `${hm.trend.toFixed(1)}%`;
+      document.getElementById('cmRevenue').textContent = VND.format(cm.revenue);
+      document.getElementById('cmClicks').textContent  = fmt(cm.clicks);
+      document.getElementById('cmTrend').textContent   = `${cm.trend.toFixed(1)}%`;
+    }
+    
+    /* ================== Charts (main + sparklines) ================== */
+    let revenueByAreaChart, clicksByProductChart, viewsDailyChart, sparks = {};
+    
+    function buildMainCharts(){
+      // Revenue by Area
+      revenueByAreaChart = new Chart(document.getElementById('chartRevenueByArea'), {
+        type: 'bar',
+        data: {
+          labels: Object.keys(areaMetrics),
+          datasets: [{ label:'Doanh thu (VND)', data:Object.values(areaMetrics).map(a=>a.revenue), borderWidth:1 }]
+        },
+        options: {
+          plugins:{ legend:{ display:false } },
+          scales:{ y:{ beginAtZero:true, ticks:{ callback:v=>v.toLocaleString('vi-VN') } } }
+        }
+      });
+    
+      // Clicks by Product (Top 5)
+      const top = [...products].sort((a,b)=>b.clicks-a.clicks).slice(0,5);
+      clicksByProductChart = new Chart(document.getElementById('chartClicksByProduct'), {
+        type:'bar',
+        data:{ labels: top.map(p=>p.name), datasets:[{ label:'Click', data: top.map(p=>p.clicks), borderWidth:1 }] },
+        options:{ indexAxis:'y', plugins:{ legend:{ display:false } }, scales:{ x:{ beginAtZero:true } } }
+      });
+    
+      // Views Daily (14d)
+      const days = Array.from({length:14}, (_,i)=>{ const d=new Date(); d.setDate(d.getDate()-(13-i)); return d.toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'});});
+      const arr = days.map((_,i)=> Math.round(180 + Math.sin(i/2)*35 + (Math.random()*20)));
+      viewsDailyChart = new Chart(document.getElementById('chartViewsDaily'), {
+        type:'line',
+        data:{ labels:days, datasets:[{ label:'Xem chi tiết', data:arr, borderWidth:2, tension:0.35, fill:false }] },
+        options:{ plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true } } }
+      });
+    }
+    
+    function buildSparklines(){
+      const sparkCfg = (el, data)=> new Chart(el, {
+        type:'line',
+        data:{ labels: data.map((_,i)=>i), datasets:[{ data, borderWidth:1.5, pointRadius:0, fill:false, tension:0.35 }] },
+        options:{
+          plugins:{ legend:{ display:false }, tooltip:{ enabled:false } },
+          scales:{ x:{ display:false }, y:{ display:false } },
+          elements:{ line:{ borderWidth:1.5 } }
+        }
+      });
+      sparks.products = sparkCfg(document.getElementById('sparkProducts'), [3,4,4,5,6,6,7,8]);
+      sparks.clicks   = sparkCfg(document.getElementById('sparkClicks'),   [10,12,11,13,15,14,16,18]);
+      sparks.views    = sparkCfg(document.getElementById('sparkViews'),    [6,7,8,9,9,11,12,13]);
+      sparks.revenue  = sparkCfg(document.getElementById('sparkRevenue'),  [20,22,21,24,26,28,29,31]);
+    }
+    
+    /* ================== Table (filter + sort + paginate) ================== */
+    function getFilteredSortedData(){
+      let data = products.filter(p => p.name.toLowerCase().includes(state.q));
+      if(state.area !== 'all'){
+        const areaName = areaSlugToName[state.area];
+        data = data.filter(p => p.hotAreas.includes(areaName));
+      }
+      // (dateFrom/dateTo chỉ đổi label hiển thị; lọc thời gian khi có dữ liệu ngày thực tế)
+      data.sort((a,b)=>{
+        const f = state.sortField, dir = state.sortDir==='asc'?1:-1;
+        if (typeof a[f]==='string') return a[f].localeCompare(b[f]) * dir;
+        return (a[f]-b[f]) * dir;
+      });
+      return data;
+    }
+    
+    function renderTable(){
+      const tbody = document.getElementById('productTableBody');
+      const empty = document.getElementById('emptyState');
+      const skeleton = document.getElementById('tableSkeleton');
+      const pageInfo = document.getElementById('pageInfo');
+    
+      // skeleton demo
+      skeleton.classList.remove('hidden');
+      tbody.innerHTML = '';
+      empty.classList.add('hidden');
+    
+      setTimeout(()=>{ // giả lập load
+        skeleton.classList.add('hidden');
+    
+        const data = getFilteredSortedData();
+        const total = data.length;
+        const pages = Math.max(1, Math.ceil(total / state.pageSize));
+        state.page = Math.min(state.page, pages);
+    
+        const start = (state.page - 1) * state.pageSize;
+        const slice = data.slice(start, start + state.pageSize);
+    
+        if (slice.length === 0){
+          empty.classList.remove('hidden');
+          pageInfo.textContent = "Không có dữ liệu";
+          return;
+        }
+    
+        slice.forEach(p=>{
+          const tr = document.createElement('tr');
+          tr.className = "hover:bg-slate-50";
+          tr.innerHTML = `
+            <td class="px-5 py-3">
+              <div class="font-semibold">${p.name}</div>
+              <div class="text-xs text-slate-500">ID: #${p.id}</div>
+            </td>
+            <td class="px-5 py-3 text-right">${VND.format(p.price)}</td>
+            <td class="px-5 py-3 text-right">${fmt(p.clicks)}</td>
+            <td class="px-5 py-3 text-right">${fmt(p.views)}</td>
+            <td class="px-5 py-3 text-right">${VND.format(p.revenue)}</td>
+            <td class="px-5 py-3">
+              <div class="flex flex-wrap gap-1">${p.hotAreas.map(badge).join('')}</div>
+            </td>
+            <td class="px-5 py-3 text-right">
+              <button class="px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:brightness-110"
+                onclick="alert('Xem chi tiết: ${p.name}')">
+                Chi tiết
+              </button>
+            </td>`;
+          tbody.appendChild(tr);
+        });
+    
+        pageInfo.textContent = `Trang ${state.page}/${pages} • Tổng ${fmt(total)} sản phẩm`;
+        document.getElementById('prevPage').disabled = state.page<=1;
+        document.getElementById('nextPage').disabled = state.page>=pages;
+      }, 250);
+    }
+    
+    /* ================== CSV Export ================== */
+    function exportToCsv(rows){
+      const header = ["ID","Tên","Giá","Click","Xem chi tiết","Doanh thu","Khu vực mạnh"];
+      const body = rows.map(p=>[
+        p.id, `"${p.name.replace(/"/g,'""')}"`, p.price, p.clicks, p.views, p.revenue, `"${p.hotAreas.join(' | ')}"`
+      ].join(','));
+      const csv = [header.join(','), ...body].join('\n');
+      const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'products.csv'; a.click();
+      URL.revokeObjectURL(url);
+    }
+    
+    /* ================== Range Chips ================== */
+    function applyQuickRange(key){
+      const today = new Date();
+      const fmtDate = d => d.toISOString().slice(0,10);
+      let from='', to=fmtDate(today);
+      if (key==='today'){ from=to; }
+      if (key==='7d'){ const d=new Date(); d.setDate(today.getDate()-6); from=fmtDate(d); }
+      if (key==='30d'){ const d=new Date(); d.setDate(today.getDate()-29); from=fmtDate(d); }
+      document.getElementById('dateFrom').value = from;
+      document.getElementById('dateTo').value   = to;
+      document.getElementById('revAreaRange').textContent = from && to ? `${from} → ${to}` : '30 ngày gần đây';
+    }
+    
+    /* ================== Init ================== */
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // KPIs + area + charts
+      renderKPIs();
+      renderAreaCards();
+      buildMainCharts();
+      buildSparklines();
+    
+      // Table defaults
+      renderTable();
+    
+      // Filters
+      document.getElementById('applyFilter').addEventListener('click', ()=>{
+        applyStateFromInputs();
+        const {dateFrom,dateTo} = state;
+        document.getElementById('revAreaRange').textContent = (dateFrom||dateTo) ? `${dateFrom||'…'} → ${dateTo||'…'}` : '30 ngày gần đây';
+        renderTable();
+      });
+    
+      document.querySelectorAll('.chip-range').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          document.querySelectorAll('.chip-range').forEach(b=>b.classList.remove('bg-slate-900','text-white'));
+          btn.classList.add('bg-slate-900','text-white');
+          applyQuickRange(btn.dataset.range);
+        });
+      });
+    
+      document.getElementById('searchInput').addEventListener('input', ()=>{
+        state.q = document.getElementById('searchInput').value.trim().toLowerCase();
+        state.page = 1;
+        renderTable();
+      });
+    
+      document.getElementById('areaFilter').addEventListener('change', ()=>{
+        state.area = document.getElementById('areaFilter').value;
+        state.page = 1;
+        renderTable();
+      });
+    
+      // Pagination
+      document.getElementById('prevPage').addEventListener('click', ()=>{ if(state.page>1){ state.page--; renderTable(); }});
+      document.getElementById('nextPage').addEventListener('click', ()=>{ state.page++; renderTable(); });
+    
+      document.getElementById('pageSize').addEventListener('change', (e)=>{
+        state.pageSize = parseInt(e.target.value,10);
+        state.page = 1;
+        renderTable();
+      });
+    
+      // Sort
+      document.querySelectorAll('th.sortable').forEach(th=>{
+        th.classList.add('cursor-pointer','hover:bg-slate-100');
+        th.addEventListener('click', ()=>{
+          const field = th.dataset.field;
+          if (state.sortField === field){ state.sortDir = (state.sortDir==='asc'?'desc':'asc'); }
+          else { state.sortField = field; state.sortDir = field==='name' ? 'asc' : 'desc'; }
+          renderTable();
+        });
+      });
+    
+      // Export CSV
+      document.getElementById('exportCsv').addEventListener('click', ()=>{
+        exportToCsv( getFilteredSortedData() );
+      });
+    });
+    </script>
+    
+
+<body class="bg-[#E5E5E5]">
+
+    <div class="relative min-h-screen lg:flex">
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden"></div>
+
+        <aside id="left-sidebar"
+            class="fixed inset-y-0 left-0 bg-white w-64 min-h-screen p-6 flex flex-col justify-between transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-30">
+            <div>
+                <div class="flex items-center space-x-2">
+                    <img src="/image/logo.png" alt="">
+                </div>
+                <nav class="space-y-4 mt-6">
+                    <a href="/" class="flex items-center space-x-4 px-4 py-3 rounded-lg active-nav">
+                        <i class="fas fa-home"></i>
+                        <span class="font-semibold">Admin</span>
+                    </a>
+                </nav>
+
+            </div>
+            <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="font-semibold">Đăng Xuất</span>
+            </a>
+        </aside>
+
+        <main class="bg-[#F7F7F7] flex-1 p-4 sm:p-6 lg:p-8">
+          <!-- DASHBOARD GIÀY THỂ THAO -->
+          <main class="bg-[#F7F7F7] flex-1 p-4 sm:p-6 lg:p-8">
+            <section class="max-w-[1400px] mx-auto space-y-6">
+              <!-- Header + Filters -->
+              <div class="bg-white rounded-2xl p-4 sm:p-5 shadow border border-slate-100">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                  <div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Quản lý Giày Thể Thao</h1>
+                    <p class="text-slate-500 mt-1">Theo dõi sản phẩm, click, xem chi tiết, doanh thu & khu vực</p>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <div class="relative">
+                      <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                      <input id="searchInput" type="text" placeholder="Tìm sản phẩm…"
+                        class="pl-9 pr-3 py-2 rounded-xl bg-slate-50 border focus:bg-white focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <select id="areaFilter" class="px-3 py-2 rounded-xl bg-slate-50 border">
+                      <option value="all">Tất cả khu vực</option>
+                      <option value="go-vap">Gò Vấp</option>
+                      <option value="tan-binh">Tân Bình</option>
+                      <option value="hoc-mon">Hóc Môn</option>
+                      <option value="ca-mau">Cà Mau</option>
+                    </select>
+                    <div class="hidden sm:flex items-center gap-2">
+                      <button data-range="today" class="chip-range px-3 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 border">Hôm nay</button>
+                      <button data-range="7d" class="chip-range px-3 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 border">7 ngày</button>
+                      <button data-range="30d" class="chip-range px-3 py-2 rounded-xl bg-slate-900 text-white hover:brightness-110">30 ngày</button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <input id="dateFrom" type="date" class="px-3 py-2 rounded-xl bg-slate-50 border">
+                      <span class="text-slate-400">—</span>
+                      <input id="dateTo" type="date" class="px-3 py-2 rounded-xl bg-slate-50 border">
+                    </div>
+                    <button id="applyFilter" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:brightness-110">
+                      Áp dụng
+                    </button>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- KPIs -->
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- KPI Card -->
+                <div class="bg-white rounded-2xl p-5 shadow border border-slate-100">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm text-slate-500">Tổng sản phẩm</p>
+                    <canvas id="sparkProducts" width="80" height="28"></canvas>
+                  </div>
+                  <div class="mt-2 text-3xl font-extrabold" id="kpiProducts">0</div>
+                  <div class="mt-1 text-xs font-medium text-emerald-600" id="kpiProductsDelta">+0 hôm nay</div>
+                </div>
+          
+                <div class="bg-white rounded-2xl p-5 shadow border border-slate-100">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm text-slate-500">Click hôm nay</p>
+                    <canvas id="sparkClicks" width="80" height="28"></canvas>
+                  </div>
+                  <div class="mt-2 text-3xl font-extrabold" id="kpiClicks">0</div>
+                  <div class="mt-1 text-xs font-medium text-emerald-600" id="kpiClicksDelta">+0 vs hôm qua</div>
+                </div>
+          
+                <div class="bg-white rounded-2xl p-5 shadow border border-slate-100">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm text-slate-500">Xem chi tiết</p>
+                    <canvas id="sparkViews" width="80" height="28"></canvas>
+                  </div>
+                  <div class="mt-2 text-3xl font-extrabold" id="kpiViews">0</div>
+                  <div class="mt-1 text-xs font-medium text-emerald-600" id="kpiViewsDelta">+0 tuần này</div>
+                </div>
+          
+                <div class="bg-white rounded-2xl p-5 shadow border border-slate-100">
+                  <div class="flex items-center justify-between">
+                    <p class="text-sm text-slate-500">Doanh thu tháng</p>
+                    <canvas id="sparkRevenue" width="80" height="28"></canvas>
+                  </div>
+                  <div class="mt-2 text-3xl font-extrabold" id="kpiRevenue">0₫</div>
+                  <div class="mt-1 text-xs font-medium text-emerald-600" id="kpiRevenueDelta">+0%</div>
+                </div>
+              </div>
+          
+              <!-- Areas quick cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-2xl shadow border hover:shadow-lg transition">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-bold">Gò Vấp</h3>
+                    <span class="text-xs px-2 py-1 rounded-full bg-emerald-50 text-emerald-700" id="gvTrend">+0.0%</span>
+                  </div>
+                  <div class="mt-2 text-xl font-extrabold" id="gvRevenue">0₫</div>
+                  <p class="text-xs text-slate-500">Doanh thu • Click: <span id="gvClicks">0</span></p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow border hover:shadow-lg transition">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-bold">Tân Bình</h3>
+                    <span class="text-xs px-2 py-1 rounded-full bg-emerald-50 text-emerald-700" id="tbTrend">+0.0%</span>
+                  </div>
+                  <div class="mt-2 text-xl font-extrabold" id="tbRevenue">0₫</div>
+                  <p class="text-xs text-slate-500">Doanh thu • Click: <span id="tbClicks">0</span></p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow border hover:shadow-lg transition">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-bold">Hóc Môn</h3>
+                    <span class="text-xs px-2 py-1 rounded-full bg-emerald-50 text-emerald-700" id="hmTrend">+0.0%</span>
+                  </div>
+                  <div class="mt-2 text-xl font-extrabold" id="hmRevenue">0₫</div>
+                  <p class="text-xs text-slate-500">Doanh thu • Click: <span id="hmClicks">0</span></p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow border hover:shadow-lg transition">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-bold">Cà Mau</h3>
+                    <span class="text-xs px-2 py-1 rounded-full bg-emerald-50 text-emerald-700" id="cmTrend">+0.0%</span>
+                  </div>
+                  <div class="mt-2 text-xl font-extrabold" id="cmRevenue">0₫</div>
+                  <p class="text-xs text-slate-500">Doanh thu • Click: <span id="cmClicks">0</span></p>
+                </div>
+              </div>
+          
+              <!-- Charts -->
+              <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl p-5 shadow border">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-bold">Doanh thu theo khu vực</h3>
+                    <span class="text-xs text-slate-400" id="revAreaRange">30 ngày gần đây</span>
+                  </div>
+                  <canvas id="chartRevenueByArea" class="mt-4"></canvas>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow border">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-bold">Top sản phẩm theo Click</h3>
+                    <span class="text-xs text-slate-400" id="clickRange">7 ngày gần đây</span>
+                  </div>
+                  <canvas id="chartClicksByProduct" class="mt-4"></canvas>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow border">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-bold">Lượt xem chi tiết theo ngày</h3>
+                    <span class="text-xs text-slate-400" id="viewRange">14 ngày gần đây</span>
+                  </div>
+                  <canvas id="chartViewsDaily" class="mt-4"></canvas>
+                </div>
+              </div>
+          
+              <!-- Table -->
+              <div class="bg-white rounded-2xl shadow border overflow-hidden">
+                <div class="p-5 border-b flex items-center justify-between">
+                  <div>
+                    <h3 class="font-bold">Danh sách sản phẩm</h3>
+                    <p class="text-sm text-slate-500">Quản lý click, xem chi tiết, doanh thu từng sản phẩm</p>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <select id="pageSize" class="px-2 py-1.5 rounded-lg bg-slate-50 border text-sm">
+                      <option value="5">5 / trang</option>
+                      <option value="10">10 / trang</option>
+                      <option value="20">20 / trang</option>
+                    </select>
+                    <button id="exportCsv" class="px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:brightness-110 text-sm">
+                      <i class="fa-solid fa-file-arrow-down mr-1"></i> Xuất CSV
+                    </button>
+                  </div>
+                </div>
+          
+                <!-- Skeleton loading -->
+                <div id="tableSkeleton" class="p-5 grid gap-3 hidden">
+                  <div class="h-4 bg-slate-100 rounded animate-pulse"></div>
+                  <div class="h-4 bg-slate-100 rounded animate-pulse"></div>
+                  <div class="h-4 bg-slate-100 rounded animate-pulse"></div>
+                  <div class="h-4 bg-slate-100 rounded animate-pulse"></div>
+                </div>
+          
+                <div class="overflow-x-auto">
+                  <table class="min-w-full text-sm">
+                    <thead class="bg-slate-50 text-slate-600">
+                      <tr>
+                        <th class="text-left px-5 py-3 sortable" data-field="name">Sản phẩm</th>
+                        <th class="text-right px-5 py-3 sortable" data-field="price">Giá</th>
+                        <th class="text-right px-5 py-3 sortable" data-field="clicks">Click</th>
+                        <th class="text-right px-5 py-3 sortable" data-field="views">Xem chi tiết</th>
+                        <th class="text-right px-5 py-3 sortable" data-field="revenue">Doanh thu</th>
+                        <th class="text-left px-5 py-3">Khu vực mạnh</th>
+                        <th class="px-5 py-3"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="productTableBody" class="divide-y">
+                      <!-- JS render -->
+                    </tbody>
+                  </table>
+                </div>
+          
+                <div id="emptyState" class="hidden p-8 text-center text-slate-500">
+                  <i class="fa-regular fa-folder-open text-3xl mb-2"></i>
+                  <p>Không tìm thấy sản phẩm phù hợp.</p>
+                </div>
+          
+                <div class="flex items-center justify-between p-4">
+                  <p class="text-xs text-slate-500" id="pageInfo">Trang 1</p>
+                  <div class="flex gap-2">
+                    <button id="prevPage" class="px-3 py-1.5 rounded-lg bg-slate-50 border hover:bg-slate-100">Trước</button>
+                    <button id="nextPage" class="px-3 py-1.5 rounded-lg bg-slate-50 border hover:bg-slate-100">Sau</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+          
+  
+        </main>
+
+
+
+
+
+        <aside class="hidden xl:block bg-white w-80 p-6 flex flex-col space-y-8">
+            <a href="https://www.facebook.com/ha.tuong.35728" target="_blank" rel="noopener noreferrer"
+                class="flex flex-col items-center text-center group cursor-pointer">
+
+                <div
+                    class="p-1 rounded-full ring-2 ring-blue-500 group-hover:ring-blue-700 transition-all duration-300 mb-4">
+                    <img src="/image/manh-tuong.jpg" alt="User" class="w-24 h-24 rounded-full shadow-md object-cover">
+                </div>
+
+                <div class="flex items-center gap-x-1.5">
+
+                    <h3 class="text-xl font-bold text-gray-800">Mạnh Tường</h3>
+                  
+                    <span title="Tài khoản đã xác minh">
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.25,12c0,5.66-4.59,10.25-10.25,10.25S1.75,17.66,1.75,12S6.34,1.75,12,1.75S22.25,6.34,22.25,12Z" fill="#1877F2"></path>
+                        <path d="M10.63,15.29l-2.88-2.88c-.23-.23-.61-.23-.84,0s-.23,.61,0,.84l3.3,3.3c.23,.23,.61,.23,.84,0l5.88-5.88c.23-.23,.23-.61,0-.84s-.61-.23-.84,0l-5.45,5.45Z" fill="#FFFFFF"></path>
+                      </svg>
+                    </span>
+                  
+                  </div>
+                <p class="text-sm text-gray-500">@manhtuong</p>
+            </a>
+
+            <div class="bg-gray-50 rounded-2xl p-4">
+                <img class="w-full rounded-xl" src="/image/Qr.jpg" alt="QR Code">
+            </div>
+            <hr class="my-6">
+        </aside>
+    </div>
+
+</body>
+
+</html>

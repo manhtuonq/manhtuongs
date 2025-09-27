@@ -32,6 +32,12 @@
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://manhtuongs.vercel.app/bai-viet/bao-ra-ga-sa.html</loc>
+        <lastmod>2025-09-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
     
     <url>
         <loc>https://manhtuongs.vercel.app/founder/manh-tuong-uy-tin.html</loc>

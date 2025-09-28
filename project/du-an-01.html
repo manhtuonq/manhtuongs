@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Website Thời Trang - Dự án thiết kế chuyên nghiệp | Mạnh Tường</title>
+    <meta name="description" content="Dự án website thời trang với giao diện hiện đại, tối ưu SEO, trải nghiệm người dùng xuất sắc. Xem album ảnh, video quá trình và feedback khách hàng.">
+    <link rel="canonical" href="https://manhtuongs.vercel.app/project/du-an-01.html">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="website thời trang, thiết kế website, dự án, mạnh tường, ecommerce, responsive">
+    <link rel="icon" sizes="40x40" href="/image/manh-tuong.jpg" type="image/jpeg">
+    <meta property="og:title" content="Website Thời Trang - Dự án thiết kế chuyên nghiệp | Mạnh Tường">
+    <meta property="og:description" content="Dự án website thời trang với giao diện hiện đại, tối ưu SEO, trải nghiệm người dùng xuất sắc.">
+    <meta property="og:image" content="https://manhtuongs.vercel.app/image/manh-tuong-thiet-ke-website.jpg">
+    <meta property="og:url" content="https://manhtuongs.vercel.app/project/du-an-01.html">
+    <meta property="og:type" content="article">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Website Thời Trang - Dự án thiết kế chuyên nghiệp | Mạnh Tường">
+    <meta name="twitter:description" content="Dự án website thời trang với giao diện hiện đại, tối ưu SEO, trải nghiệm người dùng xuất sắc.">
+    <meta name="twitter:image" content="https://manhtuongs.vercel.app/image/manh-tuong-thiet-ke-website.jpg">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/image/manh-tuong.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F7F7F7;
+            color: #1a202c;
+        }
+        .active-nav { background-color: #5960FF; color: white; }
+        .submenu { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out; background-color: #fafbff; }
+        .submenu.active { max-height: 250px; opacity: 1; }
+        .dropdown-toggle.active-parent { background-color: #eff0ff; color: #5960FF; }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c5c5c5; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
+        /* Gallery Styles */
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .gallery-main {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-main:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: white;
+            overflow-x: auto;
+        }
+        .gallery-thumb {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .gallery-thumb.active {
+            border-color: #5960FF;
+            transform: scale(1.1);
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .gallery-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .gallery-nav.prev { left: 1rem; }
+        .gallery-nav.next { right: 1rem; }
+
+        /* Video Section */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Feedback Cards */
+        .feedback-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .feedback-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        /* Founder Section */
+        .founder-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+    </style>
+</head>
+
+<body class="bg-[#E5E5E5]">
+    <div class="relative min-h-screen lg:flex">
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden lg:hidden"></div>
+
+        <aside id="left-sidebar" class="fixed inset-y-0 left-0 bg-white w-64 min-h-screen p-6 flex flex-col justify-between transform -translate-x-full lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-30">
+            <div>
+                <div class="flex items-center space-x-2">
+                    <img src="/image/logo.png" alt="">
+                </div>
+
+                <nav class="space-y-4 mt-6">
+                    <a href="/" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-home"></i>
+                        <span class="font-semibold">Trang Chủ</span>
+                    </a>
+                    <a href="/eror404/notfound.html" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-code"></i>
+                        <span class="font-semibold">Thiết Kế Web</span>
+                    </a>
+                    <div>
+                        <a href="#" class="dropdown-toggle flex items-center justify-between w-full px-4 py-3 rounded-lg text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-newspaper w-5 text-center"></i>
+                                <span class="font-semibold">Blog Tin Tức</span>
+                            </div>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </a>
+
+                        <div class="submenu">
+                            <nav class="flex flex-col pt-2 pb-1 mx-4 border-l-2 border-indigo-100">
+                                <a href="/bai-viet/manh-tuong-uy-tin.html" class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Mạnh Tường</a>
+                                <a href="/bai-viet/thiet-ke-website-uy-tin-manh-tuong.html" class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Vui Vẻ</a>
+                                <a href="/bai-viet/bao-ra-ga-sa.html" class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Báo Ra Ga Sa</a>
+                                <a href="/eror404/notfound.html" class="block pl-8 pr-4 py-2 text-sm text-gray-500 rounded-r-lg hover:bg-indigo-100 hover:text-indigo-700">Blog Facebook</a>
+                            </nav>
+                        </div>
+                    </div>
+                    <a href="/eror404/notfound.html" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-rocket"></i>
+                        <span class="font-semibold">Dịch Vụ SEO</span>
+                    </a>
+                    <a href="/game/game-quay-so.html" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-gamepad"></i>
+                        <span class="font-semibold">Mini Game</span>
+                    </a>
+                    <a href="/founder/manh-tuong-uy-tin.html" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                        <i class="fas fa-user-tie"></i>
+                        <span class="font-semibold">Sáng Lập</span>
+                    </a>
+                </nav>
+                <script>
+                    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+                    dropdownToggles.forEach(clickedToggle => {
+                        clickedToggle.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            const submenu = clickedToggle.nextElementSibling;
+                            const isAlreadyOpen = clickedToggle.classList.contains('active-parent');
+                            dropdownToggles.forEach(toggle => {
+                                toggle.classList.remove('active-parent');
+                                if (toggle.nextElementSibling) toggle.nextElementSibling.classList.remove('active');
+                                const icon = toggle.querySelector('.fa-chevron-down');
+                                if (icon) icon.classList.remove('rotate-180');
+                            });
+                            if (!isAlreadyOpen) {
+                                clickedToggle.classList.add('active-parent');
+                                if (submenu) submenu.classList.add('active');
+                                const icon = clickedToggle.querySelector('.fa-chevron-down');
+                                if (icon) icon.classList.add('rotate-180');
+                            }
+                        });
+                    });
+                </script>
+            </div>
+            <a href="#" class="flex items-center space-x-4 px-4 py-3 rounded-lg text-gray-500 hover:bg-gray-200">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="font-semibold">Log out</span>
+            </a>
+        </aside>
+
+        <main class="bg-[#F7F7F7] flex-1 p-4 sm:p-6 lg:p-8">
+            <!-- Project Header -->
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg mb-8">
+                    <div class="flex items-center mb-4">
+                        <a href="/" class="text-indigo-600 hover:text-indigo-800 mr-2">
+                            <i class="fas fa-arrow-left"></i> Trở về
+                        </a>
+                        <span class="text-gray-400">/</span>
+                        <span class="text-gray-600 ml-2">Dự án</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">Website Thời Trang</h1>
+                    <p class="text-lg text-gray-600 mb-6">Dự án thiết kế website thương mại điện tử chuyên nghiệp với giao diện hiện đại và trải nghiệm người dùng tối ưu</p>
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full">E-commerce</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full">Responsive</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full">SEO Optimized</span>
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">10 ngày</span>
+                    </div>
+                </div>
+
+                <!-- Image Gallery -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Album Ảnh Dự Án</h2>
+                    <div class="gallery-container">
+                        <div class="gallery-main">
+                            <img id="mainImage" src="https://down-vn.img.susercontent.com/file/sg-11134201-22100-y2cykgyj6oiv6b.webp" alt="Website Thời Trang - Giao diện chính">
+                            <button class="gallery-nav prev" onclick="previousImage()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="gallery-nav next" onclick="nextImage()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="gallery-thumbnails">
+                            <div class="gallery-thumb active" onclick="changeImage(0)">
+                                <img src="https://down-vn.img.susercontent.com/file/sg-11134201-22100-y2cykgyj6oiv6b.webp" alt="Giao diện chính">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(1)">
+                                <img src="https://i.pinimg.com/1200x/91/d3/f6/91d3f6bf72ab99a945ff2ebcbe5eeaa1.jpg" alt="Trang sản phẩm">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(2)">
+                                <img src="https://i.pinimg.com/736x/6f/4b/43/6f4b43b1cc87f3ac9f23777ba1bbf6fb.jpg" alt="Giỏ hàng">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(3)">
+                                <img src="https://i.pinimg.com/1200x/54/e7/b6/54e7b6fac0edf3dcc135d70238fe5163.jpg" alt="Thanh toán">
+                            </div>
+                            <div class="gallery-thumb" onclick="changeImage(4)">
+                                <img src="https://i.pinimg.com/1200x/a2/e4/93/a2e4936af6475337b39a5e257a071d23.jpg" alt="Mobile view">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Section -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Video Quá Trình Phát Triển</h2>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video quá trình phát triển website thời trang" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p class="text-gray-600 mt-4 text-center">Video timelapse quá trình thiết kế và phát triển website từ ý tưởng đến hoàn thiện</p>
+                </div>
+
+                <!-- Customer Feedback -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Feedback Khách Hàng</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="feedback-card">
+                            <div class="flex items-center mb-3">
+                                <img src="https://i.pravatar.cc/60?u=customer1" alt="Khách hàng" class="w-12 h-12 rounded-full mr-3">
+                                <div>
+                                    <h4 class="font-bold">Chị Minh Anh</h4>
+                                    <p class="text-sm opacity-80">CEO Fashion Store</p>
+                                </div>
+                            </div>
+                            <p class="text-sm leading-relaxed">Website thiết kế rất chuyên nghiệp, giao diện đẹp và dễ sử dụng. Doanh số bán hàng tăng 300% sau khi ra mắt.</p>
+                            <div class="flex text-yellow-400 mt-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+
+                        <div class="feedback-card">
+                            <div class="flex items-center mb-3">
+                                <img src="https://i.pravatar.cc/60?u=customer2" alt="Khách hàng" class="w-12 h-12 rounded-full mr-3">
+                                <div>
+                                    <h4 class="font-bold">Anh Văn Hùng</h4>
+                                    <p class="text-sm opacity-80">Giám đốc Marketing</p>
+                                </div>
+                            </div>
+                            <p class="text-sm leading-relaxed">Tốc độ tải trang nhanh, SEO tốt. Website hiển thị hoàn hảo trên mọi thiết bị. Rất hài lòng với dịch vụ.</p>
+                            <div class="flex text-yellow-400 mt-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+
+                        <div class="feedback-card">
+                            <div class="flex items-center mb-3">
+                                <img src="https://i.pravatar.cc/60?u=customer3" alt="Khách hàng" class="w-12 h-12 rounded-full mr-3">
+                                <div>
+                                    <h4 class="font-bold">Chị Thu Hà</h4>
+                                    <p class="text-sm opacity-80">Chủ shop online</p>
+                                </div>
+                            </div>
+                            <p class="text-sm leading-relaxed">Hỗ trợ kỹ thuật 24/7, team rất nhiệt tình. Website vận hành ổn định, không có lỗi gì. Sẽ tiếp tục hợp tác.</p>
+                            <div class="flex text-yellow-400 mt-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Status & Channels -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Trạng Thái Dự Án & Kênh Hoạt Động</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Trạng Thái Hiện Tại</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                    <span class="text-gray-700">Website đang hoạt động ổn định</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                                    <span class="text-gray-700">Tốc độ tải trang: 2.1s</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
+                                    <span class="text-gray-700">Uptime: 99.9%</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
+                                    <span class="text-gray-700">SEO Score: 95/100</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Kênh Marketing</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                    <i class="fab fa-facebook text-blue-600 text-xl mr-3"></i>
+                                    <span class="text-gray-700">Facebook Page: 15K followers</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                    <i class="fab fa-instagram text-pink-600 text-xl mr-3"></i>
+                                    <span class="text-gray-700">Instagram: 8K followers</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                    <i class="fab fa-tiktok text-black text-xl mr-3"></i>
+                                    <span class="text-gray-700">TikTok: 25K followers</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                    <i class="fab fa-youtube text-red-600 text-xl mr-3"></i>
+                                    <span class="text-gray-700">YouTube: 5K subscribers</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Founder Section -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Founder & Giải Pháp Doanh Nghiệp</h2>
+                    <div class="founder-card">
+                        <div class="flex items-start">
+                            <img src="/image/manh-tuong.jpg" alt="Mạnh Tường" class="w-24 h-24 rounded-full mr-6 flex-shrink-0">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold mb-2">Mạnh Tường</h3>
+                                <p class="text-lg opacity-90 mb-4">Founder & Lead Developer</p>
+                                <p class="text-sm leading-relaxed mb-4">
+                                    "Với hơn 5 năm kinh nghiệm trong lĩnh vực thiết kế website và phát triển thương mại điện tử, tôi hiểu rõ những thách thức mà doanh nghiệp phải đối mặt trong kỷ nguyên số. Mỗi dự án là một cơ hội để tạo ra giá trị thực sự cho khách hàng."
+                                </p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <h4 class="font-bold mb-2">Giải pháp chính:</h4>
+                                        <ul class="space-y-1">
+                                            <li>• Thiết kế UI/UX tối ưu</li>
+                                            <li>• Tối ưu SEO toàn diện</li>
+                                            <li>• Tích hợp thanh toán đa dạng</li>
+                                            <li>• Bảo mật cao cấp</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold mb-2">Cam kết:</h4>
+                                        <ul class="space-y-1">
+                                            <li>• Hỗ trợ 24/7</li>
+                                            <li>• Bảo hành trọn đời</li>
+                                            <li>• Cập nhật miễn phí</li>
+                                            <li>• Tư vấn chiến lược</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-6">
+                                    <a href="https://www.facebook.com/ha.tuong.35728" target="_blank" class="inline-flex items-center px-6 py-3 bg-white text-gray-800 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                                        <i class="fab fa-facebook mr-2"></i>
+                                        Liên hệ ngay
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="hidden xl:block bg-white w-80 p-6 shadow-lg">
+            <a href="https://www.facebook.com/ha.tuong.35728" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center text-center group cursor-pointer">
+                <div class="p-1 rounded-full ring-2 ring-blue-500 group-hover:ring-blue-700 transition-all duration-300 mb-4">
+                    <img src="/image/manh-tuong.jpg" alt="User" class="w-24 h-24 rounded-full shadow-md object-cover">
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-700 transition-colors">Mạnh Tường</h3>
+                <p class="text-sm text-gray-500">@manhtuong</p>
+            </a>
+            <div class="bg-gray-50 rounded-2xl p-4 mt-6">
+                <img class="w-full rounded-xl" src="/image/Qr.jpg" alt="QR Code">
+            </div>
+            <hr class="my-6">
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <h4 class="text-lg font-bold text-gray-800">Dự án khác</h4>
+                </div>
+                <div id="project-list" class="space-y-3">
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Gallery functionality
+        const images = [
+            "https://down-vn.img.susercontent.com/file/sg-11134201-22100-y2cykgyj6oiv6b.webp",
+            "https://i.pinimg.com/1200x/91/d3/f6/91d3f6bf72ab99a945ff2ebcbe5eeaa1.jpg",
+            "https://i.pinimg.com/736x/6f/4b/43/6f4b43b1cc87f3ac9f23777ba1bbf6fb.jpg",
+            "https://i.pinimg.com/1200x/54/e7/b6/54e7b6fac0edf3dcc135d70238fe5163.jpg",
+            "https://i.pinimg.com/1200x/a2/e4/93/a2e4936af6475337b39a5e257a071d23.jpg"
+        ];
+        
+        let currentImageIndex = 0;
+        
+        function changeImage(index) {
+            currentImageIndex = index;
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = images[index];
+            
+            // Update active thumbnail
+            document.querySelectorAll('.gallery-thumb').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        }
+        
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            changeImage(currentImageIndex);
+        }
+        
+        function previousImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            changeImage(currentImageIndex);
+        }
+        
+        // Auto-play gallery
+        setInterval(nextImage, 5000);
+        
+        // Other projects
+        document.addEventListener('DOMContentLoaded', function() {
+            const otherProjects = [
+                { title: 'Web Giới Thiệu Công Ty', href: '/project/du-an-02.html', image: 'https://i.pinimg.com/1200x/91/d3/f6/91d3f6bf72ab99a945ff2ebcbe5eeaa1.jpg' },
+                { title: 'Trang Bất Động Sản', href: '/project/du-an-03.html', image: 'https://i.pinimg.com/736x/6f/4b/43/6f4b43b1cc87f3ac9f23777ba1bbf6fb.jpg' },
+                { title: 'Landing Page Sự Kiện', href: '/project/du-an-04.html', image: 'https://i.pinimg.com/1200x/54/e7/b6/54e7b6fac0edf3dcc135d70238fe5163.jpg' }
+            ];
+            
+            const projectList = document.getElementById('project-list');
+            if (projectList) {
+                otherProjects.forEach(project => {
+                    const a = document.createElement('a');
+                    a.href = project.href;
+                    a.className = 'flex items-center p-3 rounded-xl hover:bg-gray-100 hover:shadow-sm transition-all duration-200';
+                    a.innerHTML = `<img src="${project.image}" alt="${project.title}" class="w-16 h-16 rounded-lg object-cover mr-4"><div class="overflow-hidden"><h5 class="font-semibold text-gray-800 leading-tight truncate">${project.title}</h5></div>`;
+                    projectList.appendChild(a);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

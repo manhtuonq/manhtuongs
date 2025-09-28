@@ -365,6 +365,7 @@
                     time: '10 ngày',
                     image: 'https://down-vn.img.susercontent.com/file/sg-11134201-22100-y2cykgyj6oiv6b.webp', // MỚI: Giao diện web shop thời trang, bắt mắt, hiện đại.
                     category: 'Bán hàng',
+                    href: '/project/du-an-01.html',
                     authorAvatar: '/image/manh-tuong.jpg'
                 },
                 {
@@ -375,6 +376,7 @@
                     time: '7 ngày',
                     image: 'https://i.pinimg.com/1200x/91/d3/f6/91d3f6bf72ab99a945ff2ebcbe5eeaa1.jpg', // MỚI: Hình ảnh văn phòng, toát lên vẻ chuyên nghiệp, tin cậy.
                     category: 'Dịch Vụ',
+                    href: '/project/du-an-02.html',
                     authorAvatar: '/image/manh-tuong.jpg'
                 },
                 {
@@ -385,6 +387,7 @@
                     time: '15 ngày',
                     image: 'https://i.pinimg.com/736x/6f/4b/43/6f4b43b1cc87f3ac9f23777ba1bbf6fb.jpg', // MỚI: Giao diện web bất động sản sang trọng, rõ ràng.
                     category: 'Bán hàng',
+                    href: '/project/du-an-03.html',
                     authorAvatar: '/image/manh-tuong.jpg'
                 },
                 {
@@ -395,6 +398,7 @@
                     time: '3 ngày',
                     image: 'https://i.pinimg.com/1200x/54/e7/b6/54e7b6fac0edf3dcc135d70238fe5163.jpg', // MỚI: Hình ảnh hội thảo, sự kiện công nghệ, năng động.
                     category: 'LandingPage',
+                    href: '/project/du-an-04.html',
                     authorAvatar: '/image/manh-tuong.jpg'
                 },
                 {
@@ -405,6 +409,7 @@
                     time: '7 ngày',
                     image: 'https://i.pinimg.com/1200x/a2/e4/93/a2e4936af6475337b39a5e257a071d23.jpg', // MỚI: Hình ảnh liên quan đến đọc sách, viết lách, tri thức.
                     category: 'Khác',
+                    href: '/project/du-an-05.html',
                     authorAvatar: '/image/manh-tuong.jpg'
                 },
                 {
@@ -415,6 +420,7 @@
                     time: '3 ngày',
                     image: 'https://i.pinimg.com/1200x/4d/3d/28/4d3d287b0f460e7d1849bad2da3ee518.jpg', // MỚI: Sản phẩm mỹ phẩm được sắp đặt tinh tế, sạch sẽ.
                     category: 'LandingPage',
+                    href: '/project/du-an-06.html',
                     authorAvatar: '/image/manh-tuong.jpg'
                 },
                 {
@@ -425,6 +431,7 @@
                     time: '12 ngày',
                     image: 'https://i.pinimg.com/736x/27/3f/c4/273fc413811f9ed85486e63f8bb0f1aa.jpg', // MỚI: Không gian spa thư giãn, yên tĩnh và sang trọng.
                     category: 'Dịch Vụ',
+                    href: '/project/du-an-07.html',
                     authorAvatar: '/image/manh-tuong.jpg'
                 },
                 {
@@ -435,6 +442,7 @@
                     time: '10 ngày',
                     image: 'https://i.pinimg.com/736x/5b/f1/9e/5bf19e54fa3e3c3ba8fdd21a80b7dfe9.jpg', // MỚI: Các thiết bị công nghệ được sắp xếp trên bàn làm việc.
                     category: 'Bán hàng',
+                    href: '/project/du-an-08.html',
                     authorAvatar: '/image/manh-tuong.jpg'
                 },
                 {
@@ -445,6 +453,7 @@
                     time: 'N/A',
                     image: 'https://i.pinimg.com/1200x/69/6d/92/696d92b56c49c5ec16bf9e3e4e35dade.jpg', // MỚI: Hình ảnh trừu tượng về code/thiết kế, thể hiện sự đa dạng.
                     category: 'Khác',
+                    href: '/project/du-an-09.html',
                     authorAvatar: '/image/manh-tuong.jpg'
                 },
             ];
@@ -467,7 +476,7 @@
 
                 paginatedItems.forEach(nft => {
                     const card = `
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <a href="${nft.href}" class="block bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
                         <div class="relative">
                             <img src="${nft.image}" class="w-full h-56 object-cover" alt="${nft.title}">
                         </div>
@@ -491,7 +500,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>`;
+                    </a>`;
                     nftGrid.innerHTML += card;
                 });
             };

@@ -7,12 +7,7 @@
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
-    <url>
-        <loc>https://manhtuongs.vercel.app/design.html</loc>
-        <lastmod>2025-07-27</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
+    <!-- Removed non-existent design.html -->
 
     <url>
         <loc>https://manhtuongs.vercel.app/bai-viet/manh-tuong-uy-tin.html</loc>
@@ -21,13 +16,13 @@
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://manhtuongs.vercel.app/bai-viet/bai-viet/thiet-ke-website-uy-tin-manh-tuong.html</loc>
+        <loc>https://manhtuongs.vercel.app/bai-viet/thiet-ke-website-uy-tin-manh-tuong.html</loc>
         <lastmod>2025-07-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://manhtuongs.vercel.app/bai-viet/bai-viet/manhtuong-thiet-ke-website.html</loc>
+        <loc>https://manhtuongs.vercel.app/bai-viet/manhtuong-thiet-ke-website.html</loc>
         <lastmod>2025-07-29</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -41,7 +36,27 @@
     
     <url>
         <loc>https://manhtuongs.vercel.app/founder/manh-tuong-uy-tin.html</loc>
-        <lastmod>2025-07-26</lastmod>
+        <lastmod>2025-10-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Project detail pages -->
+    <url>
+        <loc>https://manhtuongs.vercel.app/project/du-an-01.html</loc>
+        <lastmod>2025-10-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://manhtuongs.vercel.app/project/du-an-02.html</loc>
+        <lastmod>2025-10-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://manhtuongs.vercel.app/project/du-an-03.html</loc>
+        <lastmod>2025-10-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>

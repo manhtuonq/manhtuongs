@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quản lý - Đăng Design Web | Mạnh Tường</title>
+    <meta name="description" content="Quản lý tài khoản và đăng design web. Thống kê, nạp tiền, đăng bài dễ dàng.">
+    <link rel="canonical" href="https://manhtuongs.vercel.app/design/management.html">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="quản lý design, đăng design web, thống kê, nạp tiền">
+    <link rel="icon" sizes="40x40" href="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/555472072_1723329255035083_1258295185174540373_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=rZubJboCFF0Q7kNvwEbRMTy&_nc_oc=AdlI7CmxcUxxoFCoTkAzj7ypg8ngW119yyhqrkfU0iBNJdjBfODhStwcFQxG5uE_YuU&_nc_zt=23&_nc_ht=scontent.fsgn2-7.fna&_nc_gid=GUc-_Dtc6JEmwr4kw0-EBw&oh=00_AffLKe2swS260G8xBw55ncNsXfQcS6oxbpMTKKlWxgIT7w&oe=68EEF51F" type="image/jpeg">
+    <meta property="og:title" content="Quản lý - Đăng Design Web | Mạnh Tường">
+    <meta property="og:description" content="Quản lý tài khoản và đăng design web. Thống kê, nạp tiền, đăng bài dễ dàng.">
+    <meta property="og:image" content="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/555472072_1723329255035083_1258295185174540373_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=rZubJboCFF0Q7kNvwEbRMTy&_nc_oc=AdlI7CmxcUxxoFCoTkAzj7ypg8ngW119yyhqrkfU0iBNJdjBfODhStwcFQxG5uE_YuU&_nc_zt=23&_nc_ht=scontent.fsgn2-7.fna&_nc_gid=GUc-_Dtc6JEmwr4kw0-EBw&oh=00_AffLKe2swS260G8xBw55ncNsXfQcS6oxbpMTKKlWxgIT7w&oe=68EEF51F">
+    <meta property="og:url" content="https://manhtuongs.vercel.app/design/management.html">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Quản lý - Đăng Design Web | Mạnh Tường">
+    <meta name="twitter:description" content="Quản lý tài khoản và đăng design web. Thống kê, nạp tiền, đăng bài dễ dàng.">
+    <meta name="twitter:image" content="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/555472072_1723329255035083_1258295185174540373_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=rZubJboCFF0Q7kNvwEbRMTy&_nc_oc=AdlI7CmxcUxxoFCoTkAzj7ypg8ngW119yyhqrkfU0iBNJdjBfODhStwcFQxG5uE_YuU&_nc_zt=23&_nc_ht=scontent.fsgn2-7.fna&_nc_gid=GUc-_Dtc6JEmwr4kw0-EBw&oh=00_AffLKe2swS260G8xBw55ncNsXfQcS6oxbpMTKKlWxgIT7w&oe=68EEF51F">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/555472072_1723329255035083_1258295185174540373_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=rZubJboCFF0Q7kNvwEbRMTy&_nc_oc=AdlI7CmxcUxxoFCoTkAzj7ypg8ngW119yyhqrkfU0iBNJdjBfODhStwcFQxG5uE_YuU&_nc_zt=23&_nc_ht=scontent.fsgn2-7.fna&_nc_gid=GUc-_Dtc6JEmwr4kw0-EBw&oh=00_AffLKe2swS260G8xBw55ncNsXfQcS6oxbpMTKKlWxgIT7w&oe=68EEF51F">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mạnh Tường",
+      "description": "Chuyên gia thẩm định website và là người có thể tạo dựng website bán hàng, kỷ lục website có doanh thu cao nhất tháng 10 năm 2025 là 1 tỷ VNĐ cho tổng doanh thu 3 website \"Bánh Tráng, Xe Điện và Tủ Lạnh\".",
+      "birthDate": "2000-24-11",
+      "nationality": "Vietnamese",
+      "url": "https://manhtuongs.vercel.app/"
+    }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .btn-post {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .money-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen p-4">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="card p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <img src="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/555472072_1723329255035083_1258295185174540373_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=rZubJboCFF0Q7kNvwEbRMTy&_nc_oc=AdlI7CmxcUxxoFCoTkAzj7ypg8ngW119yyhqrkfU0iBNJdjBfODhStwcFQxG5uE_YuU&_nc_zt=23&_nc_ht=scontent.fsgn2-7.fna&_nc_gid=GUc-_Dtc6JEmwr4kw0-EBw&oh=00_AffLKe2swS260G8xBw55ncNsXfQcS6oxbpMTKKlWxgIT7w&oe=68EEF51F" 
+                         alt="Avatar" class="w-16 h-16 rounded-full border-4 border-white shadow-lg">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-800">Chào mừng trở lại!</h1>
+                        <p class="text-gray-600">Quản lý tài khoản và đăng design</p>
+                    </div>
+                </div>
+                <a href="/" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-home text-xl"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Action -->
+        <div class="card p-8 text-center">
+            <div class="mb-8">
+                <div class="w-24 h-24 bg-gradient-to-r from-red-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <i class="fas fa-palette text-white text-3xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Đăng Đặc Tả Website</h2>
+                <p class="text-gray-600 mb-6">Tạo yêu cầu thiết kế website chuyên nghiệp</p>
+            </div>
+
+            <button onclick="showPostModal()" class="btn-post px-8 py-4 rounded-xl text-white font-bold text-xl shadow-lg">
+                <i class="fas fa-plus mr-2"></i>Đăng Đặc Tả Design
+            </button>
+
+            <div class="mt-6 text-sm text-gray-500">
+                <p>Upload ảnh từ máy tính của bạn</p>
+                <p>Lưu trữ vĩnh viễn trên trình duyệt</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post Modal -->
+    <div id="postModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl mx-4 w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Đăng Đặc Tả Design</h3>
+                <button onclick="closePostModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <form id="postForm" class="space-y-6">
+                <!-- Image Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ảnh đặc tả design</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors">
+                        <input type="file" id="imageUpload" accept="image/*" class="hidden" onchange="previewImage(this)">
+                        <button type="button" onclick="document.getElementById('imageUpload').click()" 
+                                class="btn-primary px-6 py-3 rounded-lg text-white font-semibold">
+                            <i class="fas fa-plus mr-2"></i>Chọn ảnh từ file
+                        </button>
+                        <p class="text-sm text-gray-500 mt-2">JPG, PNG, GIF tối đa 10MB</p>
+                    </div>
+                    <div id="imagePreview" class="mt-4 hidden">
+                        <img id="previewImg" class="max-w-full h-64 object-cover rounded-lg mx-auto">
+                    </div>
+                </div>
+
+                <!-- Project Info -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên người thực hiện</label>
+                        <input type="text" name="authorName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                               placeholder="Nhập tên người thực hiện" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên dự án</label>
+                        <input type="text" name="projectName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                               placeholder="Nhập tên dự án" required>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả chi tiết</label>
+                    <textarea name="description" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                              rows="4" placeholder="Mô tả yêu cầu thiết kế website..."></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="closePostModal()" 
+                            class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                        Hủy
+                    </button>
+                    <button type="submit" class="btn-primary px-6 py-3 rounded-lg text-white font-semibold">
+                        <i class="fas fa-paper-plane mr-2"></i>Đăng bài
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <i class="fas fa-check text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Đăng bài thành công!</h3>
+            <p class="text-gray-600 mb-6">Bài đăng của bạn đã được lưu vào localStorage.</p>
+            <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                <p class="text-sm text-blue-800">
+                    <strong>Mã bài đăng:</strong> <span id="postId">#001</span><br>
+                    <strong>Lưu trữ:</strong> Vĩnh viễn trên trình duyệt
+                </p>
+            </div>
+            <div class="flex space-x-4">
+                <button onclick="closeSuccessModal()" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700">
+                    Đóng
+                </button>
+                <button onclick="viewPost()" class="btn-primary px-6 py-3 rounded-lg text-white font-semibold">
+                    Xem bài đăng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // LocalStorage management functions
+        function setLocalStorage(name, value) {
+            try {
+                localStorage.setItem(name, JSON.stringify(value));
+                return true;
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+                return false;
+            }
+        }
+
+        function getLocalStorage(name) {
+            try {
+                const item = localStorage.getItem(name);
+                return item ? JSON.parse(item) : null;
+            } catch (e) {
+                console.error('Error reading from localStorage:', e);
+                return null;
+            }
+        }
+
+        // Load user data from localStorage
+        function loadUserData() {
+            const userData = getLocalStorage('userData') || {
+                name: 'Chào mừng trở lại!',
+                email: 'user@example.com',
+                totalPosts: 0
+            };
+
+            // Update UI with user data
+            document.querySelector('h1').textContent = userData.name;
+        }
+
+        function showPostModal() {
+            document.getElementById('postModal').classList.remove('hidden');
+        }
+
+        function closePostModal() {
+            document.getElementById('postModal').classList.add('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('imagePreview').classList.remove('hidden');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function viewPost() {
+            const postId = document.querySelector('#postId').textContent || '001';
+            window.location.href = '/design/view.html?id=' + postId.replace('#', '');
+        }
+
+        // Error handling functions
+        function showError(message, details = null) {
+            // Remove existing error messages
+            const existingError = document.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Create error message
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 max-w-md';
+            errorDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <div class="flex-1">
+                        <div class="font-semibold">${message}</div>
+                        ${details ? `<div class="text-sm opacity-80 mt-1">${details}</div>` : ''}
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-white hover:text-red-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(errorDiv);
+            
+            // Auto remove after 8 seconds
+            setTimeout(() => {
+                if (errorDiv.parentElement) {
+                    errorDiv.remove();
+                }
+            }, 8000);
+        }
+
+        function showSuccess(message) {
+            // Remove existing success messages
+            const existingSuccess = document.querySelector('.success-message');
+            if (existingSuccess) {
+                existingSuccess.remove();
+            }
+            
+            // Create success message
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            successDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-white hover:text-green-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(successDiv);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                if (successDiv.parentElement) {
+                    successDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Form submission with validation
+        document.getElementById('postForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            try {
+                // Get form data
+                const formData = new FormData(e.target);
+                const authorName = formData.get('authorName')?.trim() || '';
+                const projectName = formData.get('projectName')?.trim() || '';
+                const description = formData.get('description')?.trim() || '';
+                const imageFile = document.getElementById('imageUpload').files[0];
+                
+                // Debug form data
+                console.log('=== FORM DATA DEBUG ===');
+                console.log('Author Name:', authorName);
+                console.log('Project Name:', projectName);
+                console.log('Description:', description);
+                console.log('Image File:', imageFile);
+                console.log('Form Data entries:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(`  ${key}:`, value);
+                }
+                console.log('=== END FORM DATA DEBUG ===');
+                
+                // Validation
+                console.log('Starting validation...');
+                
+                if (!authorName) {
+                    console.log('Validation failed: Author name is empty');
+                    showError('Vui lòng nhập tên người thực hiện!', 'Trường này là bắt buộc');
+                    return;
+                }
+                
+                if (!projectName) {
+                    console.log('Validation failed: Project name is empty');
+                    showError('Vui lòng nhập tên dự án!', 'Trường này là bắt buộc');
+                    return;
+                }
+                
+                if (!imageFile) {
+                    console.log('Validation failed: No image file selected');
+                    showError('Vui lòng chọn ảnh đặc tả design!', 'Bấm nút "Chọn ảnh từ file" để upload');
+                    return;
+                }
+                
+                // Validate image file
+                console.log('Validating image file...');
+                console.log('File type:', imageFile.type);
+                console.log('File size:', imageFile.size);
+                console.log('File name:', imageFile.name);
+                
+                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+                if (!allowedTypes.includes(imageFile.type)) {
+                    console.log('Validation failed: Invalid file type');
+                    showError('Chỉ chấp nhận file ảnh: JPG, PNG, GIF, WEBP!', `Loại file hiện tại: ${imageFile.type}`);
+                    return;
+                }
+                
+                // Validate file size (10MB max)
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                if (imageFile.size > maxSize) {
+                    const fileSizeMB = (imageFile.size / (1024 * 1024)).toFixed(2);
+                    console.log('Validation failed: File too large');
+                    showError('Kích thước file quá lớn! Tối đa 10MB.', `Kích thước hiện tại: ${fileSizeMB}MB`);
+                    return;
+                }
+                
+                console.log('Image validation passed');
+                
+                // Get user data
+                console.log('Getting user data...');
+                const userData = getLocalStorage('userData') || {
+                    name: 'Chào mừng trở lại!',
+                    email: 'user@example.com',
+                    totalPosts: 0
+                };
+                
+                console.log('User data:', userData);
+                console.log('Total posts:', userData.totalPosts);
+                
+                // Show loading
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Đang xử lý...';
+                submitBtn.disabled = true;
+                
+                // Process image upload
+                console.log('Starting image upload process...');
+                console.log('Image file:', imageFile);
+                console.log('File type:', imageFile.type);
+                console.log('File size:', imageFile.size);
+                console.log('File name:', imageFile.name);
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        console.log('File read successfully, creating design data...');
+                        console.log('Data URL length:', e.target.result.length);
+                        console.log('Data URL preview:', e.target.result.substring(0, 100) + '...');
+                        // Generate new post ID
+                        const newPostId = String(userData.totalPosts + 1).padStart(3, '0');
+                        console.log('Generated new post ID:', newPostId);
+                        
+                        // Create design data
+                        const designData = {
+                            id: newPostId,
+                            title: projectName,
+                            authorName: authorName,
+                            projectName: projectName,
+                            postDate: new Date().toLocaleDateString('vi-VN'),
+                            expectedDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString('vi-VN'),
+                            cost: 'Miễn phí',
+                            description: description,
+                            imageUrl: e.target.result, // Use the base64 result
+                            status: 'processing',
+                            fileName: imageFile.name,
+                            fileSize: imageFile.size,
+                            fileType: imageFile.type
+                        };
+                        
+                        console.log('Created design data:', designData);
+                        
+                        // Save design data to localStorage
+                        console.log('Saving design data to localStorage:', designData);
+                        setLocalStorage('design_' + newPostId, designData);
+                        console.log('Design data saved successfully');
+                        
+                        // Update user data
+                        console.log('Updating user data...');
+                        userData.totalPosts += 1;
+                        
+                        console.log('Updating user data:', userData);
+                        setLocalStorage('userData', userData);
+                        console.log('User data updated successfully');
+                        
+                        // Update success modal with post ID
+                        document.querySelector('#postId').textContent = '#' + newPostId;
+                        
+                        // Reset form
+                        document.getElementById('postForm').reset();
+                        document.getElementById('imagePreview').classList.add('hidden');
+                        
+                        // Close modal and show success
+                        closePostModal();
+                        document.getElementById('successModal').classList.remove('hidden');
+                        
+                        // Show success message
+                        console.log('Showing success message for post:', newPostId);
+                        showSuccess(`Đăng bài thành công! Mã bài đăng: #${newPostId}`);
+                        
+                        // Ask user if they want to view the image
+                        setTimeout(() => {
+                            const viewImage = confirm('Bạn có muốn xem ảnh vừa đăng không?');
+                            if (viewImage) {
+                                window.location.href = '/design/view.html?id=' + newPostId;
+                            }
+                        }, 1000);
+                        
+                        // Reload user data
+                        console.log('Reloading user data...');
+                        loadUserData();
+                        
+                        console.log('Form submission completed successfully!');
+                        
+                    } catch (error) {
+                        console.error('Error processing form:', error);
+                        console.error('Error stack:', error.stack);
+                        console.error('Error name:', error.name);
+                        console.error('Error message:', error.message);
+                        showError('Có lỗi xảy ra khi xử lý dữ liệu: ' + error.message, `Chi tiết: ${error.stack}`);
+                    } finally {
+                        // Reset button
+                        console.log('Resetting submit button...');
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                };
+                
+                reader.onerror = function(error) {
+                    console.error('FileReader error:', error);
+                    console.error('FileReader error type:', error.type);
+                    console.error('FileReader error target:', error.target);
+                    showError('Lỗi đọc file ảnh! Vui lòng thử lại.', `Chi tiết: ${error.type || 'Unknown error'}`);
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                };
+                
+                // Read the file
+                reader.readAsDataURL(imageFile);
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                console.error('Error stack:', error.stack);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
+                console.error('Error cause:', error.cause);
+                showError('Có lỗi xảy ra: ' + error.message, `Chi tiết: ${error.stack}`);
+            }
+        });
+
+        // Close modals on outside click
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('fixed')) {
+                e.target.classList.add('hidden');
+            }
+        });
+
+
+
+
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing...');
+            loadUserData();
+        });
+    </script>
+</body>
+</html>

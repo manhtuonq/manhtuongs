@@ -1,459 +1,846 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment History - Contract Management</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COLLAGE — Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --paper: #ede8dc;
+    --ink: #1a1510;
+    --rust: #b84a2e;
+    --sage: #7a8c6e;
+    --gold: #c9a84c;
+    --charcoal: #3d3530;
+  }
 
-        .sidebar-item {
-            transition: all 0.2s;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .sidebar-item:hover {
-            background-color: #f3f4f6;
-        }
+  body {
+    background: var(--cream);
+    font-family: 'DM Mono', monospace;
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
 
-        .sidebar-item.active {
-            background-color: #9ca3af;
-            color: white;
-            border-radius: 8px;
-        }
+  /* ─── GRAIN OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
 
-        .tab-button {
-            transition: all 0.3s;
-        }
+  /* ─── HEADER ─── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    mix-blend-mode: multiply;
+  }
 
-        .tab-button.active {
-            background-color: #9ca3af;
-            color: white;
-        }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
 
-        .status-badge {
-            border-radius: 6px;
-            padding: 4px 12px;
-            font-size: 13px;
-            font-weight: 500;
-        }
+  nav {
+    display: flex;
+    gap: 36px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
 
-        .dropdown-arrow {
-            transition: transform 0.3s;
-        }
+  nav a {
+    color: var(--charcoal);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--rust); }
 
-        .dropdown-arrow.open {
-            transform: rotate(180deg);
-        }
-    </style>
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(72px, 14vw, 180px);
+    font-weight: 900;
+    font-style: italic;
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    mix-blend-mode: multiply;
+  }
+
+  .hero-title span {
+    display: block;
+    color: var(--rust);
+  }
+
+  /* ─── FLOATING PAPER PIECES ─── */
+  .paper-piece {
+    position: absolute;
+    background: var(--paper);
+    box-shadow: 2px 4px 20px rgba(0,0,0,0.12), 1px 2px 6px rgba(0,0,0,0.08);
+    animation: float linear infinite;
+  }
+
+  /* Texture from uploaded image 1 (crumpled) */
+  .paper-piece.crumpled {
+    background: #ede8dc;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.01) 2px,
+      rgba(0,0,0,0.01) 4px
+    );
+  }
+
+  /* Texture from uploaded image 2 (rough) */
+  .paper-piece.rough {
+    background: #f0ece3;
+  }
+
+  .p1 { width: 180px; height: 240px; top: 10%; left: 5%; transform: rotate(-12deg); animation-duration: 20s; animation-delay: 0s; }
+  .p2 { width: 120px; height: 160px; top: 20%; right: 8%; transform: rotate(8deg); animation-duration: 25s; animation-delay: -5s; }
+  .p3 { width: 200px; height: 140px; bottom: 15%; left: 12%; transform: rotate(5deg); animation-duration: 22s; animation-delay: -10s; }
+  .p4 { width: 90px; height: 120px; top: 60%; right: 15%; transform: rotate(-6deg); animation-duration: 18s; animation-delay: -3s; }
+  .p5 { width: 150px; height: 200px; bottom: 25%; right: 5%; transform: rotate(14deg); animation-duration: 30s; animation-delay: -8s; }
+  .p6 { width: 260px; height: 180px; top: 5%; left: 35%; transform: rotate(-3deg); animation-duration: 35s; animation-delay: -12s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(var(--rot, -12deg)); }
+    33% { transform: translateY(-15px) rotate(calc(var(--rot, -12deg) + 2deg)); }
+    66% { transform: translateY(8px) rotate(calc(var(--rot, -12deg) - 1deg)); }
+  }
+
+  /* ─── TAPE STRIPS ─── */
+  .tape {
+    position: absolute;
+    height: 28px;
+    background: rgba(255,240,180,0.65);
+    backdrop-filter: blur(1px);
+    transform-origin: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .tape::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 6px);
+  }
+
+  .t1 { width: 100px; top: 8%; left: 3%; transform: rotate(45deg); }
+  .t2 { width: 80px; top: 18%; right: 6%; transform: rotate(-30deg); }
+  .t3 { width: 120px; bottom: 12%; left: 10%; transform: rotate(15deg); }
+
+  /* ─── SCRIBBLE LINES ─── */
+  .scribble-svg {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  /* ─── SECTION: GALLERY ─── */
+  .gallery-section {
+    padding: 120px 48px;
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--sage);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 16px;
+    position: relative;
+  }
+
+  .collage-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .collage-card:hover { transform: scale(1.02) rotate(0.5deg); z-index: 10; }
+
+  .collage-card .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-bg {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    position: relative;
+  }
+
+  /* Paper texture backgrounds */
+  .bg-crumpled {
+    background: #ede8dc;
+    background-image:
+      radial-gradient(ellipse at 30% 40%, rgba(180,160,130,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 70%, rgba(160,140,110,0.1) 0%, transparent 50%);
+  }
+
+  .bg-rough {
+    background: #f0ece3;
+    background-image:
+      radial-gradient(ellipse at 60% 30%, rgba(200,185,160,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse at 20% 80%, rgba(170,155,130,0.08) 0%, transparent 45%);
+  }
+
+  .bg-torn {
+    background: #e8e0d0;
+    background-image:
+      radial-gradient(circle at 50% 50%, rgba(190,170,140,0.15) 0%, transparent 70%);
+  }
+
+  /* Grid layout */
+  .card-a { grid-column: 1 / 5; grid-row: 1; height: 380px; }
+  .card-b { grid-column: 5 / 9; grid-row: 1; height: 380px; transform: translateY(40px); }
+  .card-c { grid-column: 9 / 13; grid-row: 1; height: 380px; }
+  .card-d { grid-column: 1 / 4; grid-row: 2; height: 260px; transform: translateY(-20px); }
+  .card-e { grid-column: 4 / 8; grid-row: 2; height: 260px; }
+  .card-f { grid-column: 8 / 13; grid-row: 2; height: 260px; transform: translateY(20px); }
+
+  .card-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    position: absolute;
+    top: 16px; left: 20px;
+    color: rgba(50,40,30,0.4);
+    letter-spacing: 0.1em;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(28px, 3vw, 48px);
+    font-weight: 300;
+    color: var(--ink);
+    padding: 24px;
+    line-height: 1.1;
+    mix-blend-mode: multiply;
+  }
+
+  .card-tag {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    opacity: 0.5;
+  }
+
+  /* Decorative elements on cards */
+  .card-cross {
+    position: absolute;
+    width: 32px; height: 32px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.15;
+  }
+  .card-cross::before, .card-cross::after {
+    content: '';
+    position: absolute;
+    background: var(--ink);
+  }
+  .card-cross::before { width: 1px; height: 100%; left: 50%; top: 0; }
+  .card-cross::after { width: 100%; height: 1px; top: 50%; left: 0; }
+
+  .torn-edge {
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 12px;
+    background: var(--cream);
+    clip-path: polygon(0% 100%, 3% 20%, 7% 80%, 12% 10%, 17% 90%, 22% 30%, 28% 70%, 33% 15%, 38% 85%, 43% 40%, 48% 75%, 53% 10%, 58% 80%, 63% 35%, 68% 90%, 73% 20%, 78% 70%, 83% 25%, 88% 80%, 93% 40%, 98% 85%, 100% 100%);
+  }
+
+  /* ─── MANIFESTO SECTION ─── */
+  .manifesto {
+    padding: 100px 48px;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .manifesto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  .manifesto-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 72px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.15;
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .manifesto-text em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .manifesto-meta {
+    margin-top: 60px;
+    display: flex;
+    gap: 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .meta-item {
+    color: rgba(245,240,232,0.5);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    line-height: 2.2;
+  }
+
+  .meta-item strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  /* ─── PROCESS SECTION ─── */
+  .process-section {
+    padding: 120px 48px;
+    position: relative;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid rgba(26,21,16,0.15);
+  }
+
+  .process-item {
+    padding: 48px 36px;
+    border-right: 1px solid rgba(26,21,16,0.15);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .process-item:last-child { border-right: none; }
+  .process-item:hover { background: rgba(184,74,46,0.04); }
+
+  .process-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(26,21,16,0.06);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .process-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .process-desc {
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--charcoal);
+    opacity: 0.7;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 60px 48px;
+    border-top: 1px solid rgba(26,21,16,0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .footer-copy {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(26,21,16,0.35);
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    border-top: 1px solid rgba(26,21,16,0.12);
+    border-bottom: 1px solid rgba(26,21,16,0.12);
+    overflow: hidden;
+    padding: 14px 0;
+    background: var(--rust);
+  }
+
+  .marquee-inner {
+    display: flex;
+    gap: 48px;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .marquee-dot {
+    color: rgba(245,240,232,0.5);
+    margin: 0 8px;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── SCATTERED STAMPS ─── */
+  .stamp {
+    position: absolute;
+    border: 2px solid currentColor;
+    padding: 4px 10px;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    pointer-events: none;
+    opacity: 0.25;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .stamp-rust { color: var(--rust); border-color: var(--rust); transform: rotate(-15deg); }
+  .stamp-sage { color: var(--sage); border-color: var(--sage); transform: rotate(8deg); }
+
+  /* ─── CURSOR DOT ─── */
+  .cursor-dot {
+    width: 8px; height: 8px;
+    background: var(--rust);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    mix-blend-mode: multiply;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-title { animation: fadeSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+  .gallery-section { animation: fadeSlideUp 0.8s ease 0.4s both; }
+
+  /* Hover reveal on cards */
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,21,16,0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.35s;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .collage-card:hover .card-overlay { opacity: 1; }
+
+  .overlay-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .overlay-sub {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  @media (max-width: 900px) {
+    header { padding: 20px 24px; }
+    nav { display: none; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .card-a, .card-b, .card-c { grid-column: span 1; grid-row: auto; height: 260px; transform: none; }
+    .card-d, .card-e, .card-f { grid-column: span 1; grid-row: auto; height: 220px; transform: none; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-section, .process-section { padding: 80px 24px; }
+    .manifesto { padding: 80px 24px; }
+    footer { padding: 40px 24px; flex-direction: column; gap: 20px; }
+  }
+</style>
 </head>
-<body class="bg-gray-50">
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="w-64 bg-white border-r border-gray-200 flex flex-col">
-            <!-- Logo -->
-            <div class="p-6 border-b border-gray-200 flex items-center justify-between">
-                <h1 class="text-2xl font-bold">Logo web</h1>
-                <button class="p-2 hover:bg-gray-100 rounded">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+<body>
 
-            <!-- Company Info -->
-            <div class="p-4 border-b border-gray-200">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-xs text-gray-500">Company</p>
-                        <p class="text-sm font-semibold">Name company</p>
-                    </div>
-                </div>
-            </div>
+<div class="cursor-dot" id="cursor"></div>
 
-            <!-- Navigation -->
-            <nav class="flex-1 overflow-y-auto p-4">
-                <div class="mb-6">
-                    <p class="text-xs text-gray-500 uppercase font-semibold mb-3">General</p>
-                    <a href="#" class="sidebar-item flex items-center space-x-3 p-2 rounded text-sm mb-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                        </svg>
-                        <span>Dashboard</span>
-                    </a>
-                    
-                    <div class="mb-1">
-                        <button onclick="toggleDropdown()" class="sidebar-item flex items-center justify-between w-full p-2 rounded text-sm">
-                            <div class="flex items-center space-x-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                                </svg>
-                                <span>Marketplace</span>
-                            </div>
-                            <svg id="dropdown-arrow" class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                        <div id="dropdown-menu" class="pl-11 space-y-1 hidden">
-                            <a href="#" class="block p-2 text-sm text-gray-600 hover:bg-gray-100 rounded">abc</a>
-                            <a href="#" class="block p-2 text-sm text-gray-600 hover:bg-gray-100 rounded">abc</a>
-                            <a href="#" class="block p-2 text-sm text-gray-600 hover:bg-gray-100 rounded">abc</a>
-                            <a href="#" class="block p-2 text-sm text-gray-600 hover:bg-gray-100 rounded">abc</a>
-                        </div>
-                    </div>
+<!-- HEADER -->
+<header>
+  <div class="logo">Collage°</div>
+  <nav>
+    <a href="#">Works</a>
+    <a href="#">Process</a>
+    <a href="#">Archive</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
 
-                    <a href="#" class="sidebar-item active flex items-center space-x-3 p-2 mb-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        <span>Contract Management</span>
-                    </a>
+<!-- HERO -->
+<section class="hero">
+  <!-- Floating paper pieces -->
+  <div class="paper-piece crumpled p1"></div>
+  <div class="paper-piece rough p2"></div>
+  <div class="paper-piece crumpled p3"></div>
+  <div class="paper-piece rough p4"></div>
+  <div class="paper-piece crumpled p5"></div>
+  <div class="paper-piece rough p6"></div>
 
-                    <a href="#" class="sidebar-item flex items-center space-x-3 p-2 rounded text-sm mb-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                        <span>ABC</span>
-                    </a>
+  <!-- Tape -->
+  <div class="tape t1"></div>
+  <div class="tape t2"></div>
+  <div class="tape t3"></div>
 
-                    <a href="#" class="sidebar-item flex items-center space-x-3 p-2 rounded text-sm mb-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                        </svg>
-                        <span>ACB</span>
-                    </a>
-                </div>
+  <!-- Scribbles -->
+  <svg class="scribble-svg" style="top:15%; left:20%; width:120px; height:60px;" viewBox="0 0 120 60">
+    <path d="M5,30 Q30,10 60,35 Q90,55 115,25" stroke="#1a1510" stroke-width="1.5" fill="none"/>
+  </svg>
+  <svg class="scribble-svg" style="bottom:20%; right:20%; width:80px; height:40px;" viewBox="0 0 80 40">
+    <path d="M5,20 Q20,5 40,20 Q60,35 75,15" stroke="#b84a2e" stroke-width="1" fill="none"/>
+    <circle cx="40" cy="20" r="3" fill="#b84a2e" opacity="0.5"/>
+  </svg>
 
-                <div>
-                    <p class="text-xs text-gray-500 uppercase font-semibold mb-3">Tools</p>
-                    <a href="#" class="sidebar-item flex items-center space-x-3 p-2 rounded text-sm mb-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        <span>Account & Settings</span>
-                    </a>
+  <div class="hero-title">
+    Art of<br>
+    <span>Cut &amp;</span><br>
+    Paste
+  </div>
 
-                    <a href="#" class="sidebar-item flex items-center space-x-3 p-2 rounded text-sm mb-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span>Help</span>
-                    </a>
+  <stamp class="stamp stamp-rust" style="position:absolute; bottom:25%; left:8%;">Original</stamp>
+  <stamp class="stamp stamp-sage" style="position:absolute; top:30%; right:10%;">2024</stamp>
+</section>
 
-                    <div class="flex items-center justify-between p-2 mt-4">
-                        <span class="text-sm flex items-center space-x-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                            </svg>
-                            <span>Dark Mode</span>
-                        </span>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                        </label>
-                    </div>
-                </div>
-            </nav>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Tear <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Layer <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Fragment <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Compose <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Distort <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Archive <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Remember <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Forget <span class="marquee-dot">✦</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Tear <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Layer <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Fragment <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Compose <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Distort <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Archive <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Remember <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Forget <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
 
-            <!-- User Profile -->
-            <div class="p-4 border-t border-gray-200">
-                <button class="flex items-center justify-between w-full hover:bg-gray-100 p-2 rounded">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
-                            <img src="https://via.placeholder.com/40" alt="User" class="w-full h-full object-cover">
-                        </div>
-                        <div class="text-left">
-                            <p class="text-sm font-semibold">Minh Quan</p>
-                            <p class="text-xs text-gray-500">CEO</p>
-                        </div>
-                    </div>
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-            </div>
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="section-label">Selected Works — 2022–2024</div>
+
+  <div class="gallery-grid">
+    <div class="collage-card card-a">
+      <div class="card-inner">
+        <div class="card-bg bg-crumpled">
+          <div class="card-cross"></div>
+          <div class="card-title">Memory<br>Fragments</div>
+          <div class="torn-edge"></div>
         </div>
-
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
-            <header class="bg-white border-b border-gray-200 p-4">
-                <div class="flex items-center justify-between">
-                    <div class="flex-1 max-w-xl">
-                        <div class="relative">
-                            <input type="text" placeholder="Search" class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <button class="absolute right-3 top-1/2 transform -translate-y-1/2">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-4 ml-4">
-                        <button class="relative p-2 hover:bg-gray-100 rounded-lg">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                        </button>
-                        <button class="relative p-2 hover:bg-gray-100 rounded-lg">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                            </svg>
-                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                        </button>
-                        <div class="flex items-center space-x-2">
-                            <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full">
-                            <div>
-                                <p class="text-sm font-semibold">Minh Quan</p>
-                                <p class="text-xs text-gray-500">CEO</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Page Content -->
-            <main class="flex-1 overflow-auto bg-gray-50 p-6">
-                <!-- Breadcrumb -->
-                <div class="mb-6">
-                    <h1 class="text-3xl font-bold mb-2">Payment History</h1>
-                    <div class="flex items-center text-sm text-gray-600">
-                        <span>Contract Management</span>
-                        <svg class="w-4 h-4 mx-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span>Payment History</span>
-                        <svg class="w-4 h-4 mx-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span>All</span>
-                    </div>
-                </div>
-
-                <!-- Search and Actions -->
-                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="flex-1 max-w-2xl relative">
-                            <input id="table-search" type="text" placeholder="Search for id, type,..." class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <button onclick="searchTable()" class="absolute right-3 top-1/2 transform -translate-y-1/2">
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="flex space-x-3 ml-4">
-                            <button class="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-                                </svg>
-                                <span>Filter</span>
-                            </button>
-                            <button class="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                </svg>
-                                <span>Export</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Tabs -->
-                    <div class="flex space-x-2 mb-6">
-                        <button onclick="filterByStatus('all')" class="tab-button active px-6 py-2 rounded-lg text-sm font-medium">All (441)</button>
-                        <button onclick="filterByStatus('completed')" class="tab-button px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">Completed (100)</button>
-                        <button onclick="filterByStatus('pending')" class="tab-button px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">Pending (300)</button>
-                        <button onclick="filterByStatus('failed')" class="tab-button px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">Failed (41)</button>
-                    </div>
-
-                    <!-- Table -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="border-b border-gray-200">
-                                    <th class="text-left py-3 px-4">
-                                        <input type="checkbox" onclick="toggleAllCheckboxes()" class="w-4 h-4 rounded border-gray-300">
-                                    </th>
-                                    <th class="text-left py-3 px-4 font-semibold text-sm">Transaction ID</th>
-                                    <th class="text-left py-3 px-4 font-semibold text-sm">Type</th>
-                                    <th class="text-left py-3 px-4 font-semibold text-sm">Payment method</th>
-                                    <th class="text-left py-3 px-4 font-semibold text-sm">Amount</th>
-                                    <th class="text-left py-3 px-4 font-semibold text-sm">Date</th>
-                                    <th class="text-left py-3 px-4 font-semibold text-sm">Status</th>
-                                    <th class="text-left py-3 px-4 font-semibold text-sm">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body">
-                                <!-- Table rows will be generated by JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="flex items-center justify-between mt-6">
-                        <p class="text-sm text-gray-600">1 - 10 of 13 Pages</p>
-                        <div class="flex items-center space-x-4">
-                            <span class="text-sm text-gray-600">The page on</span>
-                            <select class="border border-gray-300 rounded px-3 py-1 text-sm">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                            <div class="flex space-x-2">
-                                <button class="p-2 border border-gray-300 rounded hover:bg-gray-50">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                                <button class="p-2 border border-gray-300 rounded hover:bg-gray-50">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
+        <span class="card-num">001</span>
+        <span class="card-tag">Mixed Media</span>
+        <div class="card-overlay">
+          <div class="overlay-title">Memory Fragments</div>
+          <div class="overlay-sub">Torn paper · Ink · 2022</div>
         </div>
+      </div>
     </div>
 
-    <script>
-        // Sample data
-        const transactions = [
-            { id: '021231', type: 'Expense', method: 'Credit Card', amount: -21.78, date: '04/17/23', status: 'Completed' },
-            { id: '021231', type: 'Income', method: 'Cash', amount: 21.78, date: '04/17/23', status: 'Pending' },
-            { id: '021231', type: 'Expense', method: 'Bank Transfer', amount: -21.78, date: '04/17/23', status: 'Failed' },
-            { id: '021231', type: 'Income', method: 'eWallet', amount: 21.78, date: '04/17/23', status: 'Completed' },
-            { id: '021231', type: 'Expense', method: 'Credit Card', amount: -21.78, date: '04/17/23', status: 'Completed' },
-            { id: '021231', type: 'Income', method: 'Credit Card', amount: 21.78, date: '04/17/23', status: 'Completed' },
-            { id: '021231', type: 'Expense', method: 'Credit Card', amount: -21.78, date: '04/17/23', status: 'Completed' },
-            { id: '021231', type: 'Expense', method: 'Credit Card', amount: -21.78, date: '04/17/23', status: 'Completed' },
-            { id: '021231', type: 'Expense', method: 'Credit Card', amount: -21.78, date: '04/17/23', status: 'Completed' },
-            { id: '021231', type: 'Expense', method: 'Credit Card', amount: -21.78, date: '04/17/23', status: 'Completed' }
-        ];
+    <div class="collage-card card-b">
+      <div class="card-inner">
+        <div class="card-bg bg-rough" style="flex-direction: column; justify-content: flex-end; padding: 24px;">
+          <svg width="100%" height="60%" style="position:absolute; top:10%; opacity:0.12;" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="80" stroke="#1a1510" stroke-width="1" fill="none"/>
+            <circle cx="100" cy="100" r="50" stroke="#1a1510" stroke-width="0.5" fill="none"/>
+            <line x1="100" y1="20" x2="100" y2="180" stroke="#1a1510" stroke-width="0.5"/>
+            <line x1="20" y1="100" x2="180" y2="100" stroke="#1a1510" stroke-width="0.5"/>
+          </svg>
+          <div class="card-title">Untitled<br>No. 7</div>
+        </div>
+        <span class="card-num">002</span>
+        <span class="card-tag">Assemblage</span>
+        <div class="card-overlay">
+          <div class="overlay-title">Untitled No. 7</div>
+          <div class="overlay-sub">Newsprint · Gouache · 2023</div>
+        </div>
+      </div>
+    </div>
 
-        let currentFilter = 'all';
+    <div class="collage-card card-c">
+      <div class="card-inner">
+        <div class="card-bg bg-torn" style="justify-content: flex-start; align-items: flex-end; padding: 24px;">
+          <!-- Decorative torn strips -->
+          <div style="position:absolute; top:0; left:0; right:0; height:6px; background:rgba(184,74,46,0.3); transform:skewX(2deg);"></div>
+          <div style="position:absolute; top:8px; left:0; right:0; height:2px; background:rgba(184,74,46,0.15);"></div>
+          <div class="card-title" style="text-align:right;">Still<br>Life III</div>
+        </div>
+        <span class="card-num">003</span>
+        <span class="card-tag">Paper Cut</span>
+        <div class="card-overlay">
+          <div class="overlay-title">Still Life III</div>
+          <div class="overlay-sub">Magazine · Thread · 2023</div>
+        </div>
+      </div>
+    </div>
 
-        function renderTable(data) {
-            const tbody = document.getElementById('table-body');
-            tbody.innerHTML = '';
+    <div class="collage-card card-d">
+      <div class="card-inner">
+        <div class="card-bg bg-rough">
+          <div style="position:absolute; inset:0; background: repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(0,0,0,0.04) 18px, rgba(0,0,0,0.04) 19px);"></div>
+          <div class="card-title" style="font-size: clamp(20px,2.5vw,32px);">Echo</div>
+        </div>
+        <span class="card-num">004</span>
+        <span class="card-tag">Mono</span>
+        <div class="card-overlay">
+          <div class="overlay-title">Echo</div>
+          <div class="overlay-sub">Letterpress · 2024</div>
+        </div>
+      </div>
+    </div>
 
-            data.forEach((transaction, index) => {
-                const row = document.createElement('tr');
-                row.className = 'border-b border-gray-100 hover:bg-gray-50';
-                
-                let statusClass = '';
-                if (transaction.status === 'Completed') statusClass = 'bg-gray-300 text-gray-800';
-                else if (transaction.status === 'Pending') statusClass = 'bg-gray-400 text-white';
-                else if (transaction.status === 'Failed') statusClass = 'bg-gray-400 text-white';
+    <div class="collage-card card-e">
+      <div class="card-inner">
+        <div class="card-bg bg-crumpled" style="flex-direction: column; gap: 8px;">
+          <!-- Overlapping paper strips -->
+          <div style="position:absolute; top:20%; left:0; right:0; height:3px; background:rgba(122,140,110,0.4); transform: rotate(-2deg);"></div>
+          <div style="position:absolute; top:35%; left:0; right:0; height:1px; background:rgba(122,140,110,0.25);"></div>
+          <div style="position:absolute; top:65%; left:0; right:0; height:4px; background:rgba(184,74,46,0.3); transform: rotate(1deg);"></div>
+          <div class="card-title" style="font-size: clamp(22px, 2.5vw, 38px); padding: 24px;">Drift &amp;<br>Scatter</div>
+        </div>
+        <span class="card-num">005</span>
+        <span class="card-tag">Series</span>
+        <div class="card-overlay">
+          <div class="overlay-title">Drift &amp; Scatter</div>
+          <div class="overlay-sub">Rice paper · Wax · 2024</div>
+        </div>
+      </div>
+    </div>
 
-                row.innerHTML = `
-                    <td class="py-3 px-4">
-                        <input type="checkbox" class="row-checkbox w-4 h-4 rounded border-gray-300">
-                    </td>
-                    <td class="py-3 px-4 text-sm">${transaction.id}</td>
-                    <td class="py-3 px-4 text-sm">${transaction.type}</td>
-                    <td class="py-3 px-4 text-sm">${transaction.method}</td>
-                    <td class="py-3 px-4 text-sm font-medium ${transaction.amount > 0 ? 'text-green-600' : 'text-red-600'}">
-                        ${transaction.amount > 0 ? '+' : ''}${Math.abs(transaction.amount).toFixed(2)}
-                    </td>
-                    <td class="py-3 px-4 text-sm">${transaction.date}</td>
-                    <td class="py-3 px-4">
-                        <span class="status-badge ${statusClass}">${transaction.status}</span>
-                    </td>
-                    <td class="py-3 px-4">
-                        <div class="flex space-x-2">
-                            <button class="p-1 hover:bg-gray-200 rounded" title="View">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                </svg>
-                            </button>
-                            <button class="p-1 hover:bg-gray-200 rounded" title="Download">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
+    <div class="collage-card card-f">
+      <div class="card-inner">
+        <div class="card-bg bg-torn">
+          <!-- Corner folds -->
+          <div style="position:absolute; top:0; right:0; width:40px; height:40px; background:linear-gradient(225deg, rgba(245,240,232,0.9) 50%, transparent 50%);"></div>
+          <div style="position:absolute; bottom:0; left:0; width:30px; height:30px; background:linear-gradient(45deg, rgba(245,240,232,0.9) 50%, transparent 50%);"></div>
+          <div class="card-title" style="font-size: clamp(22px, 2.5vw, 38px);">Ghost<br>Archive</div>
+        </div>
+        <span class="card-num">006</span>
+        <span class="card-tag">Ephemera</span>
+        <div class="card-overlay">
+          <div class="overlay-title">Ghost Archive</div>
+          <div class="overlay-sub">Photocopy · Bleach · 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function filterByStatus(status) {
-            currentFilter = status;
-            
-            // Update tab buttons
-            const tabs = document.querySelectorAll('.tab-button');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <p class="manifesto-text">
+    "Collage is not destruction —<br>
+    it is <em>radical assembly.</em><br>
+    Every torn edge holds<br>
+    a decision."
+  </p>
+  <div class="manifesto-meta">
+    <div class="meta-item">
+      <strong>48</strong>
+      Works in Archive
+    </div>
+    <div class="meta-item">
+      <strong>12</strong>
+      Exhibitions
+    </div>
+    <div class="meta-item">
+      <strong>2017</strong>
+      Founded
+    </div>
+  </div>
+</section>
 
-            // Filter data
-            let filtered = transactions;
-            if (status !== 'all') {
-                filtered = transactions.filter(t => t.status.toLowerCase() === status);
-            }
-            
-            renderTable(filtered);
-        }
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="section-label">The Process</div>
+  <div class="process-grid">
+    <div class="process-item">
+      <div class="process-num">01</div>
+      <div class="process-name">Source</div>
+      <p class="process-desc">Every collage begins with accumulation — magazines, newspapers, maps, photographs, found ephemera collected over months or years.</p>
+    </div>
+    <div class="process-item">
+      <div class="process-num">02</div>
+      <div class="process-name">Tear</div>
+      <p class="process-desc">Scissors are secondary. The hand reveals edges that blades cannot — unpredictable, fibrous, alive. Tearing is a form of drawing.</p>
+    </div>
+    <div class="process-item">
+      <div class="process-num">03</div>
+      <div class="process-name">Compose</div>
+      <p class="process-desc">Arrangement without adhesive first. Elements shift, rotate, overlap. Negative space earns equal weight to the fragments placed within it.</p>
+    </div>
+    <div class="process-item">
+      <div class="process-num">04</div>
+      <div class="process-name">Commit</div>
+      <p class="process-desc">Paste is irreversible. The final act of fixing transforms intention into artifact — a record of a single moment of decision.</p>
+    </div>
+  </div>
+</section>
 
-        function searchTable() {
-            const searchTerm = document.getElementById('table-search').value.toLowerCase();
-            
-            let filtered = transactions;
-            if (currentFilter !== 'all') {
-                filtered = transactions.filter(t => t.status.toLowerCase() === currentFilter);
-            }
-            
-            if (searchTerm) {
-                filtered = filtered.filter(t => 
-                    t.id.toLowerCase().includes(searchTerm) ||
-                    t.type.toLowerCase().includes(searchTerm) ||
-                    t.method.toLowerCase().includes(searchTerm) ||
-                    t.status.toLowerCase().includes(searchTerm)
-                );
-            }
-            
-            renderTable(filtered);
-        }
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Collage°</div>
+  <div class="footer-copy">Studio — All works original &amp; unique — MMXXIV</div>
+</footer>
 
-        function toggleAllCheckboxes() {
-            const checkboxes = document.querySelectorAll('.row-checkbox');
-            const mainCheckbox = event.target;
-            checkboxes.forEach(cb => cb.checked = mainCheckbox.checked);
-        }
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = (e.clientX - 4) + 'px';
+    cursor.style.top = (e.clientY - 4) + 'px';
+  });
 
-        function toggleDropdown() {
-            const menu = document.getElementById('dropdown-menu');
-            const arrow = document.getElementById('dropdown-arrow');
-            menu.classList.toggle('hidden');
-            arrow.classList.toggle('open');
-        }
+  // Paper float individual rotations
+  const pieces = document.querySelectorAll('.paper-piece');
+  const rots = ['-12deg','8deg','5deg','-6deg','14deg','-3deg'];
+  pieces.forEach((p, i) => {
+    p.style.setProperty('--rot', rots[i] || '0deg');
+  });
 
-        // Add event listener for search input
-        document.getElementById('table-search').addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                searchTable();
-            }
-        });
+  // Subtle parallax on paper pieces
+  document.addEventListener('mousemove', e => {
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    const dx = (e.clientX - cx) / cx;
+    const dy = (e.clientY - cy) / cy;
 
-        // Initialize table
-        renderTable(transactions);
-    </script>
+    pieces.forEach((p, i) => {
+      const depth = (i % 3 + 1) * 6;
+      p.style.marginLeft = (dx * depth) + 'px';
+      p.style.marginTop = (dy * depth) + 'px';
+    });
+  });
+
+  // Intersection observer for fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.collage-card, .process-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
